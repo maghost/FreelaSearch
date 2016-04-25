@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">FreelaSearchAndroid</string>
+    <string name="title_activity_lista_categoria">Lista Categoria</string>
+    <string name="title_activity_cadastro_usuario">Cadastro de Usuário</string>
+
+    <!-- Formulários -->
+    <string name="required_fields">Campo(s) obrigatório(s) não preenchido(s).</string>
+
+    <!-- Welcome -->
+    <string name="conectar_facebook">Conectar-se pelo Facebook</string>
+    <string name="deslogar_facebook">Desconectar-se do Facebook</string>
+    <string name="conectar">Conectar-se</string>
+    <string name="cadastrar">Cadastrar-se</string>
+    <string name="esqueceu_senha">Esqueceu sua senha?</string>
+
+    <!-- Signup -->
+    <string name="nome">Nome</string>
+    <string name="email">Email</string>
+    <string name="senha">Senha</string>
+    <string name="criar_conta">Criar Conta</string>
+    <string name="ja_cadastrado">Já é cadastrado? Conecte-se.</string>
+
+    <!-- Login -->
+    <string name="deseja_cadastrar">Ainda não possui uma conta? Cadastre-se.</string>
+
+
+    <string name="facebook_app_id">1242449602450447</string>
+    <string name="title_activity_teste">TesteActivity</string>
+
+    <string name="title_activity_perfis">PerfisActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
