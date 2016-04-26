@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("FreelaSearch");
+        toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -73,6 +74,13 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        TextView nhm_username = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nhm_username);
+        nhm_username.setText(sharedpreferences.getString("nome", ""));
+
+        TextView nhm_email = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nhm_email);
+        nhm_email.setText(sharedpreferences.getString("email", ""));
+
         navigationView.setNavigationItemSelectedListener(this);
     }
 
