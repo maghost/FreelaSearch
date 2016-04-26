@@ -1,5 +1,8 @@
 package org.freelasearch.activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -15,13 +18,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.freelasearch.R;
 import org.freelasearch.fragments.GalleryFragment;
 import org.freelasearch.fragments.MainFragment;
-import org.freelasearch.R;
+import org.freelasearch.fragments.TabFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String PREF_NAME = "SignupActivityPreferences";
     NavigationView navigationView = null;
     Toolbar toolbar = null;
 
@@ -29,6 +34,16 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Verifica se está logado
+        SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        boolean loggedByApplication = sharedpreferences.getString("email", "") != "";
+
+        if (!loggedByApplication) {
+            Intent intent = new Intent(this, WelcomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         MainFragment fragment = new MainFragment();
         FragmentTransaction fragmentTransaction =
@@ -97,31 +112,23 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        Fragment fragment = null;
         if (id == R.id.nav_camera) {
-            //Set the fragment initially
-            MainFragment fragment = new MainFragment();
-            runFragment(fragment);
-            // Handle the camera action
+            fragment = new MainFragment();
         } else if (id == R.id.nav_gallery) {
-            //Set the fragment initially
-            GalleryFragment fragment = new GalleryFragment();
-            runFragment(fragment);
-
-
+            fragment = new GalleryFragment();
         } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+            fragment = new TabFragment();
+        } else {
+            fragment = new MainFragment();
         }
+
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void runFragment(Fragment fragment) {
-        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
-        fragmentTransaction.commit();
     }
 }
