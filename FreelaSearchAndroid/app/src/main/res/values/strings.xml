@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FreelaSearchAndroid</string>
+    <string name="app_name">FreelaSearch</string>
     <string name="title_activity_lista_categoria">Lista Categoria</string>
     <string name="title_activity_cadastro_usuario">Cadastro de Usuário</string>
 
@@ -27,15 +27,16 @@
     <string name="facebook_app_id">1242449602450447</string>
     <string name="title_activity_teste">TesteActivity</string>
 
-    <string name="title_activity_perfis">PerfisActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_perfis">Perfis Activity</string>
+    <string name="dummy_button">Dummy Botão</string>
+    <string name="dummy_content">DUMMY\nCONTEÚDO</string>
+    <string name="title_activity_main">Main Activity</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Abrir Navigation Drawer</string>
+    <string name="navigation_drawer_close">Fechar </string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configurações</string>
+    <string name="action_logout">Desconectar</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -18,6 +18,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+
 import org.freelasearch.R;
 import org.freelasearch.fragments.GalleryFragment;
 import org.freelasearch.fragments.MainFragment;
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
 
         //Verifica se está logado
@@ -40,9 +44,7 @@ public class MainActivity extends AppCompatActivity
         boolean loggedByApplication = sharedpreferences.getString("email", "") != "";
 
         if (!loggedByApplication) {
-            Intent intent = new Intent(this, WelcomeActivity.class);
-            startActivity(intent);
-            finish();
+            logout();
         }
 
         MainFragment fragment = new MainFragment();
@@ -101,6 +103,8 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_logout) {
+            logout();
         }
 
         return super.onOptionsItemSelected(item);
@@ -130,5 +134,18 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void logout() {
+        Intent intent = new Intent(this, WelcomeActivity.class);
+        startActivity(intent);
+        finish();
+
+        SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.commit();
+
+        LoginManager.getInstance().logOut();
     }
 }
