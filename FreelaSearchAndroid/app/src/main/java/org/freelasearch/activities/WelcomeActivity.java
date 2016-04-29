@@ -26,6 +26,7 @@ import org.freelasearch.tasks.TarefaInterface;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class WelcomeActivity extends AppCompatActivity implements TarefaInterfac
 
         //Verifica se está logado pela aplicação
         SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        boolean loggedByApplication = sharedpreferences.getString("email", "") != "";
+        boolean loggedByApplication = sharedpreferences.getString("email", "").equals("");
 
         if (loggedByFacebook || loggedByApplication) {
             Intent intent = new Intent(this, MainActivity.class);
@@ -63,6 +64,9 @@ public class WelcomeActivity extends AppCompatActivity implements TarefaInterfac
 
         //Se não estiver logado, monta a tela de Welcome com o botão do fb para login/cadastro
         LoginButton loginButton = (LoginButton) findViewById(R.id.lbFacebook);
+        if(loginButton == null) {
+            return;
+        }
         List<String> permissionNeeds = Arrays.asList("public_profile", "email");
         loginButton.setReadPermissions(permissionNeeds);
 
@@ -78,21 +82,23 @@ public class WelcomeActivity extends AppCompatActivity implements TarefaInterfac
                                     GraphResponse response) {
                                 // Application code
                                 try {
-                                    // String id = object.getString("id");
-                                    // String gender = object.getString("gender");
+                                    String id = object.getString("id");
                                     String name = object.getString("name");
                                     String email = object.getString("email");
+                                    String profile_pic = "https://graph.facebook.com/" + id + "/picture?type=large";
 
                                     SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedpreferences.edit();
                                     editor.putString("nome", name);
                                     editor.putString("email", email);
+                                    editor.putString("profile_pic", profile_pic);
                                     editor.commit();
 
                                     Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
 
                                     intent.putExtra("email", email);
                                     intent.putExtra("nome", name);
+                                    intent.putExtra("profile_pic", profile_pic);
 
                                     cadastroUsuarioFacebook(email, name);
 
@@ -152,6 +158,7 @@ public class WelcomeActivity extends AppCompatActivity implements TarefaInterfac
         DtoUsuario dto = new DtoUsuario();
         dto.email = email;
         dto.nome = nome;
+        //TODO: Colocar o link da imagem
 
         TarefaCadastroUsuarioFacebook tarefa = new TarefaCadastroUsuarioFacebook(this, this);
         tarefa.execute(dto);

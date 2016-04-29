@@ -17,10 +17,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
+import com.squareup.picasso.Picasso;
 
 import org.freelasearch.R;
 import org.freelasearch.fragments.GalleryFragment;
@@ -31,8 +33,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String PREF_NAME = "SignupActivityPreferences";
-    NavigationView navigationView = null;
-    Toolbar toolbar = null;
+    private NavigationView navigationView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity
 
         //Verifica se está logado
         SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        boolean loggedByApplication = sharedpreferences.getString("email", "") != "";
+        boolean loggedByApplication = !sharedpreferences.getString("email", "").equals("");
 
         if (!loggedByApplication) {
             logout();
@@ -73,13 +74,17 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         TextView nhm_username = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nhm_username);
         nhm_username.setText(sharedpreferences.getString("nome", ""));
 
         TextView nhm_email = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nhm_email);
         nhm_email.setText(sharedpreferences.getString("email", ""));
+
+        if (!sharedpreferences.getString("profile_pic", "").equals("")) {
+            ImageView nhmProfileImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.nhm_profile_image);
+            Picasso.with(this).load(sharedpreferences.getString("profile_pic", "")).placeholder(R.drawable.default_profile).error(R.drawable.default_profile).into(nhmProfileImage);
+        }
 
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -87,7 +92,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer != null && drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -124,7 +129,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        Fragment fragment = null;
+        Fragment fragment;
         if (id == R.id.nav_camera) {
             fragment = new MainFragment();
         } else if (id == R.id.nav_gallery) {

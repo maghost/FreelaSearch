@@ -39,6 +39,7 @@ public class SignupActivity extends AppCompatActivity implements TarefaInterface
         dto.nome = ((EditText) findViewById(R.id.nome)).getText().toString();
         dto.email = ((EditText) findViewById(R.id.email)).getText().toString();
         dto.senha = ((EditText) findViewById(R.id.senha)).getText().toString();
+        //TODO: Colocar o link da imagem
 
         TarefaCadastroUsuario tarefa = new TarefaCadastroUsuario(this, this);
         tarefa.execute(dto);
