@@ -54,7 +54,7 @@ public class WelcomeActivity extends AppCompatActivity implements TarefaInterfac
 
         //Verifica se está logado pela aplicação
         SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        boolean loggedByApplication = sharedpreferences.getString("email", "").equals("");
+        boolean loggedByApplication = !sharedpreferences.getString("email", "").equals("");
 
         if (loggedByFacebook || loggedByApplication) {
             Intent intent = new Intent(this, MainActivity.class);
