@@ -25,10 +25,10 @@ public class PerfisActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
         Class classe = null;
-        if (view.getId() == R.id.anunciantePerfil) {
+        if (view.getId() == R.id.anunciante_perfil) {
             editor.putString("perfil", "anunciante");
             classe = MainActivity.class;
-        } else if (view.getId() == R.id.freelancerPerfil) {
+        } else if (view.getId() == R.id.freelancer_perfil) {
             editor.putString("perfil", "freelancer");
             classe = ListaCategoriaActivity.class;
         }

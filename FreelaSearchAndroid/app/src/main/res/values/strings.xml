@@ -1,43 +1,30 @@
 <resources>
+    <string name="action_logout">Desconectar</string>
+    <string name="action_settings">Configurações</string>
+    <string name="anunciante">Anunciante</string>
     <string name="app_name">FreelaSearch</string>
-    <string name="title_activity_lista_categoria">Lista Categoria</string>
-    <string name="title_activity_cadastro_usuario">Cadastro de Usuário</string>
-
-    <!-- Formulários -->
-    <string name="required_fields">Campo(s) obrigatório(s) não preenchido(s).</string>
-
-    <!-- Welcome -->
-    <string name="conectar_facebook">Conectar-se pelo Facebook</string>
-    <string name="deslogar_facebook">Desconectar-se do Facebook</string>
-    <string name="conectar">Conectar-se</string>
     <string name="cadastrar">Cadastrar-se</string>
-    <string name="esqueceu_senha">Esqueceu sua senha?</string>
-
-    <!-- Signup -->
-    <string name="nome">Nome</string>
-    <string name="email">Email</string>
-    <string name="senha">Senha</string>
+    <string name="conectar">Conectar-se</string>
+    <string name="conectar_facebook">Conectar-se pelo Facebook</string>
     <string name="criar_conta">Criar Conta</string>
-    <string name="ja_cadastrado">Já é cadastrado? Conecte-se.</string>
-
-    <!-- Login -->
     <string name="deseja_cadastrar">Ainda não possui uma conta? Cadastre-se.</string>
-
-
-    <string name="facebook_app_id">1242449602450447</string>
-    <string name="title_activity_teste">TesteActivity</string>
-
-    <string name="title_activity_perfis">Perfis Activity</string>
+    <string name="deslogar_facebook">Desconectar-se do Facebook</string>
     <string name="dummy_button">Dummy Botão</string>
     <string name="dummy_content">DUMMY\nCONTEÚDO</string>
-    <string name="title_activity_main">Main Activity</string>
-
+    <string name="email">Email</string>
+    <string name="esqueceu_senha">Esqueceu sua senha?</string>
+    <string name="facebook_app_id">1242449602450447</string>
+    <string name="freelancer">Freelancer</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ja_cadastrado">Já é cadastrado? Conecte-se.</string>
     <string name="navigation_drawer_open">Abrir Navigation Drawer</string>
     <string name="navigation_drawer_close">Fechar </string>
-
-    <string name="action_settings">Configurações</string>
-    <string name="action_logout">Desconectar</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nome">Nome</string>
+    <string name="required_fields">Campo(s) obrigatório(s) não preenchido(s).</string>
+    <string name="senha">Senha</string>
+    <string name="title_activity_lista_categoria">Lista Categoria</string>
+    <string name="title_activity_cadastro_usuario">Cadastro de Usuário</string>
+    <string name="title_activity_teste">TesteActivity</string>
+    <string name="title_activity_perfis">Perfis Activity</string>
+    <string name="title_activity_main">Main Activity</string>
 </resources>

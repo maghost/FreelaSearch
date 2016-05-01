@@ -5,11 +5,11 @@
     android:weightSum="2">
 
     <LinearLayout
-        android:id="@+id/anunciantePerfil"
+        android:id="@+id/anunciante_perfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@color/colorPrimary"
+        android:background="@color/primary"
         android:onClick="selecionarPerfil"
         android:orientation="vertical">
 
@@ -25,25 +25,25 @@
                 android:src="@drawable/anunciante_perfil" />
 
             <TextView
-                android:id="@+id/tvAnunciante"
+                android:id="@+id/tv_anunciante"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="@color/black_overlay"
+                android:background="@color/overlay"
                 android:padding="5dp"
-                android:text="Anunciante"
+                android:text="@string/anunciante"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textSize="22dp" />
+                android:textSize="22sp" />
         </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/freelancerPerfil"
+        android:id="@+id/freelancer_perfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@color/black_overlay"
+        android:background="@color/overlay"
         android:onClick="selecionarPerfil"
         android:orientation="vertical">
 
@@ -59,13 +59,13 @@
                 android:src="@drawable/freelancer_perfil" />
 
             <TextView
-                android:id="@+id/tvFreelancer"
+                android:id="@+id/tv_freelancer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="@color/black_overlay"
+                android:background="@color/overlay"
                 android:padding="5dp"
-                android:text="Freelancer"
+                android:text="@string/freelancer"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="22dp" />

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:background="@color/colorPrimary"
+        android:background="@color/primary"
         android:padding="8dp"
         android:text="GALLERY"
         android:textColor="#fff"
