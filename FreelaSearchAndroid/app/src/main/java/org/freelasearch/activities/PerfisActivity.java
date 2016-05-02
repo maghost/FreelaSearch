@@ -24,7 +24,7 @@ public class PerfisActivity extends AppCompatActivity {
         SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
-        Class classe = null;
+        Class classe;
         if (view.getId() == R.id.anunciante_perfil) {
             editor.putString("perfil", "anunciante");
             classe = MainActivity.class;
