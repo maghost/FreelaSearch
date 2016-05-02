@@ -25,7 +25,6 @@ import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
 import org.freelasearch.R;
-import org.freelasearch.fragments.GalleryFragment;
 import org.freelasearch.fragments.MainFragment;
 import org.freelasearch.fragments.TabFragment;
 
@@ -34,6 +33,7 @@ public class MainActivity extends AppCompatActivity
 
     private static final String PREF_NAME = "SignupActivityPreferences";
     private NavigationView navigationView = null;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +55,12 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.app_name);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setToolbarTitle(R.string.app_name);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,10 +72,12 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        assert drawer != null;
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        assert navigationView != null;
         TextView nhm_username = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nhm_username);
         nhm_username.setText(sharedpreferences.getString("nome", ""));
 
@@ -130,13 +133,23 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         Fragment fragment;
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_dashboard) {
+            setToolbarTitle(R.string.app_name);
             fragment = new MainFragment();
-        } else if (id == R.id.nav_gallery) {
-            fragment = new GalleryFragment();
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_escolher_perfil) {
+            startActivity(PerfisActivity.class);
+            return false;
+        } else if (id == R.id.nav_anuncios) {
+            setToolbarTitle(R.string.title_tab_fragment);
             fragment = new TabFragment();
+        } else if (id == R.id.nav_settings) {
+            setToolbarTitle(R.string.title_tab_fragment);
+            fragment = new TabFragment();
+        } else if (id == R.id.nav_logout) {
+            logout();
+            return false;
         } else {
+            setToolbarTitle(R.string.title_main_fragment);
             fragment = new MainFragment();
         }
 
@@ -145,6 +158,7 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        assert drawer != null;
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -160,5 +174,14 @@ public class MainActivity extends AppCompatActivity
         editor.commit();
 
         LoginManager.getInstance().logOut();
+    }
+
+    private void startActivity(Class activity) {
+        Intent intent = new Intent(this, activity);
+        startActivity(intent);
+    }
+
+    public void setToolbarTitle(int idString) {
+        toolbar.setTitle(this.getString(idString));
     }
 }

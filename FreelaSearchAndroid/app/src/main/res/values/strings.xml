@@ -2,21 +2,26 @@
     <string name="action_logout">Desconectar</string>
     <string name="action_settings">Configurações</string>
     <string name="anunciante">Anunciante</string>
+    <string name="anuncios">Anúncios</string>
     <string name="app_name">FreelaSearch</string>
     <string name="cadastrar">Cadastrar-se</string>
     <string name="conectar">Conectar-se</string>
     <string name="conectar_facebook">Conectar-se pelo Facebook</string>
+    <string name="configuracoes">Configurações</string>
     <string name="criar_conta">Criar Conta</string>
+    <string name="dashboard">Dashboard</string>
     <string name="deseja_cadastrar">Ainda não possui uma conta? Cadastre-se.</string>
     <string name="deslogar_facebook">Desconectar-se do Facebook</string>
     <string name="dummy_button">Dummy Botão</string>
     <string name="dummy_content">DUMMY\nCONTEÚDO</string>
     <string name="email">Email</string>
+    <string name="escolher_perfil">Escolher Perfil</string>
     <string name="esqueceu_senha">Esqueceu sua senha?</string>
     <string name="facebook_app_id">1242449602450447</string>
     <string name="freelancer">Freelancer</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ja_cadastrado">Já é cadastrado? Conecte-se.</string>
+    <string name="logout">Logout</string>
     <string name="navigation_drawer_open">Abrir Navigation Drawer</string>
     <string name="navigation_drawer_close">Fechar </string>
     <string name="nome">Nome</string>
@@ -27,4 +32,7 @@
     <string name="title_activity_teste">TesteActivity</string>
     <string name="title_activity_perfis">Perfis Activity</string>
     <string name="title_activity_main">Main Activity</string>
+    <string name="title_gallery_fragment">Galeria de Fotos</string>
+    <string name="title_main_fragment">Dashboard</string>
+    <string name="title_tab_fragment">Anúncios</string>
 </resources>

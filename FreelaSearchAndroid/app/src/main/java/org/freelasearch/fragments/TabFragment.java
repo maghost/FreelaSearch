@@ -65,9 +65,9 @@ public class TabFragment extends Fragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new MainFragment();
+                    return new GaleriaFragment();
                 case 1:
-                    return new GalleryFragment();
+                    return new GaleriaFragment();
             }
             return null;
         }

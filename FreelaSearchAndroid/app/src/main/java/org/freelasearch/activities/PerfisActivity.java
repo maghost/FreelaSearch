@@ -28,17 +28,15 @@ public class PerfisActivity extends AppCompatActivity {
         if (view.getId() == R.id.anunciante_perfil) {
             editor.putString("perfil", "anunciante");
             classe = MainActivity.class;
-        } else if (view.getId() == R.id.freelancer_perfil) {
+        } else {
             editor.putString("perfil", "freelancer");
             classe = ListaCategoriaActivity.class;
         }
 
-        if (classe != null) {
-            editor.commit();
-            Intent activity = new Intent(this, classe);
-            startActivity(activity);
-            this.finish();
-        }
+        editor.commit();
+        Intent intent = new Intent(this, classe);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 }

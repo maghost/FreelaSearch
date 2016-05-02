@@ -3,25 +3,29 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_home_24dp"
+            android:tint="@color/icons"
+            android:title="@string/dashboard" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_escolher_perfil"
+            android:icon="@drawable/ic_account_circle_24dp"
+            android:tint="@color/icons"
+            android:title="@string/escolher_perfil" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-
+            android:id="@+id/nav_anuncios"
+            android:icon="@drawable/ic_dashboard_24dp"
+            android:tint="@color/icons"
+            android:title="@string/anuncios" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_24dp"
+            android:tint="@color/icons"
+            android:title="@string/configuracoes" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_settings_power_24dp"
+            android:tint="@color/icons"
+            android:title="@string/logout" />
     </group>
-    <item
-        android:id="@+id/nav_manage"
-        android:icon="@drawable/ic_menu_manage"
-        android:title="Tools" />
-    <item
-        android:id="@+id/nav_manage2"
-        android:icon="@drawable/ic_menu_manage"
-        android:title="Tools" />
 </menu>
