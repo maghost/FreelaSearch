@@ -13,7 +13,7 @@
         android:layout_marginTop="@dimen/appbar_space"
         android:background="@color/primary"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/primary_dark"
+        app:tabIndicatorColor="@color/accent"
         app:tabIndicatorHeight="@dimen/indicator_height"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@android:color/white"

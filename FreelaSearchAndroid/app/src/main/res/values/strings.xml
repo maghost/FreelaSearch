@@ -27,6 +27,8 @@
     <string name="nome">Nome</string>
     <string name="required_fields">Campo(s) obrigatório(s) não preenchido(s).</string>
     <string name="senha">Senha</string>
+    <string name="search_title">Pesquisar</string>
+    <string name="search_hint">Pesquisar Vagas</string>
     <string name="title_activity_lista_categoria">Lista Categoria</string>
     <string name="title_activity_cadastro_usuario">Cadastro de Usuário</string>
     <string name="title_activity_teste">TesteActivity</string>

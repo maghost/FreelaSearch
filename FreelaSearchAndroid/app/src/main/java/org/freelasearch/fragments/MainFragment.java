@@ -51,13 +51,13 @@ public class MainFragment extends Fragment {
         data.setValueFormatter(new IntegerFormatter());
 
         pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        data.setValueTextColor(Color.WHITE);
-        data.setValueTextSize(14f);
+        data.setValueTextColor(Color.BLACK);
+        data.setValueTextSize(15f);
 
         pieChart.setData(data);
-        pieChart.setDescription(null);
+        pieChart.setDescription("");
         pieChart.getLegend().setEnabled(false);
-        pieChart.animateY(1500);
+        pieChart.animateY(1300);
         pieChart.setHoleColor(Color.TRANSPARENT);
 
         // Inflate the layout for this fragment
