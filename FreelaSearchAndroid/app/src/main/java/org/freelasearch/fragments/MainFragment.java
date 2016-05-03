@@ -1,5 +1,8 @@
 package org.freelasearch.fragments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,11 +17,14 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.freelasearch.R;
+import org.freelasearch.activities.PerfisActivity;
 import org.freelasearch.utils.IntegerFormatter;
 
 import java.util.ArrayList;
 
 public class MainFragment extends Fragment {
+
+    private static final String PREF_NAME = "SignupActivityPreferences";
 
     public MainFragment() {
         // Required empty public constructor
@@ -59,6 +65,20 @@ public class MainFragment extends Fragment {
         pieChart.getLegend().setEnabled(false);
         pieChart.animateY(1300);
         pieChart.setHoleColor(Color.TRANSPARENT);
+
+
+        // Dependendo do perfil o item exibido é diferente
+        SharedPreferences sharedpreferences = getActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        if (sharedpreferences.getString("perfil", "").equals("")) {
+            Intent intent = new Intent(getActivity(), PerfisActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+            return view;
+        } else if (sharedpreferences.getString("perfil", "").equals("anunciante")) {
+            view.findViewById(R.id.txt_freelancer).setVisibility(View.GONE);
+        } else {
+            view.findViewById(R.id.txt_vaga).setVisibility(View.GONE);
+        }
 
         // Inflate the layout for this fragment
         return view;

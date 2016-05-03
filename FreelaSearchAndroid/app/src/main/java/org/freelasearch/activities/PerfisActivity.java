@@ -27,14 +27,12 @@ public class PerfisActivity extends AppCompatActivity {
         Class classe;
         if (view.getId() == R.id.anunciante_perfil) {
             editor.putString("perfil", "anunciante");
-            classe = MainActivity.class;
         } else {
             editor.putString("perfil", "freelancer");
-            classe = ListaCategoriaActivity.class;
         }
 
         editor.commit();
-        Intent intent = new Intent(this, classe);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

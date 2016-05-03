@@ -11,24 +11,71 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/primary"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/medium_margin"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/main_button"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/txt_vaga"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:background="@color/primary"
-                android:padding="8dp"
-                android:text="MAIN"
-                android:textColor="#fff"
-                android:textSize="28sp" />
-        </RelativeLayout>
+                android:layout_marginBottom="@dimen/medium_margin"
+                android:drawableLeft="@drawable/ic_flag_24dp"
+                android:drawablePadding="@dimen/bigger_margin"
+                android:drawableTint="@color/icons"
+                android:hint="@string/anuncios"
+                android:paddingLeft="@dimen/medium_margin"
+                android:singleLine="true"
+                android:textColor="@color/icons"
+                android:textColorHint="@color/secondary_text"
+                android:textSize="17sp" />
+
+            <EditText
+                android:id="@+id/txt_freelancer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/medium_margin"
+                android:drawableLeft="@drawable/ic_assignment_ind_24dp"
+                android:drawablePadding="@dimen/bigger_margin"
+                android:drawableTint="@color/icons"
+                android:hint="@string/freelancer"
+                android:paddingLeft="@dimen/medium_margin"
+                android:singleLine="true"
+                android:textColor="@color/icons"
+                android:textColorHint="@color/secondary_text"
+                android:textSize="17sp" />
+
+            <EditText
+                android:id="@+id/txt_local"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/medium_margin"
+                android:drawableLeft="@drawable/ic_map_24dp"
+                android:drawablePadding="@dimen/bigger_margin"
+                android:drawableTint="@color/icons"
+                android:hint="@string/location"
+                android:paddingLeft="@dimen/medium_margin"
+                android:singleLine="true"
+                android:textColor="@color/icons"
+                android:textColorHint="@color/secondary_text"
+                android:textSize="17sp" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_buscar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:background="@color/accent"
+                android:onClick="buscar"
+                android:text="@string/search_title"
+                android:textColor="@color/icons" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -40,7 +87,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/fab_margin">
+            android:layout_margin="@dimen/medium_margin">
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/piechart_freelasearch"

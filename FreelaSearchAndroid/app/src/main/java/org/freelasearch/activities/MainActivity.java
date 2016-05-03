@@ -117,7 +117,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
-            return true;
+            startActivity(PerfisActivity.class);
+            return false;
         }
 
         return super.onOptionsItemSelected(item);
@@ -186,5 +187,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void setToolbarTitle(int idString) {
         toolbar.setTitle(this.getString(idString));
+    }
+
+    public void buscar(View view) {
+        Intent activity = new Intent(this, MainActivity.class);
+        startActivity(activity);
     }
 }
