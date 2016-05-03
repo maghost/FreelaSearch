@@ -4,11 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
@@ -75,10 +79,31 @@ public class MainFragment extends Fragment {
             getActivity().finish();
             return view;
         } else if (sharedpreferences.getString("perfil", "").equals("anunciante")) {
-            view.findViewById(R.id.txt_freelancer).setVisibility(View.GONE);
+            view.findViewById(R.id.txt_anuncio).setVisibility(View.GONE);
         } else {
-            view.findViewById(R.id.txt_vaga).setVisibility(View.GONE);
+            view.findViewById(R.id.txt_freelancer).setVisibility(View.GONE);
         }
+
+
+        // Colocando e pintando os icones (drawable) do EditText (por tag não funcionou)
+        Drawable drawableAnuncio = getResources().getDrawable(R.drawable.ic_flag_24dp);
+        drawableAnuncio = DrawableCompat.wrap(drawableAnuncio);
+        DrawableCompat.setTint(drawableAnuncio, getResources().getColor(R.color.accent));
+        DrawableCompat.setTintMode(drawableAnuncio, PorterDuff.Mode.SRC_IN);
+        ((EditText) view.findViewById(R.id.txt_anuncio)).setCompoundDrawablesWithIntrinsicBounds(drawableAnuncio, null, null, null);
+
+        Drawable drawableFreelancer = getResources().getDrawable(R.drawable.ic_assignment_ind_24dp);
+        drawableFreelancer = DrawableCompat.wrap(drawableFreelancer);
+        DrawableCompat.setTint(drawableFreelancer, getResources().getColor(R.color.accent));
+        DrawableCompat.setTintMode(drawableFreelancer, PorterDuff.Mode.SRC_IN);
+        ((EditText) view.findViewById(R.id.txt_freelancer)).setCompoundDrawablesWithIntrinsicBounds(drawableFreelancer, null, null, null);
+
+        Drawable drawableLocal = getResources().getDrawable(R.drawable.ic_map_24dp);
+        drawableLocal = DrawableCompat.wrap(drawableLocal);
+        DrawableCompat.setTint(drawableLocal, getResources().getColor(R.color.accent));
+        DrawableCompat.setTintMode(drawableLocal, PorterDuff.Mode.SRC_IN);
+        ((EditText) view.findViewById(R.id.txt_local)).setCompoundDrawablesWithIntrinsicBounds(drawableLocal, null, null, null);
+
 
         // Inflate the layout for this fragment
         return view;
