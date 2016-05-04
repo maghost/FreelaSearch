@@ -25,8 +25,12 @@ import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
 import org.freelasearch.R;
+import org.freelasearch.dtos.DtoAnuncio;
 import org.freelasearch.fragments.MainFragment;
-import org.freelasearch.fragments.TabFragment;
+import org.freelasearch.fragments.TabAnunciosFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -139,10 +143,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return false;
         } else if (id == R.id.nav_anuncios) {
             setToolbarTitle(R.string.title_tab_fragment);
-            fragment = new TabFragment();
+            fragment = new TabAnunciosFragment();
         } else if (id == R.id.nav_settings) {
             setToolbarTitle(R.string.title_tab_fragment);
-            fragment = new TabFragment();
+            fragment = new TabAnunciosFragment();
         } else if (id == R.id.nav_logout) {
             logout();
             return false;
@@ -193,4 +197,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent activity = new Intent(this, MainActivity.class);
         startActivity(activity);
     }
+
+    public List<DtoAnuncio> getAnunciosList(int qtd) {
+
+        List<DtoAnuncio> anuncios = new ArrayList<>();
+
+        for (int i = 1; i <= qtd; i++) {
+            DtoAnuncio anuncio = new DtoAnuncio();
+            anuncio.id = i;
+            anuncio.ativo = true;
+            anuncio.titulo = "Anúncio nº" + i;
+            anuncio.descricao = "Lorem Ipsum Dolor Amet";
+//            if (i % 2 == 0) {
+//                anuncio.imagem = "https://s-media-cache-ak0.pinimg.com/originals/cb/f8/41/cbf841229a4ae14dbb7629f524627083.jpg";
+//            } else {
+            anuncio.imagem = "https://www.google.com.br/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
+//            }
+            anuncios.add(anuncio);
+        }
+
+        return anuncios;
+    }
+
 }
