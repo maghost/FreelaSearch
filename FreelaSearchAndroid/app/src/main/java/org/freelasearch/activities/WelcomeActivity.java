@@ -26,7 +26,6 @@ import org.freelasearch.tasks.TarefaInterface;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -100,7 +99,7 @@ public class WelcomeActivity extends AppCompatActivity implements TarefaInterfac
                                     intent.putExtra("nome", name);
                                     intent.putExtra("profile_pic", profile_pic);
 
-                                    cadastroUsuarioFacebook(email, name);
+                                    cadastroUsuarioFacebook(email, name, profile_pic);
 
                                     startActivity(intent);
                                     finish();
@@ -154,11 +153,11 @@ public class WelcomeActivity extends AppCompatActivity implements TarefaInterfac
         startActivity(activity);
     }
 
-    private void cadastroUsuarioFacebook(String email, String nome) {
+    private void cadastroUsuarioFacebook(String email, String nome, String urlFoto) {
         DtoUsuario dto = new DtoUsuario();
         dto.setEmail(email);
         dto.setNome(nome);
-        //TODO: Colocar o link da imagem
+        dto.setUrlFoto(urlFoto);
 
         TarefaCadastroUsuarioFacebook tarefa = new TarefaCadastroUsuarioFacebook(this, this);
         tarefa.execute(dto);

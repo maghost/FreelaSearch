@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 import org.freelasearch.R;
 import org.freelasearch.dtos.DtoAnuncio;
 import org.freelasearch.interfaces.RecyclerViewOnClickListenerHack;
+import org.freelasearch.utils.RoundedCornersTransformation;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.MyViewHo
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = mLayoutInflater.inflate(R.layout.item_anuncio_card, viewGroup, false);
+
         MyViewHolder mvh = new MyViewHolder(v);
         return mvh;
     }
@@ -41,7 +43,10 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.MyViewHo
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Picasso.with(mContext).load(mList.get(position).getImagem()).placeholder(R.drawable.default_profile).error(R.drawable.default_profile).into(holder.ivAnuncio);
+        Picasso.with(mContext).load(mList.get(position).getImagem()).fit().
+                transform(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.TOP_LEFT)).
+                transform(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.TOP_RIGHT)).
+                into(holder.ivAnuncio);
         holder.tvTitulo.setText(mList.get(position).getTitulo());
         holder.tvDescricao.setText(mList.get(position).getDescricao());
 

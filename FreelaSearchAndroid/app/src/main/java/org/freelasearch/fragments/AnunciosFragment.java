@@ -34,7 +34,7 @@ public class AnunciosFragment extends Fragment implements RecyclerViewOnClickLis
 
         View view = inflater.inflate(R.layout.fragment_anuncios, container, false);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_anuncios);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

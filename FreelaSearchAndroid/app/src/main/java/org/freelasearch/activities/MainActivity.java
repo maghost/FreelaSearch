@@ -209,7 +209,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             anuncio.setAtivo(true);
             anuncio.setTitulo("Anúncio nº" + i);
             anuncio.setDescricao("Lorem Ipsum Dolor Amet");
-            anuncio.setImagem("https://www.google.com.br/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png");
+            if (i % 2 == 0) {
+                anuncio.setImagem("http://www.pixelstalk.net/wp-content/uploads/2016/04/Pics-3D-download-wallpapers-HD.jpg");
+            } else {
+                anuncio.setImagem("http://www.planwallpaper.com/static/images/ZhGEqAP.jpg");
+            }
+
+            anuncios.add(anuncio);
+        }
+
+        return anuncios;
+    }
+
+    public List<DtoAnuncio> getMeusAnunciosList(int qtd) {
+
+        List<DtoAnuncio> anuncios = new ArrayList<>();
+
+        for (int i = 1; i <= qtd; i++) {
+            DtoAnuncio anuncio = new DtoAnuncio();
+
+            anuncio.setId(i);
+            anuncio.setAtivo(true);
+            anuncio.setTitulo("Meu Anúncio nº" + i);
+            anuncio.setDescricao("Lorem Ipsum Dolor Amet");
+            if (i % 2 == 0) {
+                anuncio.setImagem("http://www.planwallpaper.com/static/images/b807c2282ab0a491bd5c5c1051c6d312_k4PiHxO.jpg");
+            } else {
+                anuncio.setImagem("http://eskipaper.com/images/wallpaper-hd-15.jpg");
+            }
+
             anuncios.add(anuncio);
         }
 

@@ -67,7 +67,7 @@ public class TabAnunciosFragment extends Fragment {
                 case 0:
                     return new AnunciosFragment();
                 case 1:
-                    return new GaleriaFragment();
+                    return new MeusAnunciosFragment();
             }
             return null;
         }
