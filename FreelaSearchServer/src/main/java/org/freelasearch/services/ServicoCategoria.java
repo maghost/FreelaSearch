@@ -18,9 +18,9 @@ public class ServicoCategoria {
 
 	public Categoria montarBean(DtoCategoria dto) {
 		Categoria categoria = new Categoria();
-		categoria.setId(dto.id);
-		categoria.setNome(dto.nome);
-		categoria.setDescricao(dto.descricao);
+		categoria.setId(dto.getId());
+		categoria.setNome(dto.getNome());
+		categoria.setDescricao(dto.getDescricao());
 
 		return categoria;
 	}
@@ -28,9 +28,9 @@ public class ServicoCategoria {
 	public DtoCategoria montarDto(Integer id) {
 		Categoria categoria = categoriaDao.findById(id);
 		DtoCategoria dto = new DtoCategoria();
-		dto.id = categoria.getId();
-		dto.nome = categoria.getNome();
-		dto.descricao = categoria.getDescricao();
+		dto.setId(categoria.getId());
+		dto.setNome(categoria.getNome());
+		dto.setDescricao(categoria.getDescricao());
 
 		return dto;
 	}

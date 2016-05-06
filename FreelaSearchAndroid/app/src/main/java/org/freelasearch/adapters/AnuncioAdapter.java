@@ -41,9 +41,9 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.MyViewHo
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Picasso.with(mContext).load(mList.get(position).imagem).placeholder(R.drawable.default_profile).error(R.drawable.default_profile).into(holder.ivAnuncio);
-        holder.tvTitulo.setText(mList.get(position).titulo);
-        holder.tvDescricao.setText(mList.get(position).descricao);
+        Picasso.with(mContext).load(mList.get(position).getImagem()).placeholder(R.drawable.default_profile).error(R.drawable.default_profile).into(holder.ivAnuncio);
+        holder.tvTitulo.setText(mList.get(position).getTitulo());
+        holder.tvDescricao.setText(mList.get(position).getDescricao());
 
         try {
             YoYo.with(Techniques.FadeIn).duration(200).playOn(holder.itemView);

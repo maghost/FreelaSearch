@@ -35,8 +35,8 @@ public class LoginActivity extends AppCompatActivity implements TarefaInterface 
         }
 
         DtoUsuario dto = new DtoUsuario();
-        dto.email = ((EditText) findViewById(R.id.email)).getText().toString();
-        dto.senha = ((EditText) findViewById(R.id.senha)).getText().toString();
+        dto.setEmail(((EditText) findViewById(R.id.email)).getText().toString());
+        dto.setSenha(((EditText) findViewById(R.id.senha)).getText().toString());
 
         TarefaLoginUsuario tarefa = new TarefaLoginUsuario(this, this);
         tarefa.execute(dto);
@@ -51,8 +51,8 @@ public class LoginActivity extends AppCompatActivity implements TarefaInterface 
         if (obj instanceof DtoUsuario) {
             SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.putString("nome", ((DtoUsuario) obj).nome);
-            editor.putString("email", ((DtoUsuario) obj).email);
+            editor.putString("nome", ((DtoUsuario) obj).getNome());
+            editor.putString("email", ((DtoUsuario) obj).getEmail());
             editor.commit();
 
             Intent activity = new Intent(this, MainActivity.class);

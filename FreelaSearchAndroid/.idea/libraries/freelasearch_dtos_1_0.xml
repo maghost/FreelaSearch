@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="freelasearch-dtos-1.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/freelasearch-dtos-1.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/freelasearch/freelasearch-dtos/1.0/freelasearch-dtos-1.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

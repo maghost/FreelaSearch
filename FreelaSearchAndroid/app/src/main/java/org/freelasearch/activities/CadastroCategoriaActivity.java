@@ -37,8 +37,8 @@ public class CadastroCategoriaActivity extends AppCompatActivity {
         new Thread() {
             public void run() {
                 DtoCategoria dto = new DtoCategoria();
-                dto.nome = ((EditText) findViewById(R.id.nome)).getText().toString();
-                dto.descricao = ((EditText) findViewById(R.id.descricao)).getText().toString();
+                dto.setNome(((EditText) findViewById(R.id.nome)).getText().toString());
+                dto.setDescricao(((EditText) findViewById(R.id.descricao)).getText().toString());
 
                 try {
                     CategoriaService categoriaService = new CategoriaService();

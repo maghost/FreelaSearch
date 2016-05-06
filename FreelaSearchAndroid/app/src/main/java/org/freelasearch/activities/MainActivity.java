@@ -204,11 +204,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         for (int i = 1; i <= qtd; i++) {
             DtoAnuncio anuncio = new DtoAnuncio();
-            anuncio.id = i;
-            anuncio.ativo = true;
-            anuncio.titulo = "Anúncio nº" + i;
-            anuncio.descricao = "Lorem Ipsum Dolor Amet";
-            anuncio.imagem = "https://www.google.com.br/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
+
+            anuncio.setId(i);
+            anuncio.setAtivo(true);
+            anuncio.setTitulo("Anúncio nº" + i);
+            anuncio.setDescricao("Lorem Ipsum Dolor Amet");
+            anuncio.setImagem("https://www.google.com.br/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png");
             anuncios.add(anuncio);
         }
 

@@ -64,7 +64,7 @@ public class WelcomeActivity extends AppCompatActivity implements TarefaInterfac
 
         //Se não estiver logado, monta a tela de Welcome com o botão do fb para login/cadastro
         LoginButton loginButton = (LoginButton) findViewById(R.id.lbFacebook);
-        if(loginButton == null) {
+        if (loginButton == null) {
             return;
         }
         List<String> permissionNeeds = Arrays.asList("public_profile", "email");
@@ -156,8 +156,8 @@ public class WelcomeActivity extends AppCompatActivity implements TarefaInterfac
 
     private void cadastroUsuarioFacebook(String email, String nome) {
         DtoUsuario dto = new DtoUsuario();
-        dto.email = email;
-        dto.nome = nome;
+        dto.setEmail(email);
+        dto.setNome(nome);
         //TODO: Colocar o link da imagem
 
         TarefaCadastroUsuarioFacebook tarefa = new TarefaCadastroUsuarioFacebook(this, this);
@@ -173,9 +173,9 @@ public class WelcomeActivity extends AppCompatActivity implements TarefaInterfac
         if (obj instanceof DtoUsuario) {
             SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.putString("id", (((DtoUsuario) obj).id).toString());
-            editor.putString("nome", ((DtoUsuario) obj).nome);
-            editor.putString("email", ((DtoUsuario) obj).email);
+            editor.putString("id", (((DtoUsuario) obj).getId()).toString());
+            editor.putString("nome", ((DtoUsuario) obj).getNome());
+            editor.putString("email", ((DtoUsuario) obj).getEmail());
             editor.commit();
 
             Intent activity = new Intent(this, MainActivity.class);

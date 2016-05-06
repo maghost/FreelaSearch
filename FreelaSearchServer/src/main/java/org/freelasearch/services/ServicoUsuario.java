@@ -18,10 +18,10 @@ public class ServicoUsuario {
 
 	public Usuario montarBean(DtoUsuario dto) {
 		Usuario usuario = new Usuario();
-		usuario.setId(dto.id);
-		usuario.setNome(dto.nome);
-		usuario.setEmail(dto.email);
-		usuario.setSenha(dto.senha);
+		usuario.setId(dto.getId());
+		usuario.setNome(dto.getNome());
+		usuario.setEmail(dto.getEmail());
+		usuario.setSenha(dto.getSenha());
 
 		return usuario;
 	}
@@ -30,10 +30,10 @@ public class ServicoUsuario {
 		Usuario usuario = usuarioDao.findById(id);
 		DtoUsuario dto = new DtoUsuario();
 
-		dto.id = usuario.getId();
-		dto.nome = usuario.getNome();
-		dto.email = usuario.getEmail();
-		dto.senha = usuario.getSenha();
+		dto.setId(usuario.getId());
+		dto.setNome(usuario.getNome());
+		dto.setEmail(usuario.getEmail());
+		dto.setSenha(usuario.getSenha());
 
 		return dto;
 	}
@@ -73,7 +73,8 @@ public class ServicoUsuario {
 			List<Usuario> listUsuarioSemSenha = usuarioDao.findLogin(email);
 			if (listUsuarioSemSenha.size() == 1) {
 				if (listUsuarioSemSenha.get(0).getSenha() == null) {
-					throw new ExceptionFreelaSearch("O usuário informado não possui uma senha registrada. Logue-se pelo Facebook ou recupe a senha para ser enviada uma nova para o email registrado.");
+					throw new ExceptionFreelaSearch(
+							"O usuário informado não possui uma senha registrada. Logue-se pelo Facebook ou recupe a senha para ser enviada uma nova para o email registrado.");
 				}
 				throw new ExceptionFreelaSearch("A senha informada é inválida.");
 
@@ -84,10 +85,10 @@ public class ServicoUsuario {
 		Usuario usuario = listUsuario.get(0);
 
 		DtoUsuario dto = new DtoUsuario();
-		dto.id = usuario.getId();
-		dto.nome = usuario.getNome();
-		dto.email = usuario.getEmail();
-		dto.senha = usuario.getSenha();
+		dto.setId(usuario.getId());
+		dto.setNome(usuario.getNome());
+		dto.setEmail(usuario.getEmail());
+		dto.setSenha(usuario.getSenha());
 
 		return dto;
 	}
