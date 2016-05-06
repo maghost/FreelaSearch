@@ -208,11 +208,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             anuncio.ativo = true;
             anuncio.titulo = "Anúncio nº" + i;
             anuncio.descricao = "Lorem Ipsum Dolor Amet";
-//            if (i % 2 == 0) {
-//                anuncio.imagem = "https://s-media-cache-ak0.pinimg.com/originals/cb/f8/41/cbf841229a4ae14dbb7629f524627083.jpg";
-//            } else {
             anuncio.imagem = "https://www.google.com.br/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
-//            }
             anuncios.add(anuncio);
         }
 

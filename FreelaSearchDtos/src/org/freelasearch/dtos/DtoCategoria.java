@@ -6,9 +6,9 @@ public class DtoCategoria implements Serializable {
 
 	private static final long serialVersionUID = -9028687280832460656L;
 
-	public Integer id;
-	public String nome;
-	public String descricao;
+	private Integer id;
+	private String nome;
+	private String descricao;
 
 	public Integer getId() {
 		return id;

@@ -6,9 +6,9 @@ public class DtoLocalizacao implements Serializable {
 
 	private static final long serialVersionUID = 4314845845830814914L;
 
-	public String cidade;
-	public String estado;
-	public String pais;
+	private String cidade;
+	private String estado;
+	private String pais;
 
 	public String getCidade() {
 		return cidade;

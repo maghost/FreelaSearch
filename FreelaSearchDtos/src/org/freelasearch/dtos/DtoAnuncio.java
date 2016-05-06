@@ -7,14 +7,15 @@ public class DtoAnuncio implements Serializable {
 
 	private static final long serialVersionUID = -1832092211830965147L;
 
-	public Integer id;
-	public String imagem;
-	public String titulo;
-	public String descricao;
-	public Date data;
-	public DtoLocalizacao local;
-	public DtoUsuario anunciante;
-	public boolean ativo;
+	private Integer id;
+	private String imagem;
+	private String titulo;
+	private String descricao;
+	private Date data;
+	private DtoLocalizacao local;
+	private DtoUsuario anunciante;
+	private DtoCategoria categoria;
+	private boolean ativo;
 
 	public Integer getId() {
 		return id;
@@ -70,6 +71,14 @@ public class DtoAnuncio implements Serializable {
 
 	public void setAnunciante(DtoUsuario anunciante) {
 		this.anunciante = anunciante;
+	}
+
+	public DtoCategoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(DtoCategoria categoria) {
+		this.categoria = categoria;
 	}
 
 	public boolean isAtivo() {
