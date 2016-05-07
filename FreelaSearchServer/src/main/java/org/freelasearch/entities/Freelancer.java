@@ -27,9 +27,6 @@ public class Freelancer extends BaseBean {
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
-	@OneToMany(mappedBy = "freelancer", fetch = FetchType.LAZY)
-	private List<Portfolio> portfolios;
-
 	@OneToMany(mappedBy = "inscrito", fetch = FetchType.LAZY)
 	private List<Inscricao> inscricoes;
 
@@ -39,11 +36,10 @@ public class Freelancer extends BaseBean {
 	public Freelancer() {
 	}
 
-	public Freelancer(Integer id, Usuario usuario, List<Portfolio> portfolios, List<Inscricao> inscricoes, List<Contratacao> contratacao) {
+	public Freelancer(Integer id, Usuario usuario, List<Inscricao> inscricoes, List<Contratacao> contratacao) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
-		this.portfolios = portfolios;
 		this.inscricoes = inscricoes;
 		this.contratacoes = contratacao;
 	}
@@ -64,14 +60,6 @@ public class Freelancer extends BaseBean {
 		this.usuario = usuario;
 	}
 
-	public List<Portfolio> getPortfolios() {
-		return portfolios;
-	}
-
-	public void setPortfolios(List<Portfolio> portfolios) {
-		this.portfolios = portfolios;
-	}
-
 	public List<Inscricao> getInscricoes() {
 		return inscricoes;
 	}
@@ -90,7 +78,8 @@ public class Freelancer extends BaseBean {
 
 	@Override
 	public String toString() {
-		return "Freelancer [id=" + id + ", usuario=" + usuario + ", portfolios=" + printSpecificFieldFromBeanCollection(portfolios, "titulo") + ", inscricoes=" + printSpecificFieldFromBeanCollection(inscricoes, "id") + ", contratacao=" + printSpecificFieldFromBeanCollection(contratacoes, "id") + "]";
+		return "Freelancer [id=" + id + ", usuario=" + usuario + ", inscricoes=" + printSpecificFieldFromBeanCollection(inscricoes, "id") + ", contratacao="
+				+ printSpecificFieldFromBeanCollection(contratacoes, "id") + "]";
 	}
 
 }

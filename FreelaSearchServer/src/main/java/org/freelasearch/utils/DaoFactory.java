@@ -9,11 +9,9 @@ import org.freelasearch.dao.AvaliacaoDao;
 import org.freelasearch.dao.CategoriaDao;
 import org.freelasearch.dao.ChatDao;
 import org.freelasearch.dao.ContratacaoDao;
-import org.freelasearch.dao.FotoDao;
 import org.freelasearch.dao.FreelancerDao;
 import org.freelasearch.dao.InscricaoDao;
 import org.freelasearch.dao.MensagemDao;
-import org.freelasearch.dao.PortfolioDao;
 import org.freelasearch.dao.UsuarioDao;
 
 public final class DaoFactory {
@@ -122,20 +120,6 @@ public final class DaoFactory {
 	}
 
 	// /////////////////////////////////////////////////////////////////
-	// FOTO
-	// /////////////////////////////////////////////////////////////////
-
-	private static FotoDao fotoDaoInstance;
-
-	public static FotoDao fotoInstance() {
-		if (fotoDaoInstance == null) {
-			fotoDaoInstance = new FotoDao();
-		}
-
-		return fotoDaoInstance;
-	}
-
-	// /////////////////////////////////////////////////////////////////
 	// FREELANCER
 	// /////////////////////////////////////////////////////////////////
 
@@ -175,20 +159,6 @@ public final class DaoFactory {
 		}
 
 		return mensagemDaoInstance;
-	}
-
-	// /////////////////////////////////////////////////////////////////
-	// PORTFOLIO
-	// /////////////////////////////////////////////////////////////////
-
-	private static PortfolioDao portfolioDaoInstance;
-
-	public static PortfolioDao portfolioInstance() {
-		if (portfolioDaoInstance == null) {
-			portfolioDaoInstance = new PortfolioDao();
-		}
-
-		return portfolioDaoInstance;
 	}
 
 	// /////////////////////////////////////////////////////////////////

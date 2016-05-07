@@ -9,9 +9,9 @@
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.7.208.2:3306/matheus" /> <!-- jdbc:mysql://localhost:3306/freelasearch -->
-			<property name="javax.persistence.jdbc.user" value="adminNMXcDe2" /> <!-- matheus -->
-			<property name="javax.persistence.jdbc.password" value="AGqJyxS9eEuF" /> <!-- matheus -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/freelasearch" />
+			<property name="javax.persistence.jdbc.user" value="matheus" />
+			<property name="javax.persistence.jdbc.password" value="matheus" />
 
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="false" />
