@@ -34,22 +34,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8cdacd2-62e9-4375-92f2-c74644a1a1aa" name="Default" comment="Criação do Fragment Meus Anúncios e ajustes na borda da imagem do CardView">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/servlet/AnuncioServlet.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/servlet/AnuncioServlet.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/adapters/AnuncioAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/adapters/AnuncioAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/src/main/java/org/freelasearch/utils/DaoFactory.java" afterPath="$PROJECT_DIR$/../FreelaSearchServer/src/main/java/org/freelasearch/utils/DaoFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/src/main/java/org/freelasearch/entities/Freelancer.java" afterPath="$PROJECT_DIR$/../FreelaSearchServer/src/main/java/org/freelasearch/entities/Freelancer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/src/main/java/org/freelasearch/servlet/AnuncioServlet.java" afterPath="$PROJECT_DIR$/../FreelaSearchServer/src/main/java/org/freelasearch/servlet/AnuncioServlet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/fragments/MeusAnunciosFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/fragments/MeusAnunciosFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/resources/application.properties" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/resources/application.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/src/main/resources/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/../FreelaSearchServer/src/main/resources/META-INF/persistence.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/FreelaSearchServer/WEB-INF/classes/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/FreelaSearchServer/WEB-INF/classes/META-INF/persistence.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/META-INF/persistence.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/m2e-wtp/web-resources/META-INF/maven/org.freelasearch/FreelaSearchServer/pom.properties" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/m2e-wtp/web-resources/META-INF/maven/org.freelasearch/FreelaSearchServer/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/m2e-wtp/web-resources/META-INF/maven/org.freelasearch/FreelaSearchServer/pom.xml" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/m2e-wtp/web-resources/META-INF/maven/org.freelasearch/FreelaSearchServer/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="cae2e721-8ac8-43ad-b769-9008b546213f" name="Rejected commit: Default" comment="Ajustes na toolbar" />
@@ -78,7 +70,18 @@
     <favorites_list name="FreelaSearchAndroid" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="MeusAnunciosFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/fragments/MeusAnunciosFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6815069">
+              <caret line="68" column="43" selection-start-line="68" selection-start-column="43" selection-end-line="68" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -1795,9 +1798,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/service/AnuncioService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/service/AbstractService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/fragments/AnunciosFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/fragments/MeusAnunciosFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/adapters/AnuncioAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/fragments/MeusAnunciosFragment.java" />
       </list>
     </option>
   </component>
@@ -2366,7 +2369,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="57" y="-8" width="1317" height="784" extended-state="7" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2375,7 +2378,7 @@
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.58790773" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49072513" sideWeight="0.6572848" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.48963317" sideWeight="0.6572848" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44976076" sideWeight="0.49085122" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -2390,7 +2393,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24980111" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30071598" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30071598" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32695374" sideWeight="0.48448688" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.3293556" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="157" y="92" width="1117" height="584" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2889,22 +2892,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/fragments/MeusAnunciosFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="46" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/generated/source/r/debug/org/freelasearch/R.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.888889">
-          <caret line="2763" column="32" selection-start-line="2763" selection-start-column="32" selection-end-line="2763" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/adapters/AnuncioAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2916,6 +2903,14 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/no_image.png">
       <provider selected="true" editor-type-id="images">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/fragments/MeusAnunciosFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6815069">
+          <caret line="68" column="43" selection-start-line="68" selection-start-column="43" selection-end-line="68" selection-end-column="43" />
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>

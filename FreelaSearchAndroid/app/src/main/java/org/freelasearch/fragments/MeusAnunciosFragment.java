@@ -63,7 +63,7 @@ public class MeusAnunciosFragment extends Fragment implements RecyclerViewOnClic
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mList = ((MainActivity) getActivity()).getMeusAnunciosList(10, mList.size());
+        mList = ((MainActivity) getActivity()).getMeusAnunciosList(10, 0);
         mAdapter = new AnuncioAdapter(getActivity(), mList);
         mAdapter.setRecyclerViewOnClickListenerHack(this);
         mRecyclerView.setAdapter(mAdapter);

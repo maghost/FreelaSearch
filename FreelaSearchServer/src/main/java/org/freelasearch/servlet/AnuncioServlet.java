@@ -34,7 +34,11 @@ public class AnuncioServlet extends HttpServlet {
 				Integer qtdRetorno = request.getParameter("qtdRetorno") == null ? 0 : Integer.valueOf(request.getParameter("qtdRetorno"));
 				Integer qtdExibida = request.getParameter("qtdExibida") == null ? 0 : Integer.valueOf(request.getParameter("qtdExibida"));
 				Integer tipoBusca = request.getParameter("tipoBusca") == null ? null : Integer.valueOf(request.getParameter("tipoBusca"));
-
+					
+				System.out.println("qtdRetorno: " + qtdRetorno);
+				System.out.println("qtdExibida: " + qtdExibida);
+				System.out.println("tipoBusca: " + tipoBusca);
+				
 				oos.writeObject(servico.buscarLista(qtdRetorno, qtdExibida, tipoBusca));
 			}
 		} catch (ExceptionFreelaSearch e) {
