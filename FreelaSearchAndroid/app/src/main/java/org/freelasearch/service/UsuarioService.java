@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by msms on 25/02/2016.
- */
 public class UsuarioService extends AbstractService<DtoUsuario> {
 
     public void save(DtoUsuario dto) throws IOException {

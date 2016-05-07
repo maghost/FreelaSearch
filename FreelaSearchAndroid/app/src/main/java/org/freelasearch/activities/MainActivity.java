@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
@@ -28,9 +29,13 @@ import org.freelasearch.R;
 import org.freelasearch.dtos.DtoAnuncio;
 import org.freelasearch.fragments.MainFragment;
 import org.freelasearch.fragments.TabAnunciosFragment;
+import org.freelasearch.tasks.AsyncTaskListener;
+import org.freelasearch.tasks.impl.AsyncTaskListaAnuncio;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -221,7 +226,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return anuncios;
     }
 
+    private Context contexto = this;
+    private List<DtoAnuncio> auxAnuncios = new ArrayList<>();
+
     public List<DtoAnuncio> getMeusAnunciosList(int qtd) {
+        AsyncTaskListaAnuncio mAsyncTaskListaAnuncio = new AsyncTaskListaAnuncio();
+        mAsyncTaskListaAnuncio.setAsyncTaskListener(new AsyncTaskListener() {
+            @Override
+            public void onPreExecute() {
+
+            }
+
+            @Override
+            public <T> void onComplete(T obj) {
+                auxAnuncios.addAll((List<DtoAnuncio>) obj);
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+                Toast.makeText(contexto, errorMsg, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Map<String, Integer> filtro = new HashMap<>();
+        filtro.put("qtdRetorno", qtd);
+        filtro.put("qtdExibida", null);
+        filtro.put("tipoBusca", null);
+        mAsyncTaskListaAnuncio.execute(filtro);
+
+        return auxAnuncios;
+    }
+
+    /*public List<DtoAnuncio> getMeusAnunciosList(int qtd) {
 
         List<DtoAnuncio> anuncios = new ArrayList<>();
 
@@ -242,6 +278,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         return anuncios;
-    }
+    }*/
 
 }

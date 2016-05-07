@@ -35,7 +35,6 @@ public class CategoriaServlet extends HttpServlet {
 
 			if (request.getRequestURI().toLowerCase().endsWith("/buscar")) {
 				Integer id = Integer.valueOf(request.getParameter("id"));
-				servico.idValido(id);
 				oos.writeObject(servico.montarDto(id));
 			} else if (request.getRequestURI().toLowerCase().endsWith("/salvar")) {
 				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());

@@ -21,7 +21,7 @@ import com.facebook.login.widget.LoginButton;
 
 import org.freelasearch.R;
 import org.freelasearch.dtos.DtoUsuario;
-import org.freelasearch.tasks.TarefaCadastroUsuarioFacebook;
+import org.freelasearch.tasks.impl.TarefaCadastroUsuarioFacebook;
 import org.freelasearch.tasks.TarefaInterface;
 import org.json.JSONException;
 import org.json.JSONObject;

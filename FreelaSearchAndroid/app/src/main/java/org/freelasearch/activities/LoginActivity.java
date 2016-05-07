@@ -12,7 +12,7 @@ import android.widget.Toast;
 import org.freelasearch.R;
 import org.freelasearch.dtos.DtoUsuario;
 import org.freelasearch.tasks.TarefaInterface;
-import org.freelasearch.tasks.TarefaLoginUsuario;
+import org.freelasearch.tasks.impl.TarefaLoginUsuario;
 
 import java.io.IOException;
 import java.text.ParseException;

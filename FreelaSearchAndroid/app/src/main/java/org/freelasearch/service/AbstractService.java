@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -56,6 +57,44 @@ public abstract class AbstractService<T> {
         try {
             ObjectInputStream ois = new ObjectInputStream(urlConnection.getInputStream());
             return (T) ois.readObject();
+        } catch (ClassNotFoundException ex) {
+            throw new IOException("Falha ao recuperar objeto com os parametros " + params + ". Exception=" + ex.getLocalizedMessage());
+        } catch (Exception ex) {
+            int codigoResposta = urlConnection.getResponseCode();
+            if (codigoResposta != HttpURLConnection.HTTP_OK) {
+                if (codigoResposta == HttpURLConnection.HTTP_BAD_REQUEST) {
+                    throw new ExceptionFreelaSearch(urlConnection.getResponseMessage());
+                } else {
+                    throw new IOException(urlConnection.getResponseMessage());
+                }
+            }
+            throw new IOException(ex.getMessage());
+        }
+    }
+
+    protected List<T> retrieveListObject(Map<String, ?> params, String uri) throws IOException {
+        HttpURLConnection urlConnection = getHttpURLConnection(uri);
+
+        if (!params.isEmpty()) {
+            PrintWriter pw = new PrintWriter(urlConnection.getOutputStream());
+
+            Iterator<String> it = params.keySet().iterator();
+            while (it.hasNext()) {
+                String paramName = it.next();
+                if (params.get(paramName) != null) {
+                    pw.print(paramName + "=" + params.get(paramName));
+                    if (it.hasNext()) {
+                        pw.print("&");
+                    }
+                }
+            }
+
+            pw.close();
+        }
+
+        try {
+            ObjectInputStream ois = new ObjectInputStream(urlConnection.getInputStream());
+            return (List<T>) ois.readObject();
         } catch (ClassNotFoundException ex) {
             throw new IOException("Falha ao recuperar objeto com os parametros " + params + ". Exception=" + ex.getLocalizedMessage());
         } catch (Exception ex) {

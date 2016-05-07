@@ -27,19 +27,15 @@ public class ServicoCategoria {
 
 	public DtoCategoria montarDto(Integer id) {
 		Categoria categoria = categoriaDao.findById(id);
+		if (categoria == null) {
+			throw new ExceptionFreelaSearch("Nenhuma categoria encontrada para o id #" + id + " informado.");
+		} 
 		DtoCategoria dto = new DtoCategoria();
 		dto.setId(categoria.getId());
 		dto.setNome(categoria.getNome());
 		dto.setDescricao(categoria.getDescricao());
 
 		return dto;
-	}
-
-	public void idValido(Integer id) {
-		Categoria categoria = categoriaDao.findById(id);
-		if (categoria == null) {
-			throw new ExceptionFreelaSearch("Nenhuma categoria encontrada para o id #" + id + " informado.");
-		}
 	}
 
 	public void salvar(Categoria categoria) {

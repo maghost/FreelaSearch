@@ -5,9 +5,6 @@ import org.freelasearch.dtos.DtoCategoria;
 import java.io.IOException;
 import java.util.Collections;
 
-/**
- * Created by msms on 25/02/2016.
- */
 public class CategoriaService extends AbstractService<DtoCategoria> {
 
     public void save(DtoCategoria dto) throws IOException {

@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import org.freelasearch.R;
 import org.freelasearch.dtos.DtoUsuario;
-import org.freelasearch.tasks.TarefaCadastroUsuario;
+import org.freelasearch.tasks.impl.TarefaCadastroUsuario;
 import org.freelasearch.tasks.TarefaInterface;
 
 import java.io.IOException;
