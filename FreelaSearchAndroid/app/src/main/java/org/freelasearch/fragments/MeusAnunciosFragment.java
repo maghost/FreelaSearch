@@ -50,7 +50,7 @@ public class MeusAnunciosFragment extends Fragment implements RecyclerViewOnClic
                 AnuncioAdapter adapter = (AnuncioAdapter) mRecyclerView.getAdapter();
 
                 if (mList.size() == llm.findLastCompletelyVisibleItemPosition() + 1) {
-                    List<DtoAnuncio> listAux = ((MainActivity) getActivity()).getMeusAnunciosList(10);
+                    List<DtoAnuncio> listAux = ((MainActivity) getActivity()).getMeusAnunciosList(10, mList.size());
 
                     for (int i = 0; i < listAux.size(); i++) {
                         adapter.addListItem(listAux.get(i), mList.size());
@@ -63,7 +63,7 @@ public class MeusAnunciosFragment extends Fragment implements RecyclerViewOnClic
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mList = ((MainActivity) getActivity()).getMeusAnunciosList(10);
+        mList = ((MainActivity) getActivity()).getMeusAnunciosList(10, mList.size());
         mAdapter = new AnuncioAdapter(getActivity(), mList);
         mAdapter.setRecyclerViewOnClickListenerHack(this);
         mRecyclerView.setAdapter(mAdapter);

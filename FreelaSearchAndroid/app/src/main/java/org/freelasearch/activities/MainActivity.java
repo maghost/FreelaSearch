@@ -227,14 +227,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private Context contexto = this;
-    private List<DtoAnuncio> auxAnuncios = new ArrayList<>();
+    private List<DtoAnuncio> auxAnuncios;
 
-    public List<DtoAnuncio> getMeusAnunciosList(int qtd) {
+    public List<DtoAnuncio> getMeusAnunciosList(int qtdRetorno, int qtdExibida) {
         AsyncTaskListaAnuncio mAsyncTaskListaAnuncio = new AsyncTaskListaAnuncio();
         mAsyncTaskListaAnuncio.setAsyncTaskListener(new AsyncTaskListener() {
             @Override
             public void onPreExecute() {
-
+                auxAnuncios = new ArrayList<>();
             }
 
             @Override
@@ -249,35 +249,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         Map<String, Integer> filtro = new HashMap<>();
-        filtro.put("qtdRetorno", qtd);
-        filtro.put("qtdExibida", null);
-        filtro.put("tipoBusca", null);
+        filtro.put("qtdRetorno", qtdRetorno);
+        filtro.put("qtdExibida", qtdExibida);
+        filtro.put("tipoBusca", 0);
         mAsyncTaskListaAnuncio.execute(filtro);
 
         return auxAnuncios;
     }
-
-    /*public List<DtoAnuncio> getMeusAnunciosList(int qtd) {
-
-        List<DtoAnuncio> anuncios = new ArrayList<>();
-
-        for (int i = 1; i <= qtd; i++) {
-            DtoAnuncio anuncio = new DtoAnuncio();
-
-            anuncio.setId(i);
-            anuncio.setAtivo(true);
-            anuncio.setTitulo("Meu Anúncio nº" + i);
-            anuncio.setDescricao("Lorem Ipsum Dolor Amet");
-            if (i % 2 == 0) {
-                anuncio.setImagem("http://www.planwallpaper.com/static/images/b807c2282ab0a491bd5c5c1051c6d312_k4PiHxO.jpg");
-            } else {
-                anuncio.setImagem("http://eskipaper.com/images/wallpaper-hd-15.jpg");
-            }
-
-            anuncios.add(anuncio);
-        }
-
-        return anuncios;
-    }*/
 
 }

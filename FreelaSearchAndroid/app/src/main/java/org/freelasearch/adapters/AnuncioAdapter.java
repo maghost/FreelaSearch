@@ -43,7 +43,7 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.MyViewHo
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Picasso.with(mContext).load(mList.get(position).getImagem()).fit().
+        Picasso.with(mContext).load(mList.get(position).getImagem()).placeholder(R.drawable.no_image).error(R.drawable.no_image).fit().
                 transform(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.TOP_LEFT)).
                 transform(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.TOP_RIGHT)).
                 into(holder.ivAnuncio);
