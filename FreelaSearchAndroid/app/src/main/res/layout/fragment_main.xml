@@ -18,60 +18,74 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginBottom="@dimen/medium_margin"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/txt_anuncio"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/medium_margin"
-                android:background="@android:drawable/editbox_dropdown_dark_frame"
-                android:drawablePadding="@dimen/bigger_margin"
-                android:hint="@string/anuncios"
-                android:padding="@dimen/medium_margin"
-                android:singleLine="true"
-                android:textColor="@color/icons"
-                android:textColorHint="@color/secondary_text"
-                android:textSize="17sp" />
+                android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/txt_freelancer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/small_margin"
-                android:background="@android:drawable/editbox_dropdown_dark_frame"
-                android:drawablePadding="@dimen/bigger_margin"
-                android:hint="@string/freelancer"
-                android:padding="@dimen/medium_margin"
-                android:singleLine="true"
-                android:textColor="@color/icons"
-                android:textColorHint="@color/secondary_text"
-                android:textSize="17sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/txt_local"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/small_margin"
-                android:background="@android:drawable/editbox_dropdown_dark_frame"
-                android:drawablePadding="@dimen/bigger_margin"
-                android:hint="@string/location"
-                android:padding="@dimen/medium_margin"
-                android:singleLine="true"
-                android:textColor="@color/icons"
-                android:textColorHint="@color/secondary_text"
-                android:textSize="17sp" />
+                    <EditText
+                        android:id="@+id/txt_anuncio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/medium_margin"
+                        android:background="@android:drawable/editbox_dropdown_dark_frame"
+                        android:drawablePadding="@dimen/bigger_margin"
+                        android:hint="@string/anuncios"
+                        android:padding="@dimen/medium_margin"
+                        android:singleLine="true"
+                        android:textColor="@color/icons"
+                        android:textColorHint="@color/secondary_text"
+                        android:textSize="17sp" />
 
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_buscar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
-                android:background="@color/accent"
-                android:onClick="buscar"
-                android:text="@string/search_title"
-                android:textColor="@color/icons" />
+                    <EditText
+                        android:id="@+id/txt_freelancer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:background="@android:drawable/editbox_dropdown_dark_frame"
+                        android:drawablePadding="@dimen/bigger_margin"
+                        android:hint="@string/freelancer"
+                        android:padding="@dimen/medium_margin"
+                        android:singleLine="true"
+                        android:textColor="@color/icons"
+                        android:textColorHint="@color/secondary_text"
+                        android:textSize="17sp" />
+
+                    <EditText
+                        android:id="@+id/txt_local"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:background="@android:drawable/editbox_dropdown_dark_frame"
+                        android:drawablePadding="@dimen/bigger_margin"
+                        android:hint="@string/location"
+                        android:padding="@dimen/medium_margin"
+                        android:singleLine="true"
+                        android:textColor="@color/icons"
+                        android:textColorHint="@color/secondary_text"
+                        android:textSize="17sp" />
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/btn_buscar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:background="@color/accent"
+                        android:onClick="buscar"
+                        android:text="@string/search_title"
+                        android:textColor="@color/icons" />
+                </LinearLayout>
+            </ScrollView>
 
         </LinearLayout>
     </LinearLayout>

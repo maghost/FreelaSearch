@@ -11,11 +11,7 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
-/**
- * Created by msms on 25/02/2016.
- */
 public abstract class AbstractService<T> {
 
     protected void sendObject(T object, String uri) throws IOException {

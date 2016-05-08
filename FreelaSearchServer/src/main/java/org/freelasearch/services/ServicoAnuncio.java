@@ -3,12 +3,12 @@ package org.freelasearch.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.freelasearch.converters.AnuncioConverter;
 import org.freelasearch.dao.AnuncioDao;
 import org.freelasearch.dtos.DtoAnuncio;
 import org.freelasearch.entities.Anuncio;
+import org.freelasearch.filters.FiltroAnuncio;
 import org.freelasearch.utils.DaoFactory;
-
-import converter.AnuncioConverter;
 
 public class ServicoAnuncio {
 
@@ -37,8 +37,8 @@ public class ServicoAnuncio {
 		return dto;
 	}
 
-	public List<DtoAnuncio> buscarLista(Integer qtdRetorno, Integer qtdExibida, Integer tipoBusca) {
-		List<Anuncio> anuncios = anuncioDao.findByFiltro(qtdRetorno, qtdExibida, tipoBusca);
+	public List<DtoAnuncio> buscarLista(FiltroAnuncio filtro) {
+		List<Anuncio> anuncios = anuncioDao.findByFiltro(filtro);
 		List<DtoAnuncio> dtoAnuncios = new ArrayList<DtoAnuncio>();
 
 		for (Anuncio anuncio : anuncios) {

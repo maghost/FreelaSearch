@@ -13,7 +13,7 @@ public class UsuarioService extends AbstractService<DtoUsuario> {
     }
 
     public DtoUsuario login(DtoUsuario dto) throws IOException {
-        Map<String, String> m = new HashMap<String, String>();
+        Map<String, String> m = new HashMap<>();
         m.put("email", dto.getEmail());
         m.put("senha", dto.getSenha());
         return retrieveObject(m, "usuario/login");

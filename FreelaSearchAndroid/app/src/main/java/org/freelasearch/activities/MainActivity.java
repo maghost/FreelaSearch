@@ -3,6 +3,7 @@ package org.freelasearch.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -28,6 +29,7 @@ import com.squareup.picasso.Picasso;
 import org.freelasearch.R;
 import org.freelasearch.dtos.DtoAnuncio;
 import org.freelasearch.fragments.MainFragment;
+import org.freelasearch.fragments.MeusAnunciosFragment;
 import org.freelasearch.fragments.TabAnunciosFragment;
 import org.freelasearch.tasks.AsyncTaskListener;
 import org.freelasearch.tasks.impl.AsyncTaskListaAnuncio;
@@ -201,60 +203,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void buscar(View view) {
         Intent activity = new Intent(this, MainActivity.class);
         startActivity(activity);
-    }
-
-    public List<DtoAnuncio> getAnunciosList(int qtd) {
-
-        List<DtoAnuncio> anuncios = new ArrayList<>();
-
-        for (int i = 1; i <= qtd; i++) {
-            DtoAnuncio anuncio = new DtoAnuncio();
-
-            anuncio.setId(i);
-            anuncio.setAtivo(true);
-            anuncio.setTitulo("Anúncio nº" + i);
-            anuncio.setDescricao("Lorem Ipsum Dolor Amet");
-            if (i % 2 == 0) {
-                anuncio.setImagem("http://www.pixelstalk.net/wp-content/uploads/2016/04/Pics-3D-download-wallpapers-HD.jpg");
-            } else {
-                anuncio.setImagem("http://www.planwallpaper.com/static/images/ZhGEqAP.jpg");
-            }
-
-            anuncios.add(anuncio);
-        }
-
-        return anuncios;
-    }
-
-    private Context contexto = this;
-    private List<DtoAnuncio> auxAnuncios;
-
-    public List<DtoAnuncio> getMeusAnunciosList(int qtdRetorno, int qtdExibida) {
-        AsyncTaskListaAnuncio mAsyncTaskListaAnuncio = new AsyncTaskListaAnuncio();
-        mAsyncTaskListaAnuncio.setAsyncTaskListener(new AsyncTaskListener() {
-            @Override
-            public void onPreExecute() {
-                auxAnuncios = new ArrayList<>();
-            }
-
-            @Override
-            public <T> void onComplete(T obj) {
-                auxAnuncios.addAll((List<DtoAnuncio>) obj);
-            }
-
-            @Override
-            public void onError(String errorMsg) {
-                Toast.makeText(contexto, errorMsg, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        Map<String, Integer> filtro = new HashMap<>();
-        filtro.put("qtdRetorno", qtdRetorno);
-        filtro.put("qtdExibida", qtdExibida);
-        filtro.put("tipoBusca", 0);
-        mAsyncTaskListaAnuncio.execute(filtro);
-
-        return auxAnuncios;
     }
 
 }

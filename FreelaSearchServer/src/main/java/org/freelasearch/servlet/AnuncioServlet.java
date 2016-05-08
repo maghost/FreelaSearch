@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.freelasearch.filters.FiltroAnuncio;
 import org.freelasearch.services.ServicoAnuncio;
 import org.freelasearch.utils.ExceptionFreelaSearch;
 
@@ -31,15 +32,13 @@ public class AnuncioServlet extends HttpServlet {
 			ObjectOutputStream oos = new ObjectOutputStream(response.getOutputStream());
 
 			if (request.getRequestURI().toLowerCase().endsWith("/buscar")) {
-				Integer qtdRetorno = request.getParameter("qtdRetorno") == null ? 0 : Integer.valueOf(request.getParameter("qtdRetorno"));
-				Integer qtdExibida = request.getParameter("qtdExibida") == null ? 0 : Integer.valueOf(request.getParameter("qtdExibida"));
-				Integer tipoBusca = request.getParameter("tipoBusca") == null ? null : Integer.valueOf(request.getParameter("tipoBusca"));
-					
-				System.out.println("qtdRetorno: " + qtdRetorno);
-				System.out.println("qtdExibida: " + qtdExibida);
-				System.out.println("tipoBusca: " + tipoBusca);
-				
-				oos.writeObject(servico.buscarLista(qtdRetorno, qtdExibida, tipoBusca));
+				FiltroAnuncio filtro = new FiltroAnuncio();
+				filtro.setQtdRetorno(request.getParameter("qtdRetorno") == null ? 0 : Integer.valueOf(request.getParameter("qtdRetorno")));
+				filtro.setQtdExibida(request.getParameter("qtdExibida") == null ? 0 : Integer.valueOf(request.getParameter("qtdExibida")));
+				filtro.setTipoBusca(request.getParameter("tipoBusca") == null ? null : Integer.valueOf(request.getParameter("tipoBusca")));
+				filtro.setIdUsuario(request.getParameter("idUsuario") == null ? null : Integer.valueOf(request.getParameter("idUsuario")));
+
+				oos.writeObject(servico.buscarLista(filtro));
 			}
 		} catch (ExceptionFreelaSearch e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());

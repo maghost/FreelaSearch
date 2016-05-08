@@ -10,18 +10,23 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import org.freelasearch.R;
-import org.freelasearch.activities.MainActivity;
 import org.freelasearch.adapters.AnuncioAdapter;
 import org.freelasearch.dtos.DtoAnuncio;
 import org.freelasearch.interfaces.RecyclerViewOnClickListenerHack;
+import org.freelasearch.tasks.AsyncTaskListener;
+import org.freelasearch.tasks.impl.AsyncTaskListaAnuncio;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AnunciosFragment extends Fragment implements RecyclerViewOnClickListenerHack {
 
     private RecyclerView mRecyclerView;
     private AnuncioAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
+    private RecyclerViewOnClickListenerHack mRecyclerViewOnClickListenerHack = this;
 
     private List<DtoAnuncio> mList;
 
@@ -47,14 +52,8 @@ public class AnunciosFragment extends Fragment implements RecyclerViewOnClickLis
                 super.onScrolled(recyclerView, dx, dy);
 
                 LinearLayoutManager llm = (LinearLayoutManager) mRecyclerView.getLayoutManager();
-                AnuncioAdapter adapter = (AnuncioAdapter) mRecyclerView.getAdapter();
-
                 if (mList.size() == llm.findLastCompletelyVisibleItemPosition() + 1) {
-                    List<DtoAnuncio> listAux = ((MainActivity) getActivity()).getAnunciosList(10);
-
-                    for (int i = 0; i < listAux.size(); i++) {
-                        adapter.addListItem(listAux.get(i), mList.size());
-                    }
+                    updateAnunciosList(10, mList.size());
                 }
             }
         });
@@ -63,10 +62,7 @@ public class AnunciosFragment extends Fragment implements RecyclerViewOnClickLis
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mList = ((MainActivity) getActivity()).getAnunciosList(10);
-        mAdapter = new AnuncioAdapter(getActivity(), mList);
-        mAdapter.setRecyclerViewOnClickListenerHack(this);
-        mRecyclerView.setAdapter(mAdapter);
+        updateAnunciosList(10, 0);
 
         // Inflate the layout for this fragment
         return view;
@@ -75,6 +71,43 @@ public class AnunciosFragment extends Fragment implements RecyclerViewOnClickLis
     @Override
     public void onClickListener(View view, int position) {
         Toast.makeText(getActivity(), "onClickListener(): " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    public void updateAnunciosList(int qtdRetorno, int qtdExibida) {
+        AsyncTaskListaAnuncio mAsyncTaskListaAnuncio = new AsyncTaskListaAnuncio();
+        mAsyncTaskListaAnuncio.setAsyncTaskListener(new AsyncTaskListener() {
+            @Override
+            public void onPreExecute() {
+            }
+
+            @Override
+            public <T> void onComplete(T obj) {
+                if (mList == null) {
+                    mList = new ArrayList<>();
+                    mList.addAll((List<DtoAnuncio>) obj);
+                    mAdapter = new AnuncioAdapter(getActivity(), mList);
+                    mAdapter.setRecyclerViewOnClickListenerHack(mRecyclerViewOnClickListenerHack);
+                    mRecyclerView.setAdapter(mAdapter);
+                } else {
+                    List<DtoAnuncio> listAux = (List<DtoAnuncio>) obj;
+                    AnuncioAdapter adapter = (AnuncioAdapter) mRecyclerView.getAdapter();
+                    for (int i = 0; i < listAux.size(); i++) {
+                        adapter.addListItem(listAux.get(i), mList.size());
+                    }
+                }
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+                Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Map<String, Integer> filtro = new HashMap<>();
+        filtro.put("qtdRetorno", qtdRetorno);
+        filtro.put("qtdExibida", qtdExibida);
+        filtro.put("tipoBusca", 0);
+        mAsyncTaskListaAnuncio.execute(filtro);
     }
 
 }
