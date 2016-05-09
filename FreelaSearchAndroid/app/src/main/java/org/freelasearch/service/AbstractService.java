@@ -107,7 +107,7 @@ public abstract class AbstractService<T> {
     }
 
     private HttpURLConnection getHttpURLConnection(String uri) throws IOException {
-        URL url = new URL("http://10.0.2.2:8080/FreelaSearchServer/" + uri);
+        URL url = new URL("http://192.168.25.6:8080/FreelaSearchServer/" + uri); //10.0.2.2:8080
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setDoInput(true);
         urlConnection.setDoOutput(true);

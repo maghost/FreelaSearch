@@ -34,25 +34,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8cdacd2-62e9-4375-92f2-c74644a1a1aa" name="Default" comment="Ajustes nas imagens de perfil, estava dando problema de memória. Coloquei para que a biblioteca Picasso carregue.">
-      <change type="DELETED" beforePath="C:\Users\Matheus-PC\workspace\FreelaSearch\FreelaSearchAndroid\app\src\main\res\drawable\bg_nd00.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/FreelaSearchServer/WEB-INF/classes/org/freelasearch/dao/AnuncioDao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/FreelaSearchServer/WEB-INF/classes/org/freelasearch/dao/AnuncioDao.class" />
+      <change type="DELETED" beforePath="C:\Users\Matheus-PC\workspace\FreelaSearch\FreelaSearchServer\target\classes\.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Matheus-PC\workspace\FreelaSearch\FreelaSearchServer\target\m2e-wtp\web-resources\.gitignore" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Anunciante.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Anunciante.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/AnuncianteDao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/AnuncianteDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Anuncio.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Anuncio.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/AnuncioDao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/AnuncioDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/FreelaSearchServer.war" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/FreelaSearchServer.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/anunciante_perfil.jpg" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/anunciante_perfil.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/servlet/AnuncioServlet.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/servlet/AnuncioServlet.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Avaliacao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Avaliacao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/AvaliacaoDao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/AvaliacaoDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/utils/BaseBean.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/utils/BaseBean.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Categoria.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Categoria.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/CategoriaDao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/CategoriaDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/servlet/CategoriaServlet.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/servlet/CategoriaServlet.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Chat.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Chat.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/ChatDao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/ChatDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Contratacao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Contratacao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/ContratacaoDao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/ContratacaoDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/utils/DaoFactory.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/utils/DaoFactory.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/utils/ExceptionFreelaSearch.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/utils/ExceptionFreelaSearch.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Freelancer.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Freelancer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/FreelancerDao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/FreelancerDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/utils/GenericDao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/utils/GenericDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Inscricao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Inscricao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/InscricaoDao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/InscricaoDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Mensagem.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Mensagem.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/MensagemDao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/MensagemDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/services/ServicoAnuncio.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/services/ServicoAnuncio.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/services/ServicoCategoria.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/services/ServicoCategoria.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/services/ServicoUsuario.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/services/ServicoUsuario.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Usuario.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/entities/Usuario.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/UsuarioDao.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/dao/UsuarioDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/servlet/UsuarioServlet.class" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/org/freelasearch/servlet/UsuarioServlet.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/freelancer_perfil.jpg" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/freelancer_perfil.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/.gitignore" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/m2e-wtp/web-resources/.gitignore" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/m2e-wtp/web-resources/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/src/main/java/org/freelasearch/dao/AnuncioDao.java" afterPath="$PROJECT_DIR$/../FreelaSearchServer/src/main/java/org/freelasearch/dao/AnuncioDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/PerfisActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/PerfisActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_perfis.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_perfis.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/service/AbstractService.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/service/AbstractService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/src/main/resources/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/../FreelaSearchServer/src/main/resources/META-INF/persistence.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/../FreelaSearchServer/target/classes/META-INF/persistence.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="cae2e721-8ac8-43ad-b769-9008b546213f" name="Rejected commit: Default" comment="Ajustes na toolbar" />
@@ -1796,13 +1816,13 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/fragments/AnunciosFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/fragments/MeusAnunciosFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/service/UsuarioService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/service/AbstractService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_perfis.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/PerfisActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/service/AbstractService.java" />
       </list>
     </option>
   </component>
@@ -1848,21 +1868,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FreelaSearchAndroid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1897,6 +1902,35 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Default">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2057,30 +2091,16 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Default">
+      <pane id="PackagesPane">
+        <subPane>
           <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FreelaSearchAndroid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
             </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -2406,18 +2426,17 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3258427" sideWeight="0.48766905" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32263243" sideWeight="0.58393" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.59711075" sideWeight="0.74383456" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.59711075" sideWeight="0.74383456" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41307816" sideWeight="0.48766905" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.59711075" sideWeight="0.25616547" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26484752" sideWeight="0.4813047" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26484752" sideWeight="0.4813047" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4189406" sideWeight="0.28719172" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3258427" sideWeight="0.42720765" order="11" side_tool="false" content_ui="tabs" />
@@ -2432,6 +2451,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39872408" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -2788,13 +2808,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/service/AbstractService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65656567">
-          <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/fragments/MeusAnunciosFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.121212">
@@ -2813,15 +2826,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35443038">
           <caret line="19" column="51" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-23/android.jar!/res/drawable-hdpi-v4/editbox_dropdown_background_dark.9.png">
-      <provider editor-type-id="images">
+      <provider selected="true" editor-type-id="ninepatcheditor">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="ninepatcheditor">
+      <provider editor-type-id="images">
         <state />
       </provider>
     </entry>
@@ -2829,7 +2841,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.752941">
           <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2837,10 +2848,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33277312">
           <caret line="4166" column="16" selection-start-line="4166" selection-start-column="16" selection-end-line="4166" selection-end-column="16" />
-          <folding>
-            <element signature="e#178899#178900#0" expanded="true" />
-            <element signature="e#178947#178948#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2848,7 +2855,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2">
           <caret line="7" column="37" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2856,25 +2862,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.60954064">
           <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
-          <folding>
-            <element signature="e#234#255#0" expanded="true" />
-            <element signature="e#715#737#0" expanded="true" />
-            <element signature="e#1000#1021#0" expanded="true" />
-            <element signature="e#1145#1170#0" expanded="true" />
-            <element signature="e#1200#1218#0" expanded="true" />
-            <element signature="e#1251#1274#0" expanded="true" />
-            <element signature="e#1692#1713#0" expanded="true" />
-            <element signature="e#1837#1862#0" expanded="true" />
-            <element signature="e#1892#1912#0" expanded="true" />
-            <element signature="e#1945#1968#0" expanded="true" />
-            <element signature="e#2381#2402#0" expanded="true" />
-            <element signature="e#2526#2551#0" expanded="true" />
-            <element signature="e#2581#2599#0" expanded="true" />
-            <element signature="e#2632#2655#0" expanded="true" />
-            <element signature="e#3182#3205#0" expanded="true" />
-            <element signature="e#3235#3257#0" expanded="true" />
-            <element signature="e#3659#3681#0" expanded="true" />
-          </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -2885,10 +2872,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17142858">
           <caret line="33" column="52" selection-start-line="33" selection-start-column="52" selection-end-line="33" selection-end-column="52" />
-          <folding>
-            <element signature="e#2912#4857#0" expanded="true" />
-            <element signature="e#4856#4857#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2904,7 +2887,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33183858">
           <caret line="693" column="0" selection-start-line="693" selection-start-column="0" selection-end-line="693" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2912,7 +2894,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.71428573">
           <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2930,7 +2911,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33277312">
           <caret line="594" column="16" selection-start-line="594" selection-start-column="16" selection-end-line="594" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2938,7 +2918,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6520548">
           <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -2949,7 +2928,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33150685">
           <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -2960,7 +2938,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33150685">
           <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -2971,7 +2948,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.65753424">
           <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -2982,6 +2958,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.5023255">
           <caret line="48" column="1" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/service/AbstractService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76233184">
+          <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
           <folding />
         </state>
       </provider>
