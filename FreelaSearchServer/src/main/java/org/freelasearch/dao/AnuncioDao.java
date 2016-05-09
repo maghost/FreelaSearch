@@ -14,11 +14,11 @@ public class AnuncioDao extends GenericDao<Anuncio, Integer> {
 	public List<Anuncio> findByFiltro(FiltroAnuncio filtro) {
 		String query = "FROM Anuncio a ";
 		if (filtro.getTipoBusca() != null && filtro.getTipoBusca() == 0) {
-			query = " WHERE a.status = 0 ";
+			query += " WHERE a.status = 0 ";
 		} else if (filtro.getTipoBusca() != null && filtro.getTipoBusca() == 1 && filtro.getTipoBusca() != null) {
-			query = " WHERE a.status = 0 ";
+			query += " WHERE a.status = 0 ";
 		} else if (filtro.getTipoBusca() != null && filtro.getTipoBusca() == 2 && filtro.getTipoBusca() != null) {
-			query = " WHERE a.status = 0 ";
+			query += " WHERE a.status = 0 ";
 		}
 		query += "ORDER BY a.id";
 		Query q = this.getEntityManager().createQuery(query);

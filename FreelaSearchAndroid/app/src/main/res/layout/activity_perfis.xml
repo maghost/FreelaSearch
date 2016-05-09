@@ -18,11 +18,12 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/iv_perfil_anunciante"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="false"
                 android:scaleType="centerCrop"
-                android:src="@drawable/anunciante_perfil" />
+                android:src="@null" />
 
             <TextView
                 android:id="@+id/tv_anunciante"
@@ -52,11 +53,12 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/iv_perfil_freelancer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="false"
                 android:scaleType="centerCrop"
-                android:src="@drawable/freelancer_perfil" />
+                android:src="@null" />
 
             <TextView
                 android:id="@+id/tv_freelancer"

@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import org.freelasearch.R;
 
@@ -18,13 +21,18 @@ public class PerfisActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfis);
+
+        ImageView ivAnunciante = (ImageView) findViewById(R.id.iv_perfil_anunciante);
+        Picasso.with(this).load(R.drawable.anunciante_perfil).into(ivAnunciante);
+
+        ImageView ivFreelancer = (ImageView) findViewById(R.id.iv_perfil_freelancer);
+        Picasso.with(this).load(R.drawable.freelancer_perfil).into(ivFreelancer);
     }
 
     public void selecionarPerfil(View view) {
         SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
-        Class classe;
         if (view.getId() == R.id.anunciante_perfil) {
             editor.putString("perfil", "anunciante");
         } else {
@@ -35,6 +43,7 @@ public class PerfisActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
 }
