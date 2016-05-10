@@ -2,9 +2,11 @@ package org.freelasearch.services;
 
 import java.util.List;
 
+import org.freelasearch.converters.UsuarioConverter;
 import org.freelasearch.dao.UsuarioDao;
 import org.freelasearch.dtos.DtoUsuario;
 import org.freelasearch.entities.Usuario;
+import org.freelasearch.filters.FiltroUsuario;
 import org.freelasearch.utils.DaoFactory;
 import org.freelasearch.utils.ExceptionFreelaSearch;
 
@@ -91,6 +93,10 @@ public class ServicoUsuario {
 		dto.setSenha(usuario.getSenha());
 
 		return dto;
+	}
+
+	public DtoUsuario buscar(FiltroUsuario filtro) {
+		return UsuarioConverter.domainToDto(usuarioDao.findByFiltro(filtro));
 	}
 
 }

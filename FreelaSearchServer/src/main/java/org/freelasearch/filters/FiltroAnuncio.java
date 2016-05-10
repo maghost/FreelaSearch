@@ -9,6 +9,7 @@ public class FiltroAnuncio extends FiltroFreelaSearch implements Serializable {
 	private Integer tipoBusca;
 	private Integer qtdRetorno;
 	private Integer qtdExibida;
+	private Integer idPrimeiroLista;
 	private Integer idUsuario;
 
 	public Integer getTipoBusca() {
@@ -33,6 +34,14 @@ public class FiltroAnuncio extends FiltroFreelaSearch implements Serializable {
 
 	public void setQtdExibida(Integer qtdExibida) {
 		this.qtdExibida = qtdExibida;
+	}
+
+	public Integer getIdPrimeiroLista() {
+		return idPrimeiroLista;
+	}
+
+	public void setIdPrimeiroLista(Integer idPrimeiroLista) {
+		this.idPrimeiroLista = idPrimeiroLista;
 	}
 
 	public Integer getIdUsuario() {

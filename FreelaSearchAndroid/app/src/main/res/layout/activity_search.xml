@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    android:orientation="vertical"
+    tools:context="org.freelasearch.activities.SearchActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.AppBarOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        style="@style/AppTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/medium_margin"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/txt_anuncio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_inputs"
+                android:background="@android:drawable/editbox_dropdown_dark_frame"
+                android:drawablePadding="@dimen/drawable_padding"
+                android:hint="@string/anuncios"
+                android:padding="@dimen/padding_inputs"
+                android:singleLine="true"
+                android:textColor="@color/icons"
+                android:textColorHint="@color/secondary_text"
+                android:textSize="17sp" />
+
+            <EditText
+                android:id="@+id/txt_freelancer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_inputs"
+                android:background="@android:drawable/editbox_dropdown_dark_frame"
+                android:drawablePadding="@dimen/drawable_padding"
+                android:hint="@string/freelancer"
+                android:padding="@dimen/padding_inputs"
+                android:singleLine="true"
+                android:textColor="@color/icons"
+                android:textColorHint="@color/secondary_text"
+                android:textSize="17sp" />
+
+            <EditText
+                android:id="@+id/txt_local"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_inputs"
+                android:background="@android:drawable/editbox_dropdown_dark_frame"
+                android:drawablePadding="@dimen/drawable_padding"
+                android:hint="@string/location"
+                android:padding="@dimen/padding_inputs"
+                android:singleLine="true"
+                android:textColor="@color/icons"
+                android:textColorHint="@color/secondary_text"
+                android:textSize="17sp" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_buscar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/accent"
+                android:onClick="buscar"
+                android:padding="@dimen/padding_button"
+                android:text="@string/search_title"
+                android:textColor="@color/icons" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -57,7 +57,7 @@ public class SignupActivity extends AppCompatActivity implements TarefaInterface
             editor.putString("email", ((DtoUsuario) obj).getEmail());
             editor.commit();
 
-            Intent activity = new Intent(this, MainActivity.class);
+            Intent activity = new Intent(this, PerfisActivity.class);
             startActivity(activity);
             finish();
         }

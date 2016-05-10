@@ -19,6 +19,16 @@
             android:tint="@color/icons"
             android:title="@string/anuncios" />
         <item
+            android:id="@+id/nav_meus_anuncios"
+            android:icon="@drawable/ic_redeem_24dp"
+            android:tint="@color/icons"
+            android:title="@string/meus_anuncios" />
+        <item
+            android:id="@+id/nav_minhas_inscricoes"
+            android:icon="@drawable/ic_wallet_travel_24dp"
+            android:tint="@color/icons"
+            android:title="@string/minhas_inscricoes" />
+        <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_24dp"
             android:tint="@color/icons"

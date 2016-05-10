@@ -67,7 +67,7 @@ public class TabAnunciosFragment extends Fragment {
                 case 0:
                     return new AnunciosFragment();
                 case 1:
-                    return new MeusAnunciosFragment();
+                    return new AnunciosFinalizadosFragment();
             }
             return null;
         }
@@ -88,9 +88,9 @@ public class TabAnunciosFragment extends Fragment {
 
             switch (position) {
                 case 0:
-                    return "Anúncios";
+                    return getString(R.string.anuncios_ativos);
                 case 1:
-                    return "Meus Anúncios";
+                    return getString(R.string.anuncios_finalizados);
             }
             return null;
         }

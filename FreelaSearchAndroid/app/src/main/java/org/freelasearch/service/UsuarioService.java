@@ -19,4 +19,8 @@ public class UsuarioService extends AbstractService<DtoUsuario> {
         return retrieveObject(m, "usuario/login");
     }
 
+    public DtoUsuario findByParam(Map<String, String> params) throws IOException {
+        return retrieveObject(params, "usuario/buscar");
+    }
+
 }

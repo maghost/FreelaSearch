@@ -23,15 +23,18 @@ public class Usuario extends BaseBean {
 
 	private String senha;
 
+	private String foto;
+
 	public Usuario() {
 	}
 
-	public Usuario(Integer id, String nome, String email, String senha) {
+	public Usuario(Integer id, String nome, String email, String senha, String foto) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+		this.foto = foto;
 	}
 
 	public Integer getId() {
@@ -66,9 +69,17 @@ public class Usuario extends BaseBean {
 		this.senha = senha;
 	}
 
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", foto=" + foto + "]";
 	}
 
 }

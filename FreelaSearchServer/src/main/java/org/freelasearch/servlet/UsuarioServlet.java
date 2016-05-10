@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.freelasearch.dtos.DtoUsuario;
 import org.freelasearch.entities.Usuario;
+import org.freelasearch.filters.FiltroUsuario;
 import org.freelasearch.services.ServicoUsuario;
 import org.freelasearch.utils.ExceptionFreelaSearch;
 
@@ -49,6 +50,19 @@ public class UsuarioServlet extends HttpServlet {
 				String email = request.getParameter("email");
 				String senha = request.getParameter("senha");
 				oos.writeObject(servico.login(email, senha));
+			}
+
+			// BUSCAR
+			if (request.getRequestURI().toLowerCase().endsWith("/buscar")) {
+				FiltroUsuario filtro = new FiltroUsuario();
+				if (request.getParameter("id") != null) {
+					filtro.setId(Integer.decode(request.getParameter("id")));
+				}
+				if (request.getParameter("email") != null) {
+					filtro.setEmail(request.getParameter("email"));
+				}
+
+				oos.writeObject(servico.buscar(filtro));
 			}
 		} catch (ExceptionFreelaSearch e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());

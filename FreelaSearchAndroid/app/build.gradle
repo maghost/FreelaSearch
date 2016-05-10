@@ -32,8 +32,8 @@ dependencies {
     compile files('C:/Users/Matheus-PC/.m2/repository/freelasearch/freelasearch-dtos/1.0/freelasearch-dtos-1.0.jar')
     compile 'com.android.support:design:23.2.1'
     compile 'com.android.support:support-v4:23.2.1'
-    compile 'com.android.support:cardview-v7:23.0.+'
-    compile 'com.android.support:recyclerview-v7:23.0.+'
+    compile 'com.android.support:cardview-v7:23.2.1'
+    compile 'com.android.support:recyclerview-v7:23.2.1'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
     compile 'com.squareup.picasso:picasso:2.5.2'

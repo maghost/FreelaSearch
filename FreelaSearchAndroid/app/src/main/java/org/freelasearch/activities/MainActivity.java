@@ -3,11 +3,8 @@ package org.freelasearch.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -15,28 +12,26 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
 import org.freelasearch.R;
-import org.freelasearch.dtos.DtoAnuncio;
+import org.freelasearch.dtos.DtoUsuario;
 import org.freelasearch.fragments.MainFragment;
 import org.freelasearch.fragments.MeusAnunciosFragment;
 import org.freelasearch.fragments.TabAnunciosFragment;
 import org.freelasearch.tasks.AsyncTaskListener;
-import org.freelasearch.tasks.impl.AsyncTaskListaAnuncio;
+import org.freelasearch.tasks.impl.AsyncTaskUsuario;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final String PREF_NAME = "SignupActivityPreferences";
     private NavigationView navigationView = null;
     private Toolbar toolbar;
-    private FloatingActionButton fab;
+    private SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +48,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         //Verifica se está logado
-        SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         boolean loggedByApplication = !sharedpreferences.getString("email", "").equals("");
 
         if (!loggedByApplication) {
             logout();
+        }
+
+        if (sharedpreferences.getString("perfil", "").equals("")) {
+            startActivity(PerfisActivity.class);
+            finish();
+        }
+
+        if (sharedpreferences.getInt("id", 0) == 0) {
+            // Para o caso de estar logado via facebook e não tenha id nas etapas anteriores
+            // Futuramente deverá ser alterada a lógica do login pelo facebook para logar apenas depois
+            // de cadastrar online
+            setUserIdByEmail(sharedpreferences.getString("email", ""));
         }
 
         MainFragment fragment = new MainFragment();
@@ -68,16 +75,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setToolbarTitle(R.string.app_name);
         setSupportActionBar(toolbar);
-
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        assert fab != null;
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-            }
-        });
-        fab.setVisibility(View.GONE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -100,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         navigationView.setNavigationItemSelectedListener(this);
+        hideItem();
     }
 
     @Override
@@ -128,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
-            startActivity(PerfisActivity.class);
+            startActivity(SearchActivity.class);
             return false;
         }
 
@@ -151,21 +149,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_anuncios) {
             setToolbarTitle(R.string.title_tab_fragment);
             fragment = new TabAnunciosFragment();
+        } else if (id == R.id.nav_meus_anuncios) {
+            setToolbarTitle(R.string.meus_anuncios);
+            fragment = new MeusAnunciosFragment();
         } else if (id == R.id.nav_settings) {
-            setToolbarTitle(R.string.title_tab_fragment);
-            fragment = new TabAnunciosFragment();
+            startActivity(SettingsActivity.class);
+            return false;
         } else if (id == R.id.nav_logout) {
             logout();
             return false;
         } else {
             setToolbarTitle(R.string.title_main_fragment);
             fragment = new MainFragment();
-        }
-
-        if (fragment instanceof MainFragment) {
-            fab.setVisibility(View.GONE);
-        } else {
-            fab.setVisibility(View.VISIBLE);
         }
 
         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -183,16 +178,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
         finish();
 
-        SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.clear();
-        editor.commit();
+        if (sharedpreferences != null) {
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.clear();
+            editor.commit();
+        }
 
         LoginManager.getInstance().logOut();
     }
 
     private void startActivity(Class activity) {
         Intent intent = new Intent(this, activity);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 
@@ -201,8 +198,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void buscar(View view) {
-        Intent activity = new Intent(this, MainActivity.class);
-        startActivity(activity);
+        startActivity(SearchActivity.class);
+    }
+
+    private void hideItem() {
+        if (navigationView != null && sharedpreferences != null) {
+            Menu navMenu = navigationView.getMenu();
+            if (sharedpreferences.getString("perfil", "").equals("anunciante")) {
+                navMenu.findItem(R.id.nav_minhas_inscricoes).setVisible(false);
+            } else {
+                navMenu.findItem(R.id.nav_meus_anuncios).setVisible(false);
+            }
+        }
+    }
+
+    private void setUserIdByEmail(String email) {
+
+        AsyncTaskUsuario mAsyncTaskUsuario = new AsyncTaskUsuario();
+        mAsyncTaskUsuario.setAsyncTaskListener(new AsyncTaskListener() {
+            @Override
+            public void onPreExecute() {
+            }
+
+            @Override
+            public <T> void onComplete(T obj) {
+                if (obj != null) {
+                    DtoUsuario dtoUsuario = (DtoUsuario) obj;
+
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putInt("id", dtoUsuario.getId());
+                    editor.putString("nome", dtoUsuario.getNome());
+                    editor.putString("email", dtoUsuario.getEmail());
+                    editor.putString("profile_pic", dtoUsuario.getUrlFoto());
+                    editor.commit();
+                } else {
+                    Log.e("ERRO", "Retorno nulo.");
+                }
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+                Log.e("ERRO", errorMsg);
+            }
+        });
+
+        Map<String, String> filtro = new HashMap<>();
+        filtro.put("email", email);
+        mAsyncTaskUsuario.execute(filtro);
     }
 
 }

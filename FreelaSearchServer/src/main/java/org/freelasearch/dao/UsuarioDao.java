@@ -2,7 +2,10 @@ package org.freelasearch.dao;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.freelasearch.entities.Usuario;
+import org.freelasearch.filters.FiltroUsuario;
 import org.freelasearch.utils.GenericDao;
 
 public class UsuarioDao extends GenericDao<Usuario, Integer> {
@@ -28,4 +31,16 @@ public class UsuarioDao extends GenericDao<Usuario, Integer> {
 		return usuarios;
 	}
 
+	public Usuario findByFiltro(FiltroUsuario filtro) {
+		String query = "FROM Usuario u WHERE 1=1 ";
+		if (filtro.getId() != null) {
+			query += " and u.id = " + filtro.getId();
+		} else if (filtro.getEmail() != null && !filtro.getEmail().isEmpty()) {
+			query += " and u.email = '" + filtro.getEmail() + "'";
+		}
+		Query q = this.getEntityManager().createQuery(query);
+
+		Usuario usuario = (Usuario) q.getSingleResult();
+		return usuario;
+	}
 }

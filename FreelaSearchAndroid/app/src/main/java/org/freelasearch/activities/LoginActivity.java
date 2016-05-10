@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements TarefaInterface 
         if (obj instanceof DtoUsuario) {
             SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putInt("id", ((DtoUsuario) obj).getId());
             editor.putString("nome", ((DtoUsuario) obj).getNome());
             editor.putString("email", ((DtoUsuario) obj).getEmail());
             editor.commit();

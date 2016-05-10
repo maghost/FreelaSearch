@@ -11,6 +11,8 @@ public abstract class AnuncioConverter {
 		dto.setId(domain.getId());
 		dto.setTitulo(domain.getTitulo());
 		dto.setDescricao(domain.getDescricao());
+		dto.setImagem(domain.getCapa());
+		dto.setAtivo(domain.getStatus() == 0 ? true : false);
 
 		return dto;
 	}

@@ -86,6 +86,7 @@ public class WelcomeActivity extends AppCompatActivity implements TarefaInterfac
                                     String email = object.getString("email");
                                     String profile_pic = "https://graph.facebook.com/" + id + "/picture?type=large";
 
+                                    // TODO: Arrumar essa lógica, o usuário está logando mesmo antes de se cadastrar
                                     SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedpreferences.edit();
                                     editor.putString("nome", name);

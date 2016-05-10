@@ -32,6 +32,8 @@ public class Anuncio extends BaseBean {
 
 	private Integer status;
 
+	private String capa;
+
 	@OneToOne
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
@@ -46,7 +48,7 @@ public class Anuncio extends BaseBean {
 	public Anuncio() {
 	}
 
-	public Anuncio(Integer id, String titulo, String descricao, Date data, Integer status, Categoria categoria, Anunciante anunciante, List<Inscricao> inscricoes) {
+	public Anuncio(Integer id, String titulo, String descricao, Date data, Integer status, Categoria categoria, String capa, Anunciante anunciante, List<Inscricao> inscricoes) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -54,6 +56,7 @@ public class Anuncio extends BaseBean {
 		this.data = data;
 		this.status = status;
 		this.categoria = categoria;
+		this.capa = capa;
 		this.anunciante = anunciante;
 		this.inscricoes = inscricoes;
 	}
@@ -106,6 +109,14 @@ public class Anuncio extends BaseBean {
 		this.categoria = categoria;
 	}
 
+	public String getCapa() {
+		return capa;
+	}
+
+	public void setCapa(String capa) {
+		this.capa = capa;
+	}
+
 	public Anunciante getAnunciante() {
 		return anunciante;
 	}
@@ -124,7 +135,8 @@ public class Anuncio extends BaseBean {
 
 	@Override
 	public String toString() {
-		return "Anuncio [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", data=" + data + ", status=" + status + ", categoria=" + categoria + ", anunciante=" + anunciante + ", inscricoes=" + printSpecificFieldFromBeanCollection(inscricoes, "id") + "]";
+		return "Anuncio [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", data=" + data + ", status=" + status + ", categoria=" + categoria + ", capa=" + capa
+				+ ", anunciante=" + anunciante + ", inscricoes=" + printSpecificFieldFromBeanCollection(inscricoes, "id") + "]";
 	}
 
 }
