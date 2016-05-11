@@ -62,9 +62,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:layout_marginTop="24dp"
+            android:background="@color/accent"
             android:onClick="login"
-            android:padding="12dp"
-            android:text="@string/conectar" />
+            android:padding="@dimen/padding_button"
+            android:text="@string/conectar"
+            android:textColor="@color/icons" />
 
         <TextView
             android:id="@+id/link_login"

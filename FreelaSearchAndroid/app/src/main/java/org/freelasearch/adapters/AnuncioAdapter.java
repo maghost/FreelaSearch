@@ -53,7 +53,7 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.MyViewHo
         holder.tvDescricao.setText(mList.get(position).getDescricao());
 
         try {
-            YoYo.with(Techniques.FadeIn).duration(200).playOn(holder.itemView);
+            YoYo.with(Techniques.FadeIn).duration(120).playOn(holder.itemView);
         } catch (Exception e) {
         }
     }

@@ -65,6 +65,9 @@
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activities.AnuncioDetalharActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activities.AnuncioActivity"
             android:screenOrientation="portrait"></activity>
     </application>

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -29,12 +28,6 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(false);
-
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_24dp, getTheme()));
-        } else {
-            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_24dp));
-        }*/
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

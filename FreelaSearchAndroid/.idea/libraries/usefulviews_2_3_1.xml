@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="usefulviews-2.3.1">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.satsuware.lib/usefulviews/2.3.1/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.satsuware.lib/usefulviews/2.3.1/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.satsuware.lib/usefulviews/2.3.1/49de0bc201bd5c2e697b2eb3ee9e96f3af40a5c6/usefulviews-2.3.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

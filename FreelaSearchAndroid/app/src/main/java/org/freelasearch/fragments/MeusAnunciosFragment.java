@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 
 import org.freelasearch.R;
 import org.freelasearch.activities.AnuncioActivity;
+import org.freelasearch.activities.AnuncioDetalharActivity;
 import org.freelasearch.adapters.AnuncioAdapter;
 import org.freelasearch.dtos.DtoAnuncio;
 import org.freelasearch.interfaces.RecyclerViewOnClickListenerHack;
@@ -56,7 +56,9 @@ public class MeusAnunciosFragment extends Fragment implements RecyclerViewOnClic
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Afff vei", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                Intent intent = new Intent(getActivity(), AnuncioActivity.class);
+                startActivity(intent);
+                //Snackbar.make(view, "Afff vei", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
             }
         });
 
@@ -107,7 +109,7 @@ public class MeusAnunciosFragment extends Fragment implements RecyclerViewOnClic
 
     @Override
     public void onClickListener(View view, int position) {
-        Intent intent = new Intent(getActivity(), AnuncioActivity.class);
+        Intent intent = new Intent(getActivity(), AnuncioDetalharActivity.class);
         intent.putExtra("anuncio", mList.get(position));
         startActivity(intent);
         //Toast.makeText(getActivity(), "onClickListener(): " + position, Toast.LENGTH_SHORT).show();

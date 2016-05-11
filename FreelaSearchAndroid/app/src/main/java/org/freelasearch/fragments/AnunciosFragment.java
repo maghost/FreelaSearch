@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import org.freelasearch.R;
-import org.freelasearch.activities.AnuncioActivity;
+import org.freelasearch.activities.AnuncioDetalharActivity;
 import org.freelasearch.adapters.AnuncioAdapter;
 import org.freelasearch.dtos.DtoAnuncio;
 import org.freelasearch.interfaces.RecyclerViewOnClickListenerHack;
@@ -83,7 +83,7 @@ public class AnunciosFragment extends Fragment implements RecyclerViewOnClickLis
 
     @Override
     public void onClickListener(View view, int position) {
-        Intent intent = new Intent(getActivity(), AnuncioActivity.class);
+        Intent intent = new Intent(getActivity(), AnuncioDetalharActivity.class);
         intent.putExtra("anuncio", mList.get(position));
         startActivity(intent);
         //Toast.makeText(getActivity(), "onClickListener(): " + position, Toast.LENGTH_SHORT).show();
