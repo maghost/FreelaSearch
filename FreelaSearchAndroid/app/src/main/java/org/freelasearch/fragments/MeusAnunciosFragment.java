@@ -40,6 +40,7 @@ public class MeusAnunciosFragment extends Fragment implements RecyclerViewOnClic
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private FloatingActionButton fab;
     private ImageView ivSemAnuncio;
+    private AsyncTaskListaAnuncio mAsyncTaskListaAnuncio;
 
     private List<DtoAnuncio> mList;
 
@@ -116,7 +117,7 @@ public class MeusAnunciosFragment extends Fragment implements RecyclerViewOnClic
     }
 
     public void updateMeusAnunciosList(int qtdRetorno, int qtdExibida, final int idPrimeiroLista) {
-        AsyncTaskListaAnuncio mAsyncTaskListaAnuncio = new AsyncTaskListaAnuncio();
+        mAsyncTaskListaAnuncio = new AsyncTaskListaAnuncio();
         mAsyncTaskListaAnuncio.setAsyncTaskListener(new AsyncTaskListener() {
             @Override
             public void onPreExecute() {
@@ -167,6 +168,14 @@ public class MeusAnunciosFragment extends Fragment implements RecyclerViewOnClic
         filtro.put("idUsuario", sharedpreferences.getInt("id", 0));
         filtro.put("tipoBusca", 1);
         mAsyncTaskListaAnuncio.execute(filtro);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mAsyncTaskListaAnuncio != null) {
+            mAsyncTaskListaAnuncio.cancel(true);
+        }
     }
 
 }

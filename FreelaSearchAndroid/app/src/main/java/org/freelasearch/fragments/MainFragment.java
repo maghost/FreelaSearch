@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +23,12 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.freelasearch.R;
 import org.freelasearch.activities.PerfisActivity;
+import org.freelasearch.activities.SearchActivity;
 import org.freelasearch.utils.IntegerFormatter;
 
 import java.util.ArrayList;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements View.OnClickListener {
 
     private static final String PREF_NAME = "SignupActivityPreferences";
 
@@ -37,6 +39,9 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        AppCompatButton btnBuscar = (AppCompatButton) view.findViewById(R.id.btn_buscar);
+        btnBuscar.setOnClickListener(this);
 
         PieChart pieChart = (PieChart) view.findViewById(R.id.piechart_freelasearch);
 
@@ -69,7 +74,6 @@ public class MainFragment extends Fragment {
         pieChart.getLegend().setEnabled(false);
         pieChart.animateY(1300);
         pieChart.setHoleColor(Color.TRANSPARENT);
-
 
         // Dependendo do perfil o item exibido é diferente
         SharedPreferences sharedpreferences = getActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
@@ -109,4 +113,13 @@ public class MainFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_buscar:
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
 }

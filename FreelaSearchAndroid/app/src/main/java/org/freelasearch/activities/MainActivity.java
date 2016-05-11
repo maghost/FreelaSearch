@@ -247,4 +247,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mAsyncTaskUsuario.execute(filtro);
     }
 
+    public void buscarAlgo(View view) {
+        startActivity(SearchActivity.class);
+    }
 }
