@@ -38,7 +38,5 @@ public class AnuncioDetalharActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
-
     }
 }

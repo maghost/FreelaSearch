@@ -69,7 +69,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.AnuncioActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.InscricaoDetalharActivity"></activity>
     </application>
 
 </manifest>
