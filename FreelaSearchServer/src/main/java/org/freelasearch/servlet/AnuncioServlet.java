@@ -1,6 +1,7 @@
 package org.freelasearch.servlet;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.freelasearch.dtos.DtoAnuncio;
 import org.freelasearch.filters.FiltroAnuncio;
 import org.freelasearch.services.ServicoAnuncio;
 import org.freelasearch.utils.ExceptionFreelaSearch;
@@ -31,6 +33,7 @@ public class AnuncioServlet extends HttpServlet {
 			ServicoAnuncio servico = new ServicoAnuncio();
 			ObjectOutputStream oos = new ObjectOutputStream(response.getOutputStream());
 
+			// BUSCAR
 			if (request.getRequestURI().toLowerCase().endsWith("/buscar")) {
 				FiltroAnuncio filtro = new FiltroAnuncio();
 				filtro.setQtdRetorno(request.getParameter("qtdRetorno") == null ? 0 : Integer.valueOf(request.getParameter("qtdRetorno")));
@@ -41,10 +44,21 @@ public class AnuncioServlet extends HttpServlet {
 
 				oos.writeObject(servico.buscarLista(filtro));
 			}
+			// SALVAR (CADASTRAR / ATUALIZAR)
+			else if (request.getRequestURI().toLowerCase().endsWith("/salvar")) {
+				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());
+				DtoAnuncio dto = (DtoAnuncio) ois.readObject();
+
+				servico.salvar(dto);
+
+				oos.writeObject(new Boolean(true));
+			}
 		} catch (ExceptionFreelaSearch e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
+			e.printStackTrace();
 		} catch (Exception e) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+			e.printStackTrace();
 		}
 	}
 

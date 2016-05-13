@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,7 +18,7 @@ import org.freelasearch.tasks.impl.TarefaLoginUsuario;
 import java.io.IOException;
 import java.text.ParseException;
 
-public class LoginActivity extends AppCompatActivity implements TarefaInterface {
+public class LoginActivity extends AppCompatActivity implements TarefaInterface, View.OnClickListener {
 
     private static final String PREF_NAME = "SignupActivityPreferences";
 
@@ -25,9 +26,12 @@ public class LoginActivity extends AppCompatActivity implements TarefaInterface 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        AppCompatButton btnConectar = (AppCompatButton) findViewById(R.id.btn_conectar);
+        btnConectar.setOnClickListener(this);
     }
 
-    public void login(View view) throws IOException, ParseException {
+    public void login() {
         if (((EditText) findViewById(R.id.email)).getText().toString().isEmpty()
                 || ((EditText) findViewById(R.id.senha)).getText().toString().isEmpty()) {
             Toast.makeText(getApplicationContext(), R.string.required_fields, Toast.LENGTH_SHORT).show();
@@ -72,5 +76,14 @@ public class LoginActivity extends AppCompatActivity implements TarefaInterface 
         Intent activity = new Intent(this, ResetPasswordActivity.class);
         startActivity(activity);
         finish();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_conectar:
+                login();
+                break;
+        }
     }
 }

@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 
 import org.freelasearch.R;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String PREF_NAME = "SignupActivityPreferences";
 
@@ -63,11 +64,17 @@ public class SearchActivity extends AppCompatActivity {
         DrawableCompat.setTintMode(drawableLocal, PorterDuff.Mode.SRC_IN);
         ((EditText) findViewById(R.id.txt_local)).setCompoundDrawablesWithIntrinsicBounds(drawableLocal, null, null, null);
 
-
+        AppCompatButton btnBuscar = (AppCompatButton) findViewById(R.id.btn_buscar);
+        btnBuscar.setOnClickListener(this);
     }
 
-    public void buscar(View view) {
-        Toast.makeText(this, "Busca por algo...", Toast.LENGTH_SHORT);
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_buscar:
+                Toast.makeText(this, "Busca por algo...", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
 }

@@ -1,18 +1,18 @@
 package org.freelasearch.tasks.impl;
 
-import org.freelasearch.dtos.DtoUsuario;
-import org.freelasearch.service.UsuarioService;
+import org.freelasearch.dtos.DtoAnuncio;
+import org.freelasearch.service.AnuncioService;
 import org.freelasearch.tasks.AbstractAsyncTask;
 
 import java.io.IOException;
-import java.util.Map;
 
-public class AsyncTaskAnuncio extends AbstractAsyncTask<Map<String, String>, DtoUsuario> {
+public class AsyncTaskAnuncio extends AbstractAsyncTask<DtoAnuncio, Void> {
 
     @Override
-    protected DtoUsuario executeService(Map<String, String> params) throws IOException {
-        UsuarioService service = new UsuarioService();
-        return service.findByParam(params);
+    protected Void executeService(DtoAnuncio dtoAnuncio) throws IOException {
+        AnuncioService service = new AnuncioService();
+        service.save(dtoAnuncio);
+        return null;
     }
 
 }

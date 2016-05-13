@@ -22,6 +22,7 @@
     <string name="facebook_app_id">1242449602450447</string>
     <string name="freelancer">Freelancer</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="inscrever_se">Inscrever-se</string>
     <string name="ja_cadastrado">Já é cadastrado? Conecte-se.</string>
     <string name="location">Localização (Opcional)</string>
     <string name="logout">Logout</string>

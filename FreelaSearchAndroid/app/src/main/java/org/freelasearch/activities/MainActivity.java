@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
@@ -27,6 +28,7 @@ import org.freelasearch.R;
 import org.freelasearch.dtos.DtoUsuario;
 import org.freelasearch.fragments.MainFragment;
 import org.freelasearch.fragments.MeusAnunciosFragment;
+import org.freelasearch.fragments.MinhasInscricoesFragment;
 import org.freelasearch.fragments.TabAnunciosFragment;
 import org.freelasearch.tasks.AsyncTaskListener;
 import org.freelasearch.tasks.impl.AsyncTaskUsuario;
@@ -98,6 +100,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
         hideItem();
+
+        Bundle b = getIntent().getExtras();
+        int idNavigationItem = b != null ? b.getInt("idNavigationItem") : 0;
+        if (idNavigationItem != 0) {
+            navigationView.setCheckedItem(idNavigationItem);
+            openFragmentByNavigationItemId(idNavigationItem);
+        }
+        if (b != null && !b.getString("msgExtras").isEmpty()) {
+            Toast.makeText(this, b.getString("msgExtras"), Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -138,7 +150,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        return openFragmentByNavigationItemId(id);
+    }
 
+    private boolean openFragmentByNavigationItemId(int id) {
         Fragment fragment;
         if (id == R.id.nav_dashboard) {
             setToolbarTitle(R.string.app_name);
@@ -152,6 +167,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_meus_anuncios) {
             setToolbarTitle(R.string.meus_anuncios);
             fragment = new MeusAnunciosFragment();
+        } else if (id == R.id.nav_minhas_inscricoes) {
+            setToolbarTitle(R.string.minhas_inscricoes);
+            fragment = new MinhasInscricoesFragment();
         } else if (id == R.id.nav_settings) {
             startActivity(SettingsActivity.class);
             return false;

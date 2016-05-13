@@ -14,8 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
         android:paddingTop="56dp">
 
         <ImageView
@@ -63,7 +61,6 @@
             android:layout_marginBottom="24dp"
             android:layout_marginTop="24dp"
             android:background="@color/accent"
-            android:onClick="login"
             android:padding="@dimen/padding_button"
             android:text="@string/conectar"
             android:textColor="@color/icons" />

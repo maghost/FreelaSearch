@@ -80,7 +80,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/accent"
-                android:onClick="buscar"
                 android:padding="@dimen/padding_button"
                 android:text="@string/search_title"
                 android:textColor="@color/icons" />

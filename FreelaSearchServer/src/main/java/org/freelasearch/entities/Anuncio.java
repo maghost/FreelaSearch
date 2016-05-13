@@ -32,7 +32,9 @@ public class Anuncio extends BaseBean {
 
 	private Integer status;
 
-	private String capa;
+	private String cidade;
+
+	private String estado;
 
 	@OneToOne
 	@JoinColumn(name = "categoria_id")
@@ -48,7 +50,8 @@ public class Anuncio extends BaseBean {
 	public Anuncio() {
 	}
 
-	public Anuncio(Integer id, String titulo, String descricao, Date data, Integer status, Categoria categoria, String capa, Anunciante anunciante, List<Inscricao> inscricoes) {
+	public Anuncio(Integer id, String titulo, String descricao, Date data, Integer status, Categoria categoria, String cidade, String estado, Anunciante anunciante,
+			List<Inscricao> inscricoes) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -56,7 +59,8 @@ public class Anuncio extends BaseBean {
 		this.data = data;
 		this.status = status;
 		this.categoria = categoria;
-		this.capa = capa;
+		this.cidade = cidade;
+		this.estado = estado;
 		this.anunciante = anunciante;
 		this.inscricoes = inscricoes;
 	}
@@ -109,12 +113,20 @@ public class Anuncio extends BaseBean {
 		this.categoria = categoria;
 	}
 
-	public String getCapa() {
-		return capa;
+	public String getCidade() {
+		return cidade;
 	}
 
-	public void setCapa(String capa) {
-		this.capa = capa;
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	public Anunciante getAnunciante() {
@@ -135,8 +147,8 @@ public class Anuncio extends BaseBean {
 
 	@Override
 	public String toString() {
-		return "Anuncio [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", data=" + data + ", status=" + status + ", categoria=" + categoria + ", capa=" + capa
-				+ ", anunciante=" + anunciante + ", inscricoes=" + printSpecificFieldFromBeanCollection(inscricoes, "id") + "]";
+		return "Anuncio [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", data=" + data + ", status=" + status + ", categoria=" + categoria + ", cidade="
+				+ cidade + ", estado=" + estado + ", anunciante=" + anunciante + ", inscricoes=" + printSpecificFieldFromBeanCollection(inscricoes, "id") + "]";
 	}
 
 }

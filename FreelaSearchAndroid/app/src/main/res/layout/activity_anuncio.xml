@@ -106,19 +106,17 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
-                    android:minLines="4"
+                    android:minLines="3"
                     android:scrollbars="vertical" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Cadastrar Anúncio Button -->
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_signup"
+                android:id="@+id/btn_cadastrar_anuncio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="@dimen/bigger_margin"
                 android:background="@color/accent"
-                android:onClick="cadastrarAnuncio"
                 android:padding="@dimen/padding_button"
                 android:text="Cadastrar Anúncio"
                 android:textColor="@color/icons" />
