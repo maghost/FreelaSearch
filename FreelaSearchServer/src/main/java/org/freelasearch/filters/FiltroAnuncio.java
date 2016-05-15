@@ -6,11 +6,20 @@ public class FiltroAnuncio extends FiltroFreelaSearch implements Serializable {
 
 	private static final long serialVersionUID = -8129733193820433076L;
 
+	private Integer idAnuncio;
 	private Integer tipoBusca;
 	private Integer qtdRetorno;
 	private Integer qtdExibida;
 	private Integer idPrimeiroLista;
 	private Integer idUsuario;
+
+	public Integer getIdAnuncio() {
+		return idAnuncio;
+	}
+
+	public void setIdAnuncio(Integer idAnuncio) {
+		this.idAnuncio = idAnuncio;
+	}
 
 	public Integer getTipoBusca() {
 		return tipoBusca;

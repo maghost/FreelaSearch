@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 import org.freelasearch.R;
 import org.freelasearch.dtos.DtoAnuncio;
 import org.freelasearch.interfaces.RecyclerViewOnClickListenerHack;
-import org.freelasearch.utils.RoundedCornersTransformation;
+import org.freelasearch.utils.EstadoUtils;
 
 import java.util.List;
 
@@ -43,7 +43,20 @@ public class InscricaoAdapter extends RecyclerView.Adapter<InscricaoAdapter.MyVi
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        /*if (holder.nhmAnunciante != null) {
+            Picasso.with(mContext).load(mList.get(position).getAnunciante().getUsuario().getUrlFoto()).placeholder(R.drawable.no_image).error(R.drawable.no_image).fit().
+                    transform(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.TOP_LEFT)).
+                    transform(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.TOP_RIGHT)).
+                    into(holder.nhmAnunciante);
+        }*/
+        if (holder.nhmAnunciante != null) {
+            Picasso.with(mContext).load(mList.get(position).getAnunciante().getUsuario().getUrlFoto())
+                    .placeholder(R.drawable.default_profile).error(R.drawable.default_profile).fit().into(holder.nhmAnunciante);
+        }
         holder.tvTitulo.setText(mList.get(position).getTitulo());
+        holder.tvAnunciante.setText(mList.get(position).getAnunciante().getUsuario().getNome());
+        holder.tvLocalizacao.setText(mList.get(position).getLocalizacao().getCidade() + ", " + new EstadoUtils().getDescriptionByUf(mList.get(position).getLocalizacao().getEstado()));
+        holder.tvCategoria.setText(mList.get(position).getCategoria() != null ? mList.get(position).getCategoria().getNome() : null);
         holder.tvDescricao.setText(mList.get(position).getDescricao());
 
         try {
@@ -76,15 +89,21 @@ public class InscricaoAdapter extends RecyclerView.Adapter<InscricaoAdapter.MyVi
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public ImageView ivAnuncio;
         public TextView tvTitulo;
+        public ImageView nhmAnunciante;
+        public TextView tvAnunciante;
+        public TextView tvLocalizacao;
+        public TextView tvCategoria;
         public TextView tvDescricao;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            ivAnuncio = (ImageView) itemView.findViewById(R.id.iv_anuncio);
             tvTitulo = (TextView) itemView.findViewById(R.id.tv_titulo);
+            nhmAnunciante = (ImageView) itemView.findViewById(R.id.nhm_anunciante);
+            tvAnunciante = (TextView) itemView.findViewById(R.id.tv_anunciante);
+            tvLocalizacao = (TextView) itemView.findViewById(R.id.tv_localizacao);
+            tvCategoria = (TextView) itemView.findViewById(R.id.tv_categoria);
             tvDescricao = (TextView) itemView.findViewById(R.id.tv_descricao);
 
             itemView.setOnClickListener(this);

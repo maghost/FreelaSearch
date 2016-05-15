@@ -59,7 +59,6 @@ public class MeusAnunciosFragment extends Fragment implements RecyclerViewOnClic
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AnuncioActivity.class);
                 startActivity(intent);
-                //Snackbar.make(view, "Afff vei", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
             }
         });
 
@@ -113,7 +112,6 @@ public class MeusAnunciosFragment extends Fragment implements RecyclerViewOnClic
         Intent intent = new Intent(getActivity(), AnuncioDetalharActivity.class);
         intent.putExtra("anuncio", mList.get(position));
         startActivity(intent);
-        //Toast.makeText(getActivity(), "onClickListener(): " + position, Toast.LENGTH_SHORT).show();
     }
 
     public void updateMeusAnunciosList(int qtdRetorno, int qtdExibida, final int idPrimeiroLista) {

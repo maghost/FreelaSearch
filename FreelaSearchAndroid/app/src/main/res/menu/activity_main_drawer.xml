@@ -20,7 +20,7 @@
             android:title="@string/anuncios" />
         <item
             android:id="@+id/nav_meus_anuncios"
-            android:icon="@drawable/ic_redeem_24dp"
+            android:icon="@drawable/ic_book_open_page_variant"
             android:tint="@color/icons"
             android:title="@string/meus_anuncios" />
         <item

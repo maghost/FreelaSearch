@@ -31,10 +31,13 @@ public abstract class AnuncioConverter {
 		domain.setId(dto.getId());
 		domain.setTitulo(dto.getTitulo());
 		domain.setDescricao(dto.getDescricao());
+		domain.setData(dto.getData());
 		domain.setStatus(dto.isAtivo() ? 0 : 1);
 		domain.setCidade(dto.getLocalizacao().getCidade());
 		domain.setEstado(dto.getLocalizacao().getEstado());
-		domain.setCategoria(CategoriaConverter.dtoToDomain(dto.getCategoria()));
+		if (dto.getCategoria() != null) {
+			domain.setCategoria(CategoriaConverter.dtoToDomain(dto.getCategoria()));
+		}
 		domain.setAnunciante(AnuncianteConverter.dtoToDomain(dto.getAnunciante()));
 
 		return domain;

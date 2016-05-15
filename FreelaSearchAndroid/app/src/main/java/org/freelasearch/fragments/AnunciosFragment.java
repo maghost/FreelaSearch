@@ -87,7 +87,6 @@ public class AnunciosFragment extends Fragment implements RecyclerViewOnClickLis
         Intent intent = new Intent(getActivity(), AnuncioDetalharActivity.class);
         intent.putExtra("anuncio", mList.get(position));
         startActivity(intent);
-        //Toast.makeText(getActivity(), "onClickListener(): " + position, Toast.LENGTH_SHORT).show();
     }
 
     public void updateAnunciosList(int qtdRetorno, int qtdExibida, final int idPrimeiroLista) {

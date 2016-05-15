@@ -13,7 +13,7 @@ public class AsyncTaskListaAnuncio extends AbstractAsyncTask<Map<String, Integer
     @Override
     protected List<DtoAnuncio> executeService(Map<String, Integer> params) throws IOException {
         AnuncioService service = new AnuncioService();
-        return service.findLimited(params);
+        return service.findByFiltro(params);
     }
 
 }

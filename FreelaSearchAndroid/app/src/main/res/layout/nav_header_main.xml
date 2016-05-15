@@ -5,6 +5,16 @@
     android:background="@drawable/bg_nd06"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/tv_perfil_logado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/overlay"
+        android:padding="@dimen/small_margin"
+        android:text="Bem vindo!"
+        android:textColor="@android:color/white"
+        android:textSize="11sp" />
+
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/nhm_profile_image"
         android:layout_width="70dp"
@@ -30,7 +40,7 @@
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="0.10"
-        android:text=""
+        android:text="Nome"
         android:textColor="#FFF"
         android:textSize="15sp"
         android:textStyle="bold" />
@@ -48,7 +58,7 @@
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="0.08"
-        android:text=""
+        android:text="Email"
         android:textColor="#fff"
         android:textSize="14sp"
         android:textStyle="bold" />

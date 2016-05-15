@@ -1,31 +1,94 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/small_margin">
 
     <TextView
         android:id="@+id/tv_titulo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="@dimen/small_margin"
+        android:drawableLeft="@drawable/ic_book_open_page_variant"
+        android:drawablePadding="@dimen/small_margin"
+        android:singleLine="true"
+        android:text="Lorem Ipsum Dolor Amet"
+        android:textColor="@color/accent"
+        android:textSize="21sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/nhm_anunciante"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:singleLine="true"
+            android:src="@drawable/default_profile"
+            app:border_color="#FF000000" />
+
+        <TextView
+            android:id="@+id/tv_anunciante"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_toRightOf="@+id/nhm_anunciante"
+            android:singleLine="true"
+            android:text="Título"
+            android:textColor="@color/accent"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_localizacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_titulo"
+        android:layout_marginTop="@dimen/small_margin"
+        android:drawableLeft="@drawable/ic_place_24dp"
+        android:drawablePadding="@dimen/small_margin"
+        android:drawableStart="@drawable/ic_place_24dp"
+        android:singleLine="true"
+        android:text="Cidade, Estado"
+        android:textColor="@color/primary"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_categoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_localizacao"
+        android:layout_marginTop="@dimen/small_margin"
+        android:drawableLeft="@drawable/ic_list_24dp"
+        android:drawablePadding="@dimen/small_margin"
+        android:drawableStart="@drawable/ic_list_24dp"
+        android:singleLine="true"
+        android:text="Categoria"
         android:textColor="@color/primary"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tv_descricao"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tv_titulo"
-        android:layout_below="@+id/tv_titulo"
+        android:layout_below="@+id/tv_categoria"
+        android:layout_marginTop="@dimen/small_margin"
+        android:maxLines="2"
+        android:text="Descrição"
         android:textColor="@color/primary"
-        android:textSize="12sp" />
+        android:textSize="16sp" />
 
     <View
         android:id="@+id/vw_divider"
         android:layout_width="match_parent"
         android:layout_height="0.8dp"
-        android:layout_alignLeft="@+id/tv_descricao"
-        android:layout_below="@+id/tv_descricao"
-        android:layout_marginTop="20dp"
-        android:background="@color/primary" />
-
-</RelativeLayout>
+        android:layout_below="@+id/rl_anuncio"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:background="@color/primary_light" />
+</LinearLayout>

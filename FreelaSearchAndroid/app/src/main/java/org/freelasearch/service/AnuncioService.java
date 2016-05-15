@@ -12,7 +12,7 @@ public class AnuncioService extends AbstractService<DtoAnuncio> {
         sendObject(dto, "anuncio/salvar");
     }
 
-    public List<DtoAnuncio> findLimited(Map<String, Integer> params) throws IOException {
+    public List<DtoAnuncio> findByFiltro(Map<String, Integer> params) throws IOException {
         return retrieveListObject(params, "anuncio/buscar");
     }
 

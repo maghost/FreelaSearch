@@ -1,10 +1,13 @@
 package org.freelasearch.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.freelasearch.converters.CategoriaConverter;
 import org.freelasearch.dao.CategoriaDao;
 import org.freelasearch.dtos.DtoCategoria;
 import org.freelasearch.entities.Categoria;
+import org.freelasearch.filters.FiltroCategoria;
 import org.freelasearch.utils.DaoFactory;
 import org.freelasearch.utils.ExceptionFreelaSearch;
 
@@ -16,37 +19,35 @@ public class ServicoCategoria {
 		categoriaDao = DaoFactory.categoriaInstance();
 	}
 
-	public Categoria montarBean(DtoCategoria dto) {
-		Categoria categoria = new Categoria();
-		categoria.setId(dto.getId());
-		categoria.setNome(dto.getNome());
-		categoria.setDescricao(dto.getDescricao());
-
-		return categoria;
-	}
-
-	public DtoCategoria montarDto(Integer id) {
-		Categoria categoria = categoriaDao.findById(id);
+	public DtoCategoria buscarPorId(FiltroCategoria filtro) {
+		Categoria categoria = categoriaDao.findById(filtro.getId());
 		if (categoria == null) {
-			throw new ExceptionFreelaSearch("Nenhuma categoria encontrada para o id #" + id + " informado.");
-		} 
-		DtoCategoria dto = new DtoCategoria();
-		dto.setId(categoria.getId());
-		dto.setNome(categoria.getNome());
-		dto.setDescricao(categoria.getDescricao());
-
-		return dto;
-	}
-
-	public void salvar(Categoria categoria) {
-		if (categoria.getId() == null) {
-			List<Categoria> listaPorNome = categoriaDao.findByCategoriaNome(categoria.getNome());
-			if (listaPorNome.size() > 0) {
-				throw new ExceptionFreelaSearch("Categoria '" + categoria.getNome() + "' já cadastrada.");
-			}
-			categoriaDao.save(categoria);
-		} else {
-			categoriaDao.update(categoria);
+			throw new ExceptionFreelaSearch("Nenhuma categoria encontrada para o id #" + filtro.getId() + " informado.");
 		}
+		return CategoriaConverter.domainToDto(categoria);
 	}
+
+	// TODO: Tentar fazer igual o buscarParams do IntegraDados
+	public List<DtoCategoria> buscarLista(FiltroCategoria filtro) {
+		List<Categoria> categorias = categoriaDao.findByFiltro(filtro);
+		List<DtoCategoria> listaDtoCategoria = new ArrayList<DtoCategoria>();
+
+		for (Categoria categoria : categorias) {
+			listaDtoCategoria.add(CategoriaConverter.domainToDto(categoria));
+		}
+
+		return listaDtoCategoria;
+	}
+
+	public List<DtoCategoria> buscarLista() {
+		List<Categoria> categorias = categoriaDao.findAll();
+		List<DtoCategoria> listaDtoCategoria = new ArrayList<DtoCategoria>();
+
+		for (Categoria categoria : categorias) {
+			listaDtoCategoria.add(CategoriaConverter.domainToDto(categoria));
+		}
+
+		return listaDtoCategoria;
+	}
+
 }

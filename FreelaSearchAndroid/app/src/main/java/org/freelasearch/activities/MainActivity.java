@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +23,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
+import org.apache.commons.lang3.StringUtils;
 import org.freelasearch.R;
 import org.freelasearch.dtos.DtoUsuario;
 import org.freelasearch.fragments.MainFragment;
@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Picasso.with(this).load(sharedpreferences.getString("profile_pic", "")).placeholder(R.drawable.default_profile).error(R.drawable.default_profile).into(nhmProfileImage);
         }
 
+        TextView tvPerfilLogado = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tv_perfil_logado);
+        tvPerfilLogado.setText("Você está logado com o perfil de " + StringUtils.capitalize(sharedpreferences.getString("perfil", "")));
+
         navigationView.setNavigationItemSelectedListener(this);
         hideItem();
 
@@ -107,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(idNavigationItem);
             openFragmentByNavigationItemId(idNavigationItem);
         }
-        if (b != null && !b.getString("msgExtras").isEmpty()) {
+        if (b != null && b.getString("msgExtras") != null && !b.getString("msgExtras").isEmpty()) {
             Toast.makeText(this, b.getString("msgExtras"), Toast.LENGTH_LONG).show();
         }
     }
@@ -215,10 +218,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setTitle(this.getString(idString));
     }
 
-    public void buscar(View view) {
-        startActivity(SearchActivity.class);
-    }
-
     private void hideItem() {
         if (navigationView != null && sharedpreferences != null) {
             Menu navMenu = navigationView.getMenu();
@@ -263,9 +262,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Map<String, String> filtro = new HashMap<>();
         filtro.put("email", email);
         mAsyncTaskUsuario.execute(filtro);
-    }
-
-    public void buscarAlgo(View view) {
-        startActivity(SearchActivity.class);
     }
 }

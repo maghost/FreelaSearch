@@ -101,9 +101,8 @@ public class MinhasInscricoesFragment extends Fragment implements RecyclerViewOn
     @Override
     public void onClickListener(View view, int position) {
         Intent intent = new Intent(getActivity(), InscricaoDetalharActivity.class);
-        intent.putExtra("inscricao", mList.get(position));
+        intent.putExtra("anuncio", mList.get(position));
         startActivity(intent);
-        //Toast.makeText(getActivity(), "onClickListener(): " + position, Toast.LENGTH_SHORT).show();
     }
 
     public void updateMinhasInscricoesList(int qtdRetorno, int qtdExibida, final int idPrimeiroLista) {

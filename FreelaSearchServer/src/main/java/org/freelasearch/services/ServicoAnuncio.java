@@ -28,13 +28,13 @@ public class ServicoAnuncio {
 
 	public List<DtoAnuncio> buscarLista(FiltroAnuncio filtro) {
 		List<Anuncio> anuncios = anuncioDao.findByFiltro(filtro);
-		List<DtoAnuncio> dtoAnuncios = new ArrayList<DtoAnuncio>();
+		List<DtoAnuncio> listaDtoAnuncio = new ArrayList<DtoAnuncio>();
 
 		for (Anuncio anuncio : anuncios) {
-			dtoAnuncios.add(AnuncioConverter.domainToDto(anuncio));
+			listaDtoAnuncio.add(AnuncioConverter.domainToDto(anuncio));
 		}
 
-		return dtoAnuncios;
+		return listaDtoAnuncio;
 	}
 
 	public void salvar(DtoAnuncio dto) {

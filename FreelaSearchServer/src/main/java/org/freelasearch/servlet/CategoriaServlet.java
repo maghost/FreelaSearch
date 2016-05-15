@@ -1,7 +1,6 @@
 package org.freelasearch.servlet;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import javax.servlet.ServletException;
@@ -10,8 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.freelasearch.dtos.DtoCategoria;
-import org.freelasearch.entities.Categoria;
+import org.freelasearch.filters.FiltroCategoria;
 import org.freelasearch.services.ServicoCategoria;
 import org.freelasearch.utils.ExceptionFreelaSearch;
 
@@ -34,16 +32,15 @@ public class CategoriaServlet extends HttpServlet {
 			ObjectOutputStream oos = new ObjectOutputStream(response.getOutputStream());
 
 			if (request.getRequestURI().toLowerCase().endsWith("/buscar")) {
-				Integer id = Integer.valueOf(request.getParameter("id"));
-				oos.writeObject(servico.montarDto(id));
-			} else if (request.getRequestURI().toLowerCase().endsWith("/salvar")) {
-				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());
-				DtoCategoria dto = (DtoCategoria) ois.readObject();
+				// Se tiver id, busca preenchendo apenas esse campo, caso contrário, preenche o filtro
+				if (request.getParameter("id") != null) {
+					FiltroCategoria filtro = new FiltroCategoria();
+					filtro.setId(Integer.valueOf(request.getParameter("id")));
 
-				Categoria categoria = servico.montarBean(dto);
-				servico.salvar(categoria);
-
-				oos.writeObject(new Boolean(true));
+					oos.writeObject(servico.buscarPorId(filtro));
+				} else {
+					oos.writeObject(servico.buscarLista());
+				}
 			}
 		} catch (ExceptionFreelaSearch e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());

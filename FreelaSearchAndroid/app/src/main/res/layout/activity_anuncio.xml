@@ -46,10 +46,10 @@
                     android:id="@+id/titulo_anuncio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapWords" />
+                    android:maxLength="150" />
             </android.support.design.widget.TextInputLayout>
 
-            <!--  Categoria Label -->
+            <!--  Categoria Label
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,10 +60,17 @@
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/categoria_anuncio"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textCapWords" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>-->
+            <!-- Categoria -->
+            <com.satsuware.usefulviews.LabelledSpinner
+                android:id="@+id/categoria_anuncio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ls:labelText="Categoria"
+                ls:widgetColor="@color/accent" />
 
+            <!-- Localização Label -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,20 +89,23 @@
                         android:id="@+id/cidade_anuncio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textCapWords" />
+                        android:inputType="textCapWords"
+                        android:maxLength="50" />
                 </android.support.design.widget.TextInputLayout>
 
-                <!-- Estado Label -->
+                <!-- EstadoUtils -->
                 <com.satsuware.usefulviews.LabelledSpinner
                     android:id="@+id/estado_anuncio"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:maxLength="2"
                     ls:labelText="Estado"
                     ls:widgetColor="@color/accent" />
 
             </LinearLayout>
 
+            <!-- Descrição Label -->
             <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -106,6 +116,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
+                    android:maxLength="500"
                     android:minLines="3"
                     android:scrollbars="vertical" />
             </android.support.design.widget.TextInputLayout>
@@ -119,7 +130,20 @@
                 android:background="@color/accent"
                 android:padding="@dimen/padding_button"
                 android:text="Cadastrar Anúncio"
-                android:textColor="@color/icons" />
+                android:textColor="@color/icons"
+                android:visibility="gone" />
+
+            <!-- Editar Anúncio Button -->
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_editar_anuncio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/bigger_margin"
+                android:background="@color/accent"
+                android:padding="@dimen/padding_button"
+                android:text="Editar Anúncio"
+                android:textColor="@color/icons"
+                android:visibility="gone" />
 
         </LinearLayout>
     </ScrollView>

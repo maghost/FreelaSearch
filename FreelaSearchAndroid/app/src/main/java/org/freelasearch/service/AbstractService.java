@@ -34,7 +34,7 @@ public abstract class AbstractService<T> {
     protected T retrieveObject(Map<String, ?> params, String uri) throws IOException {
         HttpURLConnection urlConnection = getHttpURLConnection(uri);
 
-        if (!params.isEmpty()) {
+        if (params != null && !params.isEmpty()) {
             PrintWriter pw = new PrintWriter(urlConnection.getOutputStream());
 
             Iterator<String> it = params.keySet().iterator();
@@ -71,7 +71,7 @@ public abstract class AbstractService<T> {
     protected List<T> retrieveListObject(Map<String, ?> params, String uri) throws IOException {
         HttpURLConnection urlConnection = getHttpURLConnection(uri);
 
-        if (!params.isEmpty()) {
+        if (params != null && !params.isEmpty()) {
             PrintWriter pw = new PrintWriter(urlConnection.getOutputStream());
 
             Iterator<String> it = params.keySet().iterator();
@@ -107,7 +107,8 @@ public abstract class AbstractService<T> {
     }
 
     private HttpURLConnection getHttpURLConnection(String uri) throws IOException {
-        URL url = new URL("http://192.168.25.6:8080/FreelaSearchServer/" + uri); //10.0.2.2:8080
+        //Properties mProperties = System.getProperties();mProperties.getProperty("systemProp.http.serverUrl")+ "/"
+        URL url = new URL("http://192.168.25.9:8080/FreelaSearchServer/" + uri);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setDoInput(true);
         urlConnection.setDoOutput(true);
