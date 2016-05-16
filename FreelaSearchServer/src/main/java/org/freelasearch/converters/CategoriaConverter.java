@@ -8,9 +8,11 @@ public abstract class CategoriaConverter {
 	public static DtoCategoria domainToDto(Categoria domain) {
 		DtoCategoria dto = new DtoCategoria();
 
-		dto.setId(domain.getId());
-		dto.setNome(domain.getNome());
-		dto.setDescricao(domain.getDescricao());
+		if (domain != null) {
+			dto.setId(domain.getId());
+			dto.setNome(domain.getNome());
+			dto.setDescricao(domain.getDescricao());
+		}
 
 		return dto;
 	}
@@ -18,9 +20,11 @@ public abstract class CategoriaConverter {
 	public static Categoria dtoToDomain(DtoCategoria dto) {
 		Categoria domain = new Categoria();
 
-		domain.setId(dto.getId());
-		domain.setNome(dto.getNome());
-		domain.setDescricao(dto.getDescricao());
+		if (dto != null) {
+			domain.setId(dto.getId());
+			domain.setNome(dto.getNome());
+			domain.setDescricao(dto.getDescricao());
+		}
 
 		return domain;
 	}

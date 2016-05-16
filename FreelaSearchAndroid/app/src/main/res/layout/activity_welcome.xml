@@ -20,7 +20,7 @@
         tools:context="org.freelasearch.activities.WelcomeActivity">
 
         <ImageView
-            android:id="@+id/ivLogo"
+            android:id="@+id/iv_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -31,13 +31,13 @@
             android:visibility="visible" />
 
         <com.facebook.login.widget.LoginButton xmlns:fb="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/lbFacebook"
+            android:id="@+id/lb_facebook"
             style="@style/FacebookLoginButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@id/ivLogo"
+            android:layout_below="@id/iv_logo"
             android:textColor="@android:color/white"
             fb:com_facebook_login_text="@string/conectar_facebook"
             fb:com_facebook_logout_text="@string/deslogar_facebook" />
@@ -48,45 +48,42 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/lbFacebook"
+            android:layout_below="@id/lb_facebook"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnLogin"
+                android:id="@+id/btn_login"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="25dp"
                 android:layout_weight="1"
                 android:background="#4bffffff"
-                android:onClick="abrirLoginActivity"
                 android:text="@string/conectar"
                 android:textAllCaps="true"
                 android:textColor="@android:color/white" />
 
             <Button
-                android:id="@+id/btnCriarConta"
+                android:id="@+id/btn_signup"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="25dp"
                 android:layout_weight="1"
                 android:background="#4bffffff"
-                android:onClick="abrirSignupActivity"
                 android:text="@string/cadastrar"
                 android:textAllCaps="true"
                 android:textColor="@android:color/white" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvResetarSenha"
+            android:id="@+id/tv_resetar_senha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/linearLayout"
             android:layout_marginTop="18dp"
-            android:onClick="abrirResetPasswordActivity"
             android:text="@string/esqueceu_senha"
             android:textColor="@android:color/white"
             android:textSize="14dp" />

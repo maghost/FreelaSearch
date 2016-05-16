@@ -12,6 +12,15 @@ public class UsuarioService extends AbstractService<DtoUsuario> {
         sendObject(dto, "usuario/salvar");
     }
 
+    public DtoUsuario loginOrRegisterFacebook(DtoUsuario dto) throws IOException {
+        Map<String, String> m = new HashMap<>();
+        m.put("nome", dto.getNome());
+        m.put("email", dto.getEmail());
+        m.put("urlFoto", dto.getUrlFoto());
+
+        return retrieveObject(m, "usuario/facebook");
+    }
+
     public DtoUsuario login(DtoUsuario dto) throws IOException {
         Map<String, String> m = new HashMap<>();
         m.put("email", dto.getEmail());

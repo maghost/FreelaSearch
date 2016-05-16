@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class AsyncTaskListaCategoria extends AbstractAsyncTask<Map<String, String>, List<DtoCategoria>> {
+public class AsyncTaskListaCategoria extends AbstractAsyncTask<Void, List<DtoCategoria>> {
 
     @Override
-    protected List<DtoCategoria> executeService(Map<String, String> params) throws IOException {
+    protected List<DtoCategoria> executeService(Void params) throws IOException {
         CategoriaService service = new CategoriaService();
         return service.findAll();
     }

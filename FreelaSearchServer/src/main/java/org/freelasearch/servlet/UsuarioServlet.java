@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.freelasearch.converters.UsuarioConverter;
 import org.freelasearch.dtos.DtoUsuario;
 import org.freelasearch.entities.Usuario;
 import org.freelasearch.filters.FiltroUsuario;
@@ -39,8 +40,7 @@ public class UsuarioServlet extends HttpServlet {
 				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());
 				DtoUsuario dto = (DtoUsuario) ois.readObject();
 
-				Usuario usuario = servico.montarBean(dto);
-				servico.salvar(usuario);
+				servico.salvar(UsuarioConverter.dtoToDomain(dto));
 
 				oos.writeObject(new Boolean(true));
 			}
@@ -50,6 +50,18 @@ public class UsuarioServlet extends HttpServlet {
 				String email = request.getParameter("email");
 				String senha = request.getParameter("senha");
 				oos.writeObject(servico.login(email, senha));
+			}
+
+			// LOGIN/REGISTRO FACEBOOK
+			if (request.getRequestURI().toLowerCase().endsWith("/facebook")) {
+				DtoUsuario dto = new DtoUsuario();
+
+				dto.setEmail(request.getParameter("email"));
+				dto.setNome(request.getParameter("nome"));
+				dto.setUrlFoto(request.getParameter("urlFoto"));
+
+				Usuario usuario = UsuarioConverter.dtoToDomain(dto);
+				oos.writeObject(UsuarioConverter.domainToDto(servico.loginOrRegisterFacebook(usuario)));
 			}
 
 			// BUSCAR

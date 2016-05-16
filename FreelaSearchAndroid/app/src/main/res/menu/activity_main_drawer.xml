@@ -22,12 +22,16 @@
             android:id="@+id/nav_meus_anuncios"
             android:icon="@drawable/ic_book_open_page_variant"
             android:tint="@color/icons"
-            android:title="@string/meus_anuncios" />
+            android:title="@string/meus_anuncios"
+            android:visible="false" />
         <item
             android:id="@+id/nav_minhas_inscricoes"
             android:icon="@drawable/ic_wallet_travel_24dp"
             android:tint="@color/icons"
-            android:title="@string/minhas_inscricoes" />
+            android:title="@string/minhas_inscricoes"
+            android:visible="false" />
+    </group>
+    <group>
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_24dp"

@@ -77,15 +77,15 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
         // Dependendo do perfil o item exibido é diferente
         SharedPreferences sharedpreferences = getActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        if (sharedpreferences.getString("perfil", "").equals("")) {
+        if (sharedpreferences.getInt("anunciante", 0) == 0 && sharedpreferences.getInt("freelancer", 0) == 0) {
             Intent intent = new Intent(getActivity(), PerfisActivity.class);
             startActivity(intent);
             getActivity().finish();
             return view;
-        } else if (sharedpreferences.getString("perfil", "").equals("anunciante")) {
-            view.findViewById(R.id.txt_anuncio).setVisibility(View.GONE);
+        } else if (sharedpreferences.getInt("anunciante", 0) == 0) {
+            view.findViewById(R.id.txt_anuncio).setVisibility(View.VISIBLE);
         } else {
-            view.findViewById(R.id.txt_freelancer).setVisibility(View.GONE);
+            view.findViewById(R.id.txt_freelancer).setVisibility(View.VISIBLE);
         }
 
 

@@ -45,7 +45,8 @@
                 android:singleLine="true"
                 android:textColor="@color/icons"
                 android:textColorHint="@color/secondary_text"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/txt_freelancer"
@@ -59,7 +60,8 @@
                 android:singleLine="true"
                 android:textColor="@color/icons"
                 android:textColorHint="@color/secondary_text"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/txt_local"

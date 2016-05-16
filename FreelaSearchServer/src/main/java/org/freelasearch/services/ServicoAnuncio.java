@@ -19,11 +19,16 @@ public class ServicoAnuncio {
 		anuncioDao = DaoFactory.anuncioInstance();
 	}
 
-	public DtoAnuncio montarDtoById(Integer id) {
-		Anuncio domain = anuncioDao.findById(id);
-		DtoAnuncio dto = AnuncioConverter.domainToDto(domain);
+	public void salvar(DtoAnuncio dto) {
+		Anuncio anuncio = AnuncioConverter.dtoToDomain(dto);
 
-		return dto;
+		if (anuncio.getId() == null) {
+			anuncio.setData(new Date());
+			anuncioDao.save(anuncio);
+		} else {
+			anuncioDao.update(anuncio);
+		}
+
 	}
 
 	public List<DtoAnuncio> buscarLista(FiltroAnuncio filtro) {
@@ -37,15 +42,4 @@ public class ServicoAnuncio {
 		return listaDtoAnuncio;
 	}
 
-	public void salvar(DtoAnuncio dto) {
-		Anuncio anuncio = AnuncioConverter.dtoToDomain(dto);
-
-		if (anuncio.getId() == null) {
-			anuncio.setData(new Date());
-			anuncioDao.save(anuncio);
-		} else {
-			anuncioDao.update(anuncio);
-		}
-
-	}
 }

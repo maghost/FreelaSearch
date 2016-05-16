@@ -49,21 +49,23 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
     private LabelledSpinner categoriaSpinner;
     private AsyncTaskListaCategoria mAsyncTaskListaCategoria;
 
-    private DtoAnuncio dtoAnuncio;
+    private DtoAnuncio dtoAnuncioOriginal;
     private AsyncTaskAnuncio mAsyncTaskAnuncio;
+
+    private SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anuncio);
 
-        SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
 
         Bundle b = getIntent().getExtras();
-        dtoAnuncio = b != null ? (DtoAnuncio) b.getSerializable("anuncio") : null;
+        dtoAnuncioOriginal = b != null ? (DtoAnuncio) b.getSerializable("anuncio") : null;
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setTitle(dtoAnuncio == null ? "Criar Anúncio" : "Editar Anúncio");
+        mToolbar.setTitle(dtoAnuncioOriginal == null ? "Criar Anúncio" : "Editar Anúncio");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(false);
@@ -89,7 +91,7 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
         AppCompatButton btnEditarAnuncio = (AppCompatButton) findViewById(R.id.btn_editar_anuncio);
         btnEditarAnuncio.setOnClickListener(this);
 
-        if (dtoAnuncio != null) {
+        if (dtoAnuncioOriginal != null) {
             btnEditarAnuncio.setVisibility(View.VISIBLE);
 
             // Pegando os campos da tela
@@ -99,17 +101,17 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
             TextInputEditText descricaoAnuncio = (TextInputEditText) findViewById(R.id.descricao_anuncio);
 
             // Preenchendo os dados conforme dto (Edição)
-            tituloAnuncio.setText(dtoAnuncio.getTitulo());
+            tituloAnuncio.setText(dtoAnuncioOriginal.getTitulo());
 
             //Categoria não pode preencher aqui pois pode não ter terminado a thread de buscar a lista
 
-            cidadeAnuncio.setText(dtoAnuncio.getLocalizacao().getCidade());
+            cidadeAnuncio.setText(dtoAnuncioOriginal.getLocalizacao().getCidade());
 
-            int posicaoEstado = new EstadoUtils().getPositionByUf(dtoAnuncio.getLocalizacao().getEstado());
+            int posicaoEstado = new EstadoUtils().getPositionByUf(dtoAnuncioOriginal.getLocalizacao().getEstado());
             estadoAnuncio.setSelection(posicaoEstado);
             ufSelecionada = estadoUtils.get(posicaoEstado).getUf();
 
-            descricaoAnuncio.setText(dtoAnuncio.getDescricao());
+            descricaoAnuncio.setText(dtoAnuncioOriginal.getDescricao());
         } else {
             btnCadastrarAnuncio.setVisibility(View.VISIBLE);
         }
@@ -162,9 +164,9 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
                 }
                 categoriaSpinner.setItemsArray(CategoriaUtils.getNamesByList(listDtoCategoria));
 
-                if (dtoAnuncio != null && dtoAnuncio.getCategoria() != null) {
-                    categoriaSpinner.setSelection(CategoriaUtils.getPositionById(listDtoCategoria, dtoAnuncio.getCategoria().getId()));
-                    categoriaSelecionada = dtoAnuncio.getCategoria().getId();
+                if (dtoAnuncioOriginal != null && dtoAnuncioOriginal.getCategoria() != null) {
+                    categoriaSpinner.setSelection(CategoriaUtils.getPositionById(listDtoCategoria, dtoAnuncioOriginal.getCategoria().getId()));
+                    categoriaSelecionada = dtoAnuncioOriginal.getCategoria().getId();
                 }
             }
 
@@ -175,9 +177,7 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
             }
         });
 
-        Map<String, String> filtro = new HashMap<>();
-        filtro.put("status", "1"); // Categorias ativas
-        mAsyncTaskListaCategoria.execute(filtro);
+        mAsyncTaskListaCategoria.execute();
     }
 
     private void cadastrarAnuncio() {
@@ -186,7 +186,13 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
             return;
         }
 
-        preencheDto(dtoAnuncio);
+        if (sharedpreferences.getInt("anunciante", 0) == 0 || sharedpreferences.getInt("id", 0) == 0) {
+            Toast.makeText(getApplicationContext(), "O usuário conectado não possui permissão para cadastrar anúncios. Reconecte por favor.", Toast.LENGTH_LONG).show();
+            MainActivity.logout(AnuncioActivity.this);
+            return;
+        }
+
+        DtoAnuncio dtoAnuncio = preencheDto();
 
         mAsyncTaskAnuncio = new AsyncTaskAnuncio();
         mAsyncTaskAnuncio.setAsyncTaskListener(new AsyncTaskListener() {
@@ -224,7 +230,13 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
             return;
         }
 
-        preencheDto(dtoAnuncio);
+        if (sharedpreferences.getInt("anunciante", 0) == 0 || sharedpreferences.getInt("id", 0) == 0) {
+            Toast.makeText(getApplicationContext(), "O usuário conectado não possui permissão para editar esse anúncio. Reconecte por favor.", Toast.LENGTH_LONG).show();
+            MainActivity.logout(AnuncioActivity.this);
+            return;
+        }
+
+        DtoAnuncio dtoAnuncio = preencheDto();
 
         mAsyncTaskAnuncio = new AsyncTaskAnuncio();
         mAsyncTaskAnuncio.setAsyncTaskListener(new AsyncTaskListener() {
@@ -239,9 +251,10 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
             public <T> void onComplete(T obj) {
                 progress.dismiss();
 
+                Toast.makeText(AnuncioActivity.this, "Anúncio editado com sucesso.", Toast.LENGTH_SHORT);
+
                 Intent intent = new Intent(activity, AnuncioDetalharActivity.class);
-                // TODO: Após arrumar lógicas dessa tela, verificar necessidade de passar o dtoAnuncio ao invés do id
-                intent.putExtra("id", dtoAnuncio.getId());
+                intent.putExtra("id", dtoAnuncioOriginal.getId());
                 intent.putExtra("backMeusAnuncios", true);
                 startActivity(intent);
                 finish();
@@ -268,10 +281,8 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
         return true;
     }
 
-    private void preencheDto(DtoAnuncio dto) {
-        if (dto == null) {
-            dto = new DtoAnuncio();
-        }
+    private DtoAnuncio preencheDto() {
+        DtoAnuncio dto = new DtoAnuncio();
 
         dto.setTitulo(((TextInputEditText) findViewById(R.id.titulo_anuncio)).getText().toString().trim());
 
@@ -287,11 +298,13 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
         dto.setDescricao(((TextInputEditText) findViewById(R.id.descricao_anuncio)).getText().toString().trim());
 
         DtoAnunciante dtoAnunciante = new DtoAnunciante();
-        dtoAnunciante.setId(1); // TODO: sharedpreferences.getInt("id", 0) = Aqui está pegando o id do Usuário, deve ser do Anunciante
+        dtoAnunciante.setId(sharedpreferences.getInt("anunciante", 0));
         DtoUsuario dtoUsuario = new DtoUsuario();
-        dtoUsuario.setId(1);
+        dtoUsuario.setId(sharedpreferences.getInt("id", 0));
         dtoAnunciante.setUsuario(dtoUsuario);
         dto.setAnunciante(dtoAnunciante);
+
+        return dto;
     }
 
     @Override

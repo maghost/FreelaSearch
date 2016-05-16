@@ -33,6 +33,8 @@ public class InscricaoDetalharActivity extends AppCompatActivity implements View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anuncio_detalhar);
 
+        // TODO: ATUALIZAR ESSA CLASSE QUANDO FOR COMEÇAR A MEXER, PEGAR O "ANUNCIO  DETALHAR" COMO EXEMPLO
+
         if (getIntent() != null && getIntent().getExtras() != null && getIntent().getExtras().getSerializable("anuncio") != null) {
             anuncio = (DtoAnuncio) getIntent().getExtras().getSerializable("anuncio");
         } else {
@@ -90,18 +92,12 @@ public class InscricaoDetalharActivity extends AppCompatActivity implements View
         // Lógicas para exibir ou ocultar botões/funcionaldades
         SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         if (sharedpreferences.getInt("id", 0) != anuncio.getAnunciante().getUsuario().getId()) {
-            if (sharedpreferences.getString("perfil", "").equals("freelancer")) {
+            if (sharedpreferences.getInt("freelancer", 0) != 0) {
                 btnInscrever.setVisibility(View.VISIBLE);
-                btnLogarFreelancer.setVisibility(View.GONE);
-                fab.setVisibility(View.GONE);
             } else {
-                btnInscrever.setVisibility(View.GONE);
                 btnLogarFreelancer.setVisibility(View.VISIBLE);
-                fab.setVisibility(View.GONE);
             }
         } else {
-            btnInscrever.setVisibility(View.GONE);
-            btnLogarFreelancer.setVisibility(View.GONE);
             fab.setVisibility(View.VISIBLE);
         }
     }

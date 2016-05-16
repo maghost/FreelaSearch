@@ -27,18 +27,6 @@ public class ServicoCategoria {
 		return CategoriaConverter.domainToDto(categoria);
 	}
 
-	// TODO: Tentar fazer igual o buscarParams do IntegraDados
-	public List<DtoCategoria> buscarLista(FiltroCategoria filtro) {
-		List<Categoria> categorias = categoriaDao.findByFiltro(filtro);
-		List<DtoCategoria> listaDtoCategoria = new ArrayList<DtoCategoria>();
-
-		for (Categoria categoria : categorias) {
-			listaDtoCategoria.add(CategoriaConverter.domainToDto(categoria));
-		}
-
-		return listaDtoCategoria;
-	}
-
 	public List<DtoCategoria> buscarLista() {
 		List<Categoria> categorias = categoriaDao.findAll();
 		List<DtoCategoria> listaDtoCategoria = new ArrayList<DtoCategoria>();

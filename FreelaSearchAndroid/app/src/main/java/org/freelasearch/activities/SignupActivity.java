@@ -55,6 +55,7 @@ public class SignupActivity extends AppCompatActivity implements TarefaInterface
         }
 
         if (obj instanceof DtoUsuario) {
+            // TODO: Arrumar esse método também, deve conter o id do usuário e sua foto
             SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedpreferences.edit();
             editor.putString("nome", ((DtoUsuario) obj).getNome());

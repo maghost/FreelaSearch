@@ -39,10 +39,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         // Dependendo do perfil o item exibido é diferente
         SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        if (sharedpreferences.getString("perfil", "").equals("anunciante")) {
-            findViewById(R.id.txt_anuncio).setVisibility(View.GONE);
+        if (sharedpreferences.getInt("anunciante", 0) == 0) {
+            findViewById(R.id.txt_anuncio).setVisibility(View.VISIBLE);
         } else {
-            findViewById(R.id.txt_freelancer).setVisibility(View.GONE);
+            findViewById(R.id.txt_freelancer).setVisibility(View.VISIBLE);
         }
 
         // Colocando e pintando os icones (drawable) do EditText (por tag não funcionou)

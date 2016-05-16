@@ -18,28 +18,6 @@ public class ServicoUsuario {
 		usuarioDao = DaoFactory.usuarioInstance();
 	}
 
-	public Usuario montarBean(DtoUsuario dto) {
-		Usuario usuario = new Usuario();
-		usuario.setId(dto.getId());
-		usuario.setNome(dto.getNome());
-		usuario.setEmail(dto.getEmail());
-		usuario.setSenha(dto.getSenha());
-
-		return usuario;
-	}
-
-	public DtoUsuario montarDto(Integer id) {
-		Usuario usuario = usuarioDao.findById(id);
-		DtoUsuario dto = new DtoUsuario();
-
-		dto.setId(usuario.getId());
-		dto.setNome(usuario.getNome());
-		dto.setEmail(usuario.getEmail());
-		dto.setSenha(usuario.getSenha());
-
-		return dto;
-	}
-
 	public void salvar(Usuario usuario) {
 		if (usuario.getId() == null) {
 			List<Usuario> listaPorEmail = usuarioDao.findByEmail(usuario.getEmail());
@@ -95,8 +73,35 @@ public class ServicoUsuario {
 		return dto;
 	}
 
+	public Usuario loginOrRegisterFacebook(Usuario usuario) {
+		List<Usuario> listaPorEmail = usuarioDao.findByEmail(usuario.getEmail());
+
+		if (listaPorEmail.size() == 0) {
+			usuarioDao.save(usuario);
+			return usuario;
+		} else {
+			Usuario usuarioAtualizado = listaPorEmail.get(0);
+
+			if (usuarioAtualizado.getEmail().equals(usuario.getEmail()) && usuarioAtualizado.getNome().equals(usuario.getNome())
+					&& usuarioAtualizado.getFoto().equals(usuario.getFoto())) {
+				return usuarioAtualizado;
+			}
+
+			usuarioAtualizado.setEmail(usuario.getEmail());
+			usuarioAtualizado.setNome(usuario.getNome());
+			usuarioAtualizado.setFoto(usuario.getFoto());
+
+			usuarioDao.update(usuarioAtualizado);
+			return usuarioAtualizado;
+		}
+	}
+
 	public DtoUsuario buscar(FiltroUsuario filtro) {
 		return UsuarioConverter.domainToDto(usuarioDao.findByFiltro(filtro));
+	}
+
+	public Usuario buscarDomain(FiltroUsuario filtro) {
+		return usuarioDao.findByFiltro(filtro);
 	}
 
 }

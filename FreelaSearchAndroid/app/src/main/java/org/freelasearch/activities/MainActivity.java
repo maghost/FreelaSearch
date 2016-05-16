@@ -1,5 +1,6 @@
 package org.freelasearch.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +13,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -23,18 +23,11 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
-import org.apache.commons.lang3.StringUtils;
 import org.freelasearch.R;
-import org.freelasearch.dtos.DtoUsuario;
 import org.freelasearch.fragments.MainFragment;
 import org.freelasearch.fragments.MeusAnunciosFragment;
 import org.freelasearch.fragments.MinhasInscricoesFragment;
 import org.freelasearch.fragments.TabAnunciosFragment;
-import org.freelasearch.tasks.AsyncTaskListener;
-import org.freelasearch.tasks.impl.AsyncTaskUsuario;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -51,22 +44,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Verifica se está logado
         sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        boolean loggedByApplication = !sharedpreferences.getString("email", "").equals("");
+        boolean loggedInApplication = sharedpreferences.getInt("id", 0) != 0;
 
-        if (!loggedByApplication) {
-            logout();
+        if (!loggedInApplication) {
+            logout(this);
+            return;
         }
 
-        if (sharedpreferences.getString("perfil", "").equals("")) {
+        // Verifica se selecionou o Perfil
+        if (sharedpreferences.getInt("freelancer", 0) == 0 && sharedpreferences.getInt("anunciante", 0) == 0) {
             startActivity(PerfisActivity.class);
             finish();
-        }
-
-        if (sharedpreferences.getInt("id", 0) == 0) {
-            // Para o caso de estar logado via facebook e não tenha id nas etapas anteriores
-            // Futuramente deverá ser alterada a lógica do login pelo facebook para logar apenas depois
-            // de cadastrar online
-            setUserIdByEmail(sharedpreferences.getString("email", ""));
+            return;
         }
 
         MainFragment fragment = new MainFragment();
@@ -99,7 +88,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         TextView tvPerfilLogado = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tv_perfil_logado);
-        tvPerfilLogado.setText("Você está logado com o perfil de " + StringUtils.capitalize(sharedpreferences.getString("perfil", "")));
+        String perfil = sharedpreferences.getInt("freelancer", 0) == 0 ? "Anunciante" : "Freelancer";
+        tvPerfilLogado.setText("Você está logado com o perfil de " + perfil);
 
         navigationView.setNavigationItemSelectedListener(this);
         hideItem();
@@ -177,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(SettingsActivity.class);
             return false;
         } else if (id == R.id.nav_logout) {
-            logout();
+            logout(this);
             return false;
         } else {
             setToolbarTitle(R.string.title_main_fragment);
@@ -194,13 +184,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void logout() {
-        Intent intent = new Intent(this, WelcomeActivity.class);
-        startActivity(intent);
-        finish();
+    public static void logout(Activity activity) {
+        Intent intent = new Intent(activity, WelcomeActivity.class);
+        activity.startActivity(intent);
+        activity.finish();
 
-        if (sharedpreferences != null) {
-            SharedPreferences.Editor editor = sharedpreferences.edit();
+        SharedPreferences mSharedpreferences = activity.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        if (mSharedpreferences != null) {
+            SharedPreferences.Editor editor = mSharedpreferences.edit();
             editor.clear();
             editor.commit();
         }
@@ -221,46 +212,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void hideItem() {
         if (navigationView != null && sharedpreferences != null) {
             Menu navMenu = navigationView.getMenu();
-            if (sharedpreferences.getString("perfil", "").equals("anunciante")) {
-                navMenu.findItem(R.id.nav_minhas_inscricoes).setVisible(false);
+            if (sharedpreferences.getInt("freelancer", 0) != 0) {
+                navMenu.findItem(R.id.nav_minhas_inscricoes).setVisible(true);
             } else {
-                navMenu.findItem(R.id.nav_meus_anuncios).setVisible(false);
+                navMenu.findItem(R.id.nav_meus_anuncios).setVisible(true);
             }
         }
-    }
-
-    private void setUserIdByEmail(String email) {
-
-        AsyncTaskUsuario mAsyncTaskUsuario = new AsyncTaskUsuario();
-        mAsyncTaskUsuario.setAsyncTaskListener(new AsyncTaskListener() {
-            @Override
-            public void onPreExecute() {
-            }
-
-            @Override
-            public <T> void onComplete(T obj) {
-                if (obj != null) {
-                    DtoUsuario dtoUsuario = (DtoUsuario) obj;
-
-                    SharedPreferences.Editor editor = sharedpreferences.edit();
-                    editor.putInt("id", dtoUsuario.getId());
-                    editor.putString("nome", dtoUsuario.getNome());
-                    editor.putString("email", dtoUsuario.getEmail());
-                    editor.putString("profile_pic", dtoUsuario.getUrlFoto());
-                    editor.commit();
-                } else {
-                    Log.e("ERRO", "Retorno nulo.");
-                }
-            }
-
-            @Override
-            public void onError(String errorMsg) {
-                Log.e("ERRO", errorMsg);
-            }
-        });
-
-        Map<String, String> filtro = new HashMap<>();
-        filtro.put("email", email);
-        mAsyncTaskUsuario.execute(filtro);
     }
 }

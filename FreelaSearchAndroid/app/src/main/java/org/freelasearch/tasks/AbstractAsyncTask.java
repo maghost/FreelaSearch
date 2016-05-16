@@ -2,6 +2,8 @@ package org.freelasearch.tasks;
 
 import android.os.AsyncTask;
 
+import org.freelasearch.R;
+
 import java.io.IOException;
 
 public abstract class AbstractAsyncTask<E, S> extends AsyncTask<E, String, S> {

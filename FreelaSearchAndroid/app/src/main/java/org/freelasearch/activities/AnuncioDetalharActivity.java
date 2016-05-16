@@ -19,11 +19,9 @@ import com.squareup.picasso.Picasso;
 
 import org.freelasearch.R;
 import org.freelasearch.dtos.DtoAnuncio;
-import org.freelasearch.fragments.MeusAnunciosFragment;
 import org.freelasearch.tasks.AsyncTaskListener;
 import org.freelasearch.tasks.impl.AsyncTaskListaAnuncio;
 import org.freelasearch.utils.EstadoUtils;
-import org.freelasearch.utils.RoundedCornersTransformation;
 
 import java.util.Collections;
 import java.util.List;
@@ -144,13 +142,13 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
             // Lógicas para exibir ou ocultar botões/funcionaldades
             SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
             if (sharedpreferences.getInt("id", 0) != anuncio.getAnunciante().getUsuario().getId()) {
-                if (sharedpreferences.getString("perfil", "").equals("freelancer")) {
+                if (sharedpreferences.getInt("freelancer", 0) != 0) {
                     btnInscrever.setVisibility(View.VISIBLE);
                 } else {
                     llLogarFreelancer.setVisibility(View.VISIBLE);
                 }
             } else {
-                if (sharedpreferences.getString("perfil", "").equals("freelancer")) {
+                if (sharedpreferences.getInt("anunciante", 0) == 0) {
                     btnLogarAnunciante.setVisibility(View.VISIBLE);
 
                     fab.setOnClickListener(new View.OnClickListener() {
