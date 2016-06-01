@@ -3,6 +3,7 @@ package org.freelasearch.entities;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,6 +31,7 @@ public class Anuncio extends BaseBean {
 
 	private Date data;
 
+	@Column(columnDefinition = "TINYINT")
 	private Integer status;
 
 	private String cidade;

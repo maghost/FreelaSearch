@@ -23,11 +23,11 @@
 	</appender>
 
 	<logger name="org.freelasearch">
-		<level value="debug" />
+		<level value="warn" />
 	</logger>
 
 	<logger name="org.hibernate">
-		<level value="debug" />
+		<level value="warn" />
 	</logger>
 
 	<logger name="org.jboss">

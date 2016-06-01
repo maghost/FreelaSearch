@@ -27,25 +27,28 @@ public class Mensagem extends BaseBean {
 	@Column(name = "data_envio")
 	private Date dataEnvio;
 
-	@OneToOne
-	@JoinColumn(name = "chat_id")
-	private Chat chat;
+	@Column(columnDefinition = "TINYINT")
+	private Integer status;
 
 	@OneToOne
-	@JoinColumn(name = "usuario_id")
-	private Usuario usuario;
+	@JoinColumn(name = "usuario_id_enviado_por")
+	private Usuario usuarioRemetente;
+
+	@OneToOne
+	@JoinColumn(name = "usuario_id_recebido_por")
+	private Usuario usuarioDestinatario;
 
 	public Mensagem() {
 		super();
 	}
 
-	public Mensagem(Integer id, String conteudo, Date dataEnvio, Chat chat, Usuario usuario) {
+	public Mensagem(Integer id, String conteudo, Date dataEnvio, Usuario usuarioRemetente, Usuario usuarioDestinatario) {
 		super();
 		this.id = id;
 		this.conteudo = conteudo;
 		this.dataEnvio = dataEnvio;
-		this.chat = chat;
-		this.usuario = usuario;
+		this.usuarioRemetente = usuarioRemetente;
+		this.usuarioDestinatario = usuarioDestinatario;
 	}
 
 	public Integer getId() {
@@ -72,25 +75,33 @@ public class Mensagem extends BaseBean {
 		this.dataEnvio = dataEnvio;
 	}
 
-	public Chat getChat() {
-		return chat;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setChat(Chat chat) {
-		this.chat = chat;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Usuario getUsuarioRemetente() {
+		return usuarioRemetente;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuarioRemetente(Usuario usuarioRemetente) {
+		this.usuarioRemetente = usuarioRemetente;
+	}
+
+	public Usuario getUsuarioDestinatario() {
+		return usuarioDestinatario;
+	}
+
+	public void setUsuarioDestinatario(Usuario usuarioDestinatario) {
+		this.usuarioDestinatario = usuarioDestinatario;
 	}
 
 	@Override
 	public String toString() {
-		return "Mensagem [id=" + id + ", conteudo=" + conteudo + ", dataEnvio=" + dataEnvio + ", chat=" + chat + ", usuario=" + usuario + "]";
+		return "Mensagem [id=" + id + ", conteudo=" + conteudo + ", dataEnvio=" + dataEnvio + ", status=" + status + ", usuarioRemetente=" + usuarioRemetente + ", usuarioDestinatario=" + usuarioDestinatario + "]";
 	}
 
 }

@@ -7,7 +7,6 @@ import org.freelasearch.dao.AnuncianteDao;
 import org.freelasearch.dao.AnuncioDao;
 import org.freelasearch.dao.AvaliacaoDao;
 import org.freelasearch.dao.CategoriaDao;
-import org.freelasearch.dao.ChatDao;
 import org.freelasearch.dao.ContratacaoDao;
 import org.freelasearch.dao.FreelancerDao;
 import org.freelasearch.dao.InscricaoDao;
@@ -89,20 +88,6 @@ public final class DaoFactory {
 		}
 
 		return categoriaDaoInstance;
-	}
-
-	// /////////////////////////////////////////////////////////////////
-	// CHAT
-	// /////////////////////////////////////////////////////////////////
-
-	private static ChatDao chatDaoInstance;
-
-	public static ChatDao chatInstance() {
-		if (chatDaoInstance == null) {
-			chatDaoInstance = new ChatDao();
-		}
-
-		return chatDaoInstance;
 	}
 
 	// /////////////////////////////////////////////////////////////////

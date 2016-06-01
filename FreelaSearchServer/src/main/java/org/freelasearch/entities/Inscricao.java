@@ -33,19 +33,19 @@ public class Inscricao extends BaseBean {
 	@Column(name = "data_inscricao")
 	private Date dataInscricao;
 
-	@Column(name = "status_inscricao")
-	private Boolean inscricaoAceita;
+	@Column(name = "status_inscricao", columnDefinition = "TINYINT")
+	private Integer statusInscricao;
 
 	public Inscricao() {
 	}
 
-	public Inscricao(Integer id, Anuncio anuncio, Freelancer inscrito, Date dataInscricao, Boolean inscricaoAceita) {
+	public Inscricao(Integer id, Anuncio anuncio, Freelancer inscrito, Date dataInscricao, Integer inscricaoAceita) {
 		super();
 		this.id = id;
 		this.anuncio = anuncio;
 		this.inscrito = inscrito;
 		this.dataInscricao = dataInscricao;
-		this.inscricaoAceita = inscricaoAceita;
+		this.statusInscricao = inscricaoAceita;
 	}
 
 	public Integer getId() {
@@ -80,17 +80,17 @@ public class Inscricao extends BaseBean {
 		this.dataInscricao = dataInscricao;
 	}
 
-	public Boolean getInscricaoAceita() {
-		return inscricaoAceita;
+	public Integer getInscricaoAceita() {
+		return statusInscricao;
 	}
 
-	public void setInscricaoAceita(Boolean inscricaoAceita) {
-		this.inscricaoAceita = inscricaoAceita;
+	public void setStatusInscricao(Integer statusInscricao) {
+		this.statusInscricao = statusInscricao;
 	}
 
 	@Override
 	public String toString() {
-		return "Inscricao [id=" + id + ", anuncio=" + anuncio + ", inscrito=" + inscrito + ", dataInscricao=" + dataInscricao + ", inscricaoAceita=" + inscricaoAceita + "]";
+		return "Inscricao [id=" + id + ", anuncio=" + anuncio + ", inscrito=" + inscrito + ", dataInscricao=" + dataInscricao + ", inscricaoAceita=" + statusInscricao + "]";
 	}
 
 }
