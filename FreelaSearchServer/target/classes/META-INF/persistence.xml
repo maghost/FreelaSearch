@@ -9,13 +9,15 @@
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.25.9:3306/freelasearch" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://freelasearch.cxvasrhmvvwl.sa-east-1.rds.amazonaws.com:3306/freelasearch" />
 			<property name="javax.persistence.jdbc.user" value="matheus" />
-			<property name="javax.persistence.jdbc.password" value="matheus" />
+			<property name="javax.persistence.jdbc.password" value="matheusmaghost" />
 
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="false" />
 			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.default_schema" value="freelasearch"/>
+			<property name="dialect" value="org.hibernate.dialect.MySQLInnoDBDialect" />
 		</properties>
 	</persistence-unit>
 </persistence>

@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import org.freelasearch.utils.BaseBean;
 
 @Entity
-@Table
+@Table(name = "categoria")
 public class Categoria extends BaseBean {
 
 	private static final long serialVersionUID = 4342587652955065735L;

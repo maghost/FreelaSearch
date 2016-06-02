@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import org.freelasearch.utils.BaseBean;
 
 @Entity
-@Table
+@Table(name = "contratacao")
 public class Contratacao extends BaseBean {
 
 	private static final long serialVersionUID = -409675274366548532L;
