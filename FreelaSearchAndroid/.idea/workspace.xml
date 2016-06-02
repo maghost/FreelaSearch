@@ -61,26 +61,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8cdacd2-62e9-4375-92f2-c74644a1a1aa" name="Default" comment="Ajustes nas imagens de perfil, estava dando problema de memória. Coloquei para que a biblioteca Picasso carregue.">
-      <change type="MOVED" beforePath="C:\workspace\FreelaSearch\FreelaSearchAndroid\.idea\libraries\cardview_v7_23_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/cardview_v7_23_4_0.xml" />
-      <change type="MOVED" beforePath="C:\workspace\FreelaSearch\FreelaSearchAndroid\.idea\libraries\customtabs_23_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/customtabs_23_4_0.xml" />
-      <change type="MOVED" beforePath="C:\workspace\FreelaSearch\FreelaSearchAndroid\.idea\libraries\facebook_android_sdk_4_11_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/facebook_android_sdk_4_12_1.xml" />
-      <change type="MOVED" beforePath="C:\workspace\FreelaSearch\FreelaSearchAndroid\.idea\libraries\support_annotations_23_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_4_0.xml" />
-      <change type="MOVED" beforePath="C:\workspace\FreelaSearch\FreelaSearchAndroid\.idea\libraries\support_v4_23_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_23_4_0.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../freelasearch-dtos-1.0.jar" afterPath="$PROJECT_DIR$/../freelasearch-dtos-1.0.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchDtos/bin/.gitignore" afterPath="$PROJECT_DIR$/../FreelaSearchDtos/bin/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/service/AbstractService.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/service/AbstractService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/AnuncioActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/AnuncioActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/src/main/java/org/freelasearch/converters/AnuncioConverter.java" afterPath="$PROJECT_DIR$/../FreelaSearchServer/src/main/java/org/freelasearch/converters/AnuncioConverter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchDtos/src/org/freelasearch/dtos/DtoAnuncio.java" afterPath="$PROJECT_DIR$/../FreelaSearchDtos/src/org/freelasearch/dtos/DtoAnuncio.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FreelaSearchServer/src/main/webapp/index.jsp" afterPath="$PROJECT_DIR$/../FreelaSearchServer/src/main/webapp/index.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/AnuncioDetalharActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/AnuncioDetalharActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="cae2e721-8ac8-43ad-b769-9008b546213f" name="Rejected commit: Default" comment="Ajustes na toolbar" />
@@ -112,24 +97,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AnuncioActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/AnuncioActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37823835">
-              <caret line="300" column="9" selection-start-line="300" selection-start-column="9" selection-end-line="300" selection-end-column="9" />
-              <folding>
-                <element signature="e#2660#2809#0" expanded="true" />
-                <element signature="e#2808#2809#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AnuncioAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/adapters/AnuncioAdapter.java">
+      <file leaf-file-name="AnuncioDetalharActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/AnuncioDetalharActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="82" column="12" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="12" />
+              <caret line="137" column="54" selection-start-line="137" selection-start-column="54" selection-end-line="137" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -137,16 +109,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MeusAnunciosFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/fragments/MeusAnunciosFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
+      <file leaf-file-name="activity_anuncio.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_anuncio.xml">
+          <provider editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="129" column="47" selection-start-line="129" selection-start-column="47" selection-end-line="129" selection-end-column="47" />
-              <folding>
-                <element signature="e#2079#2319#0" expanded="true" />
-                <element signature="e#2318#2319#0" expanded="true" />
-              </folding>
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -1752,14 +1724,12 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/PerfisActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/service/AnuncianteService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/service/FreelancerService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_anuncio_detalhar.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/fragments/TabAnunciosFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/fragments/AnunciosFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/tasks/impl/AsyncTaskUsuario.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/SignupActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_welcome.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/AnuncioDetalharActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/service/UsuarioService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/tasks/impl/AsyncTaskCadastrarUsuario.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/tasks/impl/AsyncTaskFacebookUsuario.java" />
@@ -1769,6 +1739,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/adapters/AnuncioAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/WelcomeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/AnuncioActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_anuncio_detalhar.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/AnuncioDetalharActivity.java" />
       </list>
     </option>
   </component>
@@ -1903,7 +1875,7 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
-    <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.SHOW" value="false" />
+    <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.SHOW" value="true" />
     <property name="restartRequiresConfirmation" value="true" />
   </component>
   <component name="RecentsManager">
@@ -2271,6 +2243,7 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.5322196" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2290,14 +2263,13 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14983974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19172633" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19172633" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31897926" sideWeight="0.47486034" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.3293556" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="157" y="92" width="1117" height="584" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39872408" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2423,11 +2395,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/logo.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/logo_white.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -2495,19 +2462,6 @@
           <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_anuncio_detalhar.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.3521128">
-          <caret line="132" column="41" selection-start-line="132" selection-start-column="41" selection-end-line="132" selection-end-column="41" />
-          <folding>
-            <element signature="e#6603#6625#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/tasks/AsyncTaskListener.java">
@@ -2752,8 +2706,8 @@
         <state vertical-scroll-proportion="0.6369048">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
-            <element signature="e#427#428#0" expanded="true" />
-            <element signature="e#466#467#0" expanded="true" />
+            <element signature="e#427#428#0" expanded="false" />
+            <element signature="e#466#467#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2779,16 +2733,6 @@
         <state vertical-scroll-proportion="0.39285713">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/AnuncioDetalharActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4532374">
-          <caret line="165" column="50" selection-start-line="165" selection-start-column="50" selection-end-line="165" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2823,15 +2767,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_anuncio_detalhar.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14285715">
+          <caret line="129" column="34" selection-start-line="129" selection-start-column="34" selection-end-line="129" selection-end-column="34" />
+          <folding>
+            <element signature="e#2792#2813#0" expanded="true" />
+            <element signature="e#2858#2880#0" expanded="true" />
+            <element signature="e#2926#2948#0" expanded="true" />
+            <element signature="e#3427#3449#0" expanded="true" />
+            <element signature="e#4605#4626#0" expanded="true" />
+            <element signature="e#5573#5595#0" expanded="true" />
+            <element signature="e#6047#6080#0" expanded="true" />
+            <element signature="e#6117#6152#0" expanded="true" />
+            <element signature="e#6190#6225#0" expanded="true" />
+            <element signature="e#6261#6294#0" expanded="true" />
+            <element signature="e#6535#6557#0" expanded="true" />
+            <element signature="e#6603#6625#0" expanded="true" />
+            <element signature="e#7735#7757#0" expanded="true" />
+            <element signature="e#7857#7880#0" expanded="true" />
+            <element signature="e#8364#8386#0" expanded="true" />
+            <element signature="e#8478#8501#0" expanded="true" />
+            <element signature="e#8985#9007#0" expanded="true" />
+            <element signature="e#9099#9122#0" expanded="true" />
+            <element signature="e#9156#9178#0" expanded="true" />
+            <element signature="e#9602#9621#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/AnuncioActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37823835">
+        <state vertical-scroll-proportion="0.6917098">
           <caret line="300" column="9" selection-start-line="300" selection-start-column="9" selection-end-line="300" selection-end-column="9" />
           <folding>
             <element signature="e#2660#2809#0" expanded="true" />
             <element signature="e#2808#2809#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/freelasearch/activities/AnuncioDetalharActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="137" column="54" selection-start-line="137" selection-start-column="54" selection-end-line="137" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_anuncio.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
   </component>

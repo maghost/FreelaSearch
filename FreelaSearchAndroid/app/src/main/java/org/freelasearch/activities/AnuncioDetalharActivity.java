@@ -133,41 +133,45 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
 
             tvDescricao.setText(anuncio.getDescricao());
 
-            btnInscrever.setOnClickListener(this);
+            // Se anúncio não for inativo (status != 1) deve mostrar algum botão de ação
+            if (anuncio.getStatus() != 1) {
+                btnInscrever.setOnClickListener(this);
 
-            btnLogarFreelancer.setOnClickListener(this);
+                btnLogarFreelancer.setOnClickListener(this);
 
-            btnLogarAnunciante.setOnClickListener(this);
+                btnLogarAnunciante.setOnClickListener(this);
 
-            // Lógicas para exibir ou ocultar botões/funcionaldades
-            SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-            if (sharedpreferences.getInt("id", 0) != anuncio.getAnunciante().getUsuario().getId()) {
-                if (sharedpreferences.getInt("freelancer", 0) != 0) {
-                    btnInscrever.setVisibility(View.VISIBLE);
+                // Lógicas para exibir ou ocultar botões/funcionaldades
+
+                SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+                if (sharedpreferences.getInt("id", 0) != anuncio.getAnunciante().getUsuario().getId()) {
+                    if (sharedpreferences.getInt("freelancer", 0) != 0) {
+                        btnInscrever.setVisibility(View.VISIBLE);
+                    } else {
+                        llLogarFreelancer.setVisibility(View.VISIBLE);
+                    }
                 } else {
-                    llLogarFreelancer.setVisibility(View.VISIBLE);
-                }
-            } else {
-                if (sharedpreferences.getInt("anunciante", 0) == 0) {
-                    btnLogarAnunciante.setVisibility(View.VISIBLE);
+                    if (sharedpreferences.getInt("anunciante", 0) == 0) {
+                        btnLogarAnunciante.setVisibility(View.VISIBLE);
 
-                    fab.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Snackbar.make(view, "Apenas com o perfil de anunciante é possível criar/editar anúncios", Snackbar.LENGTH_LONG).setAction("Ação não permitida", null).show();
-                        }
-                    });
-                } else {
-                    fab.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(context, AnuncioActivity.class);
-                            intent.putExtra("anuncio", anuncio);
-                            startActivity(intent);
-                        }
-                    });
+                        fab.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Snackbar.make(view, "Apenas com o perfil de anunciante é possível criar/editar anúncios", Snackbar.LENGTH_LONG).setAction("Ação não permitida", null).show();
+                            }
+                        });
+                    } else {
+                        fab.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(context, AnuncioActivity.class);
+                                intent.putExtra("anuncio", anuncio);
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                    fab.setVisibility(View.VISIBLE);
                 }
-                fab.setVisibility(View.VISIBLE);
             }
         }
     }
