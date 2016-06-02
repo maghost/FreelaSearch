@@ -45,7 +45,7 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
     private String ufSelecionada;
 
     private List<DtoCategoria> listDtoCategoria;
-    private Integer categoriaSelecionada;
+    private DtoCategoria categoriaSelecionada;
     private LabelledSpinner categoriaSpinner;
     private AsyncTaskListaCategoria mAsyncTaskListaCategoria;
 
@@ -124,7 +124,7 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
                 ufSelecionada = estadoUtils.get(position).getUf();
                 break;
             case R.id.categoria_anuncio:
-                categoriaSelecionada = listDtoCategoria.get(position).getId();
+                categoriaSelecionada = listDtoCategoria.get(position);
                 break;
         }
 
@@ -166,7 +166,7 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
 
                 if (dtoAnuncioOriginal != null && dtoAnuncioOriginal.getCategoria() != null) {
                     categoriaSpinner.setSelection(CategoriaUtils.getPositionById(listDtoCategoria, dtoAnuncioOriginal.getCategoria().getId()));
-                    categoriaSelecionada = dtoAnuncioOriginal.getCategoria().getId();
+                    categoriaSelecionada = dtoAnuncioOriginal.getCategoria();
                 }
             }
 
@@ -177,7 +177,7 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
             }
         });
 
-        mAsyncTaskListaCategoria.execute();
+        mAsyncTaskListaCategoria.execute((Void) null);
     }
 
     private void cadastrarAnuncio() {
@@ -282,13 +282,27 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
     }
 
     private DtoAnuncio preencheDto() {
-        DtoAnuncio dto = new DtoAnuncio();
+        DtoAnuncio dto;
+        if (dtoAnuncioOriginal != null) {
+            dto = dtoAnuncioOriginal;
+        } else {
+            dto = new DtoAnuncio();
+
+            // Só precisa setar o usuário quando é uma inclusão, caso contrário já estará preenchido no dtoAnuncioOriginal
+            DtoAnunciante dtoAnunciante = new DtoAnunciante();
+            dtoAnunciante.setId(sharedpreferences.getInt("anunciante", 0));
+            DtoUsuario dtoUsuario = new DtoUsuario();
+            dtoUsuario.setId(sharedpreferences.getInt("id", 0));
+            dtoUsuario.setNome(sharedpreferences.getString("nome", ""));
+            dtoUsuario.setEmail(sharedpreferences.getString("email", ""));
+            dtoUsuario.setUrlFoto(sharedpreferences.getString("profile_pic", ""));
+            dtoAnunciante.setUsuario(dtoUsuario);
+            dto.setAnunciante(dtoAnunciante);
+        }
 
         dto.setTitulo(((TextInputEditText) findViewById(R.id.titulo_anuncio)).getText().toString().trim());
 
-        DtoCategoria dtoCategoria = new DtoCategoria();
-        dtoCategoria.setId(categoriaSelecionada);
-        dto.setCategoria(dtoCategoria);
+        dto.setCategoria(categoriaSelecionada);
 
         DtoLocalizacao dtoLocalizacao = new DtoLocalizacao();
         dtoLocalizacao.setCidade(((TextInputEditText) findViewById(R.id.cidade_anuncio)).getText().toString().trim());
@@ -296,13 +310,6 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
         dto.setLocalizacao(dtoLocalizacao);
 
         dto.setDescricao(((TextInputEditText) findViewById(R.id.descricao_anuncio)).getText().toString().trim());
-
-        DtoAnunciante dtoAnunciante = new DtoAnunciante();
-        dtoAnunciante.setId(sharedpreferences.getInt("anunciante", 0));
-        DtoUsuario dtoUsuario = new DtoUsuario();
-        dtoUsuario.setId(sharedpreferences.getInt("id", 0));
-        dtoAnunciante.setUsuario(dtoUsuario);
-        dto.setAnunciante(dtoAnunciante);
 
         return dto;
     }

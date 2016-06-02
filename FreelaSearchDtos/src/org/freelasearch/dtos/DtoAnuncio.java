@@ -14,7 +14,7 @@ public class DtoAnuncio implements Serializable {
 	private DtoLocalizacao localizacao;
 	private DtoAnunciante anunciante;
 	private DtoCategoria categoria;
-	private boolean ativo;
+	private Integer status;
 
 	public Integer getId() {
 		return id;
@@ -72,12 +72,12 @@ public class DtoAnuncio implements Serializable {
 		this.categoria = categoria;
 	}
 
-	public boolean isAtivo() {
-		return ativo;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 }
