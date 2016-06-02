@@ -122,8 +122,10 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         if (anuncio != null) {
-            Picasso.with(this).load(anuncio.getAnunciante().getUsuario().getUrlFoto())
-                    .placeholder(R.drawable.default_profile).error(R.drawable.default_profile).fit().into(nhmAnunciante);
+            if (anuncio.getAnunciante().getUsuario().getUrlFoto() != null && !anuncio.getAnunciante().getUsuario().getUrlFoto().trim().isEmpty()) {
+                Picasso.with(this).load(anuncio.getAnunciante().getUsuario().getUrlFoto())
+                        .placeholder(R.drawable.default_profile).error(R.drawable.default_profile).fit().into(nhmAnunciante);
+            }
 
             tvTitulo.setText(anuncio.getTitulo());
 

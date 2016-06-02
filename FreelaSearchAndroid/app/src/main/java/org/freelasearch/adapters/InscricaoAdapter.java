@@ -49,7 +49,7 @@ public class InscricaoAdapter extends RecyclerView.Adapter<InscricaoAdapter.MyVi
                     transform(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.TOP_RIGHT)).
                     into(holder.nhmAnunciante);
         }*/
-        if (holder.nhmAnunciante != null) {
+        if (holder.nhmAnunciante != null && mList.get(position).getAnunciante().getUsuario().getUrlFoto() != null && !mList.get(position).getAnunciante().getUsuario().getUrlFoto().trim().isEmpty()) {
             Picasso.with(mContext).load(mList.get(position).getAnunciante().getUsuario().getUrlFoto())
                     .placeholder(R.drawable.default_profile).error(R.drawable.default_profile).fit().into(holder.nhmAnunciante);
         }

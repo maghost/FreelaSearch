@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextView nhm_email = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nhm_email);
         nhm_email.setText(sharedpreferences.getString("email", ""));
 
-        if (!sharedpreferences.getString("profile_pic", "").equals("")) {
+        if (!sharedpreferences.getString("profile_pic", "").trim().equals("")) {
             ImageView nhmProfileImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.nhm_profile_image);
             Picasso.with(this).load(sharedpreferences.getString("profile_pic", "")).placeholder(R.drawable.default_profile).error(R.drawable.default_profile).into(nhmProfileImage);
         }
