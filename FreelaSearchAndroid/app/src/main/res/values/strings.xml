@@ -10,6 +10,7 @@
     <string name="conectar">Conectar-se</string>
     <string name="conectar_facebook">Conectar-se pelo Facebook</string>
     <string name="configuracoes">Configurações</string>
+    <string name="contratacoes">Contratações</string>
     <string name="criar_conta">Criar Conta</string>
     <string name="dashboard">Dashboard</string>
     <string name="deseja_cadastrar">Ainda não possui uma conta? Cadastre-se.</string>
@@ -26,6 +27,7 @@
     <string name="ja_cadastrado">Já é cadastrado? Conecte-se.</string>
     <string name="location">Localização (Opcional)</string>
     <string name="logout">Logout</string>
+    <string name="mensagens">Mensagens</string>
     <string name="meus_anuncios">Meus Anúncios</string>
     <string name="minhas_inscricoes">Minhas Inscrições</string>
     <string name="navigation_drawer_open">Abrir Navigation Drawer</string>

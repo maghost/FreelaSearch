@@ -141,7 +141,9 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Você está logado como Anunciante, caso tenha se interessado pelo anúncio, por favor conecte-se como Freelancer para inscrever-se." />
+                        android:text="Você está logado como Anunciante,
+                        caso tenha se interessado pelo anúncio, por favor
+                        conecte-se como Freelancer para inscrever-se." />
 
                     <android.support.v7.widget.AppCompatButton
                         android:id="@+id/btn_logar_freelancer"

@@ -30,6 +30,16 @@
             android:tint="@color/icons"
             android:title="@string/minhas_inscricoes"
             android:visible="false" />
+        <item
+            android:id="@+id/nav_contratacoes"
+            android:icon="@drawable/ic_stars_24dp"
+            android:tint="@color/icons"
+            android:title="@string/contratacoes" />
+        <item
+            android:id="@+id/nav_mensagens"
+            android:icon="@drawable/ic_insert_comment_24dp"
+            android:tint="@color/icons"
+            android:title="@string/mensagens" />
     </group>
     <group>
         <item
