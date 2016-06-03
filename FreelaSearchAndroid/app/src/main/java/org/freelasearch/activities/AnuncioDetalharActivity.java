@@ -53,7 +53,6 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
     private AsyncTaskFreelancer mAsyncTaskFreelancer;
 
     private ProgressDialog progress;
-    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +88,6 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
             }
         });
 
-        email = sharedpreferences.getString("email", null);
-
         preencherTela();
     }
 
@@ -114,7 +111,7 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
         }
     }
 
-    public void buscarAnuncioPorId() {
+    private void buscarAnuncioPorId() {
         mAsyncTaskListaAnuncio = new AsyncTaskListaAnuncio();
         mAsyncTaskListaAnuncio.setAsyncTaskListener(new AsyncTaskListener() {
             @Override

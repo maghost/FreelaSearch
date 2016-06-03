@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- "Mark Favorite", should appear as action button if possible -->
+    <item
+        android:id="@+id/nav_avaliar"
+        android:icon="@drawable/ic_star_outline_24dp"
+        android:tint="@color/icons"
+        android:title="@string/avaliar"
+        app:showAsAction="ifRoom" />
+
+</menu>

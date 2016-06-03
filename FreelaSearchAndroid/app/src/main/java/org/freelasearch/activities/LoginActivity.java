@@ -58,6 +58,7 @@ public class LoginActivity extends AppCompatActivity implements TarefaInterface,
             editor.putInt("id", ((DtoUsuario) obj).getId());
             editor.putString("nome", ((DtoUsuario) obj).getNome());
             editor.putString("email", ((DtoUsuario) obj).getEmail());
+            editor.putString("profile_pic", ((DtoUsuario) obj).getUrlFoto());
             editor.commit();
 
             Intent activity = new Intent(this, MainActivity.class);

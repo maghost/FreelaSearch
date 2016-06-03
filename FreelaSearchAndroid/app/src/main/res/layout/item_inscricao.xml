@@ -12,7 +12,7 @@
         android:drawableLeft="@drawable/ic_book_open_page_variant"
         android:drawablePadding="@dimen/small_margin"
         android:singleLine="true"
-        android:text="Lorem Ipsum Dolor Amet"
+        android:text="Título"
         android:textColor="@color/accent"
         android:textSize="21sp" />
 
@@ -40,7 +40,7 @@
             android:layout_marginLeft="@dimen/small_margin"
             android:layout_toRightOf="@+id/nhm_anunciante"
             android:singleLine="true"
-            android:text="Título"
+            android:text="Anunciante"
             android:textColor="@color/accent"
             android:textSize="16sp" />
     </RelativeLayout>

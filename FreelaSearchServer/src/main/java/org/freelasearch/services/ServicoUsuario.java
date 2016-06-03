@@ -62,15 +62,7 @@ public class ServicoUsuario {
 			throw new ExceptionFreelaSearch("Nenhuma conta foi encontrada com o e-mail informado.");
 		}
 
-		Usuario usuario = listUsuario.get(0);
-
-		DtoUsuario dto = new DtoUsuario();
-		dto.setId(usuario.getId());
-		dto.setNome(usuario.getNome());
-		dto.setEmail(usuario.getEmail());
-		dto.setSenha(usuario.getSenha());
-
-		return dto;
+		return UsuarioConverter.domainToDto(listUsuario.get(0));
 	}
 
 	public Usuario loginOrRegisterFacebook(Usuario usuario) {

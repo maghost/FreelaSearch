@@ -1,12 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
+<items version="2" />
 
-    <item
-        jar="C:\workspace\FreelaSearch\freelasearch-dtos-1.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="8da9d3516a453669a16337f5fa70e3515d886c19">
-        <dex dex="C:\workspace\FreelaSearch\FreelaSearchAndroid\app\build\intermediates\pre-dexed\debug\freelasearch-dtos-1.0_b78dcbe33718f28d58ebc72e9f3aa81afd85078f.jar" />
-    </item>
-
-</items>

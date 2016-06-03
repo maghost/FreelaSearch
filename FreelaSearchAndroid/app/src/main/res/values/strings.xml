@@ -6,6 +6,7 @@
     <string name="anuncios_ativos">Ativos</string>
     <string name="anuncios_finalizados">Finalizados</string>
     <string name="app_name">FreelaSearch</string>
+    <string name="avaliar">Avaliar</string>
     <string name="cadastrar">Cadastrar-se</string>
     <string name="conectar">Conectar-se</string>
     <string name="conectar_facebook">Conectar-se pelo Facebook</string>
@@ -35,6 +36,7 @@
     <string name="nenhum_anuncio_encontrado">Nenhum anúncio foi encontrado.</string>
     <string name="nome">Nome</string>
     <string name="required_fields">Campo(s) obrigatório(s) não preenchido(s).</string>
+    <string name="resetar_senha">Resetar senha</string>
     <string name="senha">Senha</string>
     <string name="search_title">Pesquisar</string>
     <string name="search_hint">Pesquisar Vagas</string>

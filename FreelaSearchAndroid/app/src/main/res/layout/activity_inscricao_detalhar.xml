@@ -129,44 +129,7 @@
                     android:text="Descrição"
                     android:textSize="20sp" />
 
-                <!-- Entrar como Freelancer -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:value="Você está logado como Anunciante, caso tenha se interessado pelo anúncio,
-                por favor conecte-se como Freelancer para inscrever-se." />
-
-                <android.support.v7.widget.AppCompatButton
-                    android:id="@+id/btn_logar_freelancer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/medium_margin"
-                    android:background="@color/accent"
-                    android:padding="@dimen/padding_button"
-                    android:text="Visualizar como Freelancer"
-                    android:textColor="@color/icons" />
-
-                <!-- Inscrever-se Anúncio -->
-                <android.support.v7.widget.AppCompatButton
-                    android:id="@+id/btn_inscrever_se"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/medium_margin"
-                    android:background="@color/accent"
-                    android:padding="@dimen/padding_button"
-                    android:text="@string/inscrever_se"
-                    android:textColor="@color/icons" />
-
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_edit_24dp"
-        android:tint="@color/icons" />
 </android.support.design.widget.CoordinatorLayout>

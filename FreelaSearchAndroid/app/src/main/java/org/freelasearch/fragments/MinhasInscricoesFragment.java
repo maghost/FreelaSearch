@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,7 +36,6 @@ public class MinhasInscricoesFragment extends Fragment implements RecyclerViewOn
     private LinearLayoutManager mLayoutManager;
     private RecyclerViewOnClickListenerHack mRecyclerViewOnClickListenerHack = this;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private FloatingActionButton fab;
     private ImageView ivSemInscricao;
     private AsyncTaskListaInscricao mAsyncTaskListaInscricao;
 
