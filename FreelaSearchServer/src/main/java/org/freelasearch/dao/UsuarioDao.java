@@ -24,13 +24,6 @@ public class UsuarioDao extends GenericDao<Usuario, Integer> {
 		return usuarios;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Usuario> findLogin(String email) {
-		List<Usuario> usuarios = (List<Usuario>) this.executeQuery("SELECT u FROM Usuario u WHERE u.email = ?0", email);
-
-		return usuarios;
-	}
-
 	public Usuario findByFiltro(FiltroUsuario filtro) {
 		String query = "FROM Usuario u WHERE 1=1 ";
 		if (filtro.getId() != null) {

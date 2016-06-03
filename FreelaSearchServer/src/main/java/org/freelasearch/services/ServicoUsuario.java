@@ -50,11 +50,10 @@ public class ServicoUsuario {
 	public DtoUsuario login(String email, String senha) {
 		List<Usuario> listUsuario = usuarioDao.findLogin(email, senha);
 		if (listUsuario.size() != 1) {
-			List<Usuario> listUsuarioSemSenha = usuarioDao.findLogin(email);
-			if (listUsuarioSemSenha.size() == 1) {
-				if (listUsuarioSemSenha.get(0).getSenha() == null) {
-					throw new ExceptionFreelaSearch(
-							"O usuário informado não possui uma senha registrada. Logue-se pelo Facebook ou recupe a senha para ser enviada uma nova para o email registrado.");
+			List<Usuario> listUsuarioPorEmail = usuarioDao.findByEmail(email);
+			if (listUsuarioPorEmail.size() == 1) {
+				if (listUsuarioPorEmail.get(0).getSenha() == null) {
+					throw new ExceptionFreelaSearch("O usuário informado não possui uma senha registrada. Logue-se pelo Facebook ou recupe a senha para ser enviada uma nova para o email registrado.");
 				}
 				throw new ExceptionFreelaSearch("A senha informada é inválida.");
 
