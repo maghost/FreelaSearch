@@ -5,14 +5,13 @@ import org.freelasearch.service.UsuarioService;
 import org.freelasearch.tasks.AbstractAsyncTask;
 
 import java.io.IOException;
-import java.util.Map;
 
-public class AsyncTaskUsuario extends AbstractAsyncTask<Map<String, String>, DtoUsuario> {
+public class AsyncTaskUsuario extends AbstractAsyncTask<DtoUsuario, DtoUsuario> {
 
     @Override
-    protected DtoUsuario executeService(Map<String, String> params) throws IOException {
+    protected DtoUsuario executeService(DtoUsuario dtoUsuario) throws IOException {
         UsuarioService service = new UsuarioService();
-        return service.findByParam(params);
+        return service.save(dtoUsuario);
     }
 
 }

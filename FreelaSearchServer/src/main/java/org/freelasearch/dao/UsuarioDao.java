@@ -1,5 +1,6 @@
 package org.freelasearch.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -24,16 +25,24 @@ public class UsuarioDao extends GenericDao<Usuario, Integer> {
 		return usuarios;
 	}
 
-	public Usuario findByFiltro(FiltroUsuario filtro) {
-		String query = "FROM Usuario u WHERE 1=1 ";
-		if (filtro.getId() != null) {
-			query += " and u.id = " + filtro.getId();
-		} else if (filtro.getEmail() != null && !filtro.getEmail().isEmpty()) {
-			query += " and u.email = '" + filtro.getEmail() + "'";
-		}
-		Query q = this.getEntityManager().createQuery(query);
+	@SuppressWarnings("unchecked")
+	public List<Usuario> findByFiltro(FiltroUsuario filtro) {
+		List<Usuario> usuarios = new ArrayList<>();
 
-		Usuario usuario = (Usuario) q.getSingleResult();
-		return usuario;
+		// Se filtro possuir o id do usuário, faz a busca direta, se não, utiliza lógicas para filtrar
+		if (filtro.getId() != null) {
+			usuarios.add(findById(filtro.getId()));
+		} else {
+
+			String query = "FROM Usuario u WHERE 1=1 ";
+			if (filtro.getEmail() != null && !filtro.getEmail().isEmpty()) {
+				query += " and u.email = '" + filtro.getEmail() + "'";
+			}
+
+			Query q = this.getEntityManager().createQuery(query);
+			usuarios = (List<Usuario>) q.getResultList();
+		}
+
+		return usuarios;
 	}
 }

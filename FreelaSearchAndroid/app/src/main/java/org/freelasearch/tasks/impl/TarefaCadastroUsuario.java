@@ -2,22 +2,14 @@ package org.freelasearch.tasks.impl;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import org.freelasearch.R;
-import org.freelasearch.dtos.DtoCategoria;
 import org.freelasearch.dtos.DtoUsuario;
 import org.freelasearch.service.UsuarioService;
 import org.freelasearch.tasks.TarefaInterface;
 import org.freelasearch.utils.ExceptionFreelaSearch;
 
-/**
- * Created by msms on 29/02/2016.
- */
 public class TarefaCadastroUsuario extends AsyncTask<DtoUsuario, String, DtoUsuario> {
 
     private Context context;

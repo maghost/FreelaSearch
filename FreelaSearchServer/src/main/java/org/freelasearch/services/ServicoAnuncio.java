@@ -25,10 +25,11 @@ public class ServicoAnuncio {
 		if (anuncio.getId() == null) {
 			anuncio.setData(new Date());
 			anuncioDao.save(anuncio);
-			dto.setId(anuncio.getId());
 		} else {
 			anuncioDao.update(anuncio);
 		}
+
+		dto = AnuncioConverter.domainToDto(anuncio);
 	}
 
 	public List<DtoAnuncio> buscarLista(FiltroAnuncio filtro) {

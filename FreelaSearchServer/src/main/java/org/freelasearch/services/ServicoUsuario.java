@@ -1,5 +1,6 @@
 package org.freelasearch.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.freelasearch.converters.UsuarioConverter;
@@ -18,7 +19,9 @@ public class ServicoUsuario {
 		usuarioDao = DaoFactory.usuarioInstance();
 	}
 
-	public void salvar(Usuario usuario) {
+	public void salvar(DtoUsuario dto) {
+		Usuario usuario = UsuarioConverter.dtoToDomain(dto);
+
 		if (usuario.getId() == null) {
 			List<Usuario> listaPorEmail = usuarioDao.findByEmail(usuario.getEmail());
 
@@ -45,6 +48,8 @@ public class ServicoUsuario {
 		} else {
 			usuarioDao.update(usuario);
 		}
+
+		dto = UsuarioConverter.domainToDto(usuario);
 	}
 
 	public DtoUsuario login(String email, String senha) {
@@ -73,8 +78,7 @@ public class ServicoUsuario {
 		} else {
 			Usuario usuarioAtualizado = listaPorEmail.get(0);
 
-			if (usuarioAtualizado.getEmail().equals(usuario.getEmail()) && usuarioAtualizado.getNome().equals(usuario.getNome())
-					&& usuarioAtualizado.getFoto().equals(usuario.getFoto())) {
+			if (usuarioAtualizado.getEmail().equals(usuario.getEmail()) && usuarioAtualizado.getNome().equals(usuario.getNome()) && usuarioAtualizado.getFoto().equals(usuario.getFoto())) {
 				return usuarioAtualizado;
 			}
 
@@ -87,12 +91,19 @@ public class ServicoUsuario {
 		}
 	}
 
-	public DtoUsuario buscar(FiltroUsuario filtro) {
-		return UsuarioConverter.domainToDto(usuarioDao.findByFiltro(filtro));
+	public List<DtoUsuario> buscarLista(FiltroUsuario filtro) {
+		List<Usuario> usuarios = usuarioDao.findByFiltro(filtro);
+		List<DtoUsuario> listaDtoUsuario = new ArrayList<DtoUsuario>();
+
+		for (Usuario usuario : usuarios) {
+			listaDtoUsuario.add(UsuarioConverter.domainToDto(usuario));
+		}
+
+		return listaDtoUsuario;
 	}
 
 	public Usuario buscarDomain(FiltroUsuario filtro) {
-		return usuarioDao.findByFiltro(filtro);
+		return usuarioDao.findByFiltro(filtro).get(0);
 	}
 
 }

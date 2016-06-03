@@ -40,9 +40,10 @@ public class UsuarioServlet extends HttpServlet {
 				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());
 				DtoUsuario dto = (DtoUsuario) ois.readObject();
 
-				servico.salvar(UsuarioConverter.dtoToDomain(dto));
+				servico.salvar(dto);
 
-				oos.writeObject(new Boolean(true));
+				// Retorna o objeto preenchido para a aplicação
+				oos.writeObject(dto);
 			}
 
 			// LOGIN
@@ -52,6 +53,7 @@ public class UsuarioServlet extends HttpServlet {
 				oos.writeObject(servico.login(email, senha));
 			}
 
+			// TODO: Atualizar depois esse método para se comportar igual ao salvar
 			// LOGIN/REGISTRO FACEBOOK
 			if (request.getRequestURI().toLowerCase().endsWith("/facebook")) {
 				DtoUsuario dto = new DtoUsuario();
@@ -74,7 +76,7 @@ public class UsuarioServlet extends HttpServlet {
 					filtro.setEmail(request.getParameter("email"));
 				}
 
-				oos.writeObject(servico.buscar(filtro));
+				oos.writeObject(servico.buscarLista(filtro));
 			}
 		} catch (ExceptionFreelaSearch e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());

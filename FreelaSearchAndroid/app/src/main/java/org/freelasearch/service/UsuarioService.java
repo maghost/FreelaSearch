@@ -4,12 +4,13 @@ import org.freelasearch.dtos.DtoUsuario;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UsuarioService extends AbstractService<DtoUsuario> {
 
-    public void save(DtoUsuario dto) throws IOException {
-        sendObject(dto, "usuario/salvar");
+    public DtoUsuario save(DtoUsuario dto) throws IOException {
+        return (DtoUsuario) sendObject(dto, "usuario/salvar");
     }
 
     public DtoUsuario loginOrRegisterFacebook(DtoUsuario dto) throws IOException {
@@ -28,8 +29,8 @@ public class UsuarioService extends AbstractService<DtoUsuario> {
         return retrieveObject(m, "usuario/login");
     }
 
-    public DtoUsuario findByParam(Map<String, String> params) throws IOException {
-        return retrieveObject(params, "usuario/buscar");
+    public List<DtoUsuario> findByFiltro(Map<String, String> params) throws IOException {
+        return retrieveListObject(params, "usuario/buscar");
     }
 
 }
