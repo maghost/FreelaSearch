@@ -49,19 +49,25 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.MyViewHo
                     transform(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.TOP_RIGHT)).
                     into(holder.nhmAnunciante);
         }*/
-        if (holder.nhmAnunciante != null && mList.get(position).getAnunciante().getUsuario().getUrlFoto() != null && !mList.get(position).getAnunciante().getUsuario().getUrlFoto().trim().isEmpty()) {
-            Picasso.with(mContext).load(mList.get(position).getAnunciante().getUsuario().getUrlFoto())
-                    .placeholder(R.drawable.default_profile).error(R.drawable.default_profile).fit().into(holder.nhmAnunciante);
+        DtoAnuncio anuncio = mList.get(position);
+
+        if (holder.nhmAnunciante != null) {
+            if (anuncio.getAnunciante().getUsuario().getUrlFoto() != null && !anuncio.getAnunciante().getUsuario().getUrlFoto().trim().isEmpty()) {
+                Picasso.with(mContext).load(anuncio.getAnunciante().getUsuario().getUrlFoto())
+                        .placeholder(R.drawable.default_profile).error(R.drawable.default_profile).fit().into(holder.nhmAnunciante);
+            } else {
+                holder.nhmAnunciante.setImageResource(R.drawable.default_profile);
+            }
         }
-        holder.tvTitulo.setText(mList.get(position).getTitulo());
-        holder.tvAnunciante.setText(mList.get(position).getAnunciante().getUsuario().getNome());
-        holder.tvLocalizacao.setText(mList.get(position).getLocalizacao().getCidade() + ", " + new EstadoUtils().getDescriptionByUf(mList.get(position).getLocalizacao().getEstado()));
-        if (mList.get(position).getCategoria() != null) {
-            holder.tvCategoria.setText(mList.get(position).getCategoria().getNome());
+        holder.tvTitulo.setText(anuncio.getTitulo());
+        holder.tvAnunciante.setText(anuncio.getAnunciante().getUsuario().getNome());
+        holder.tvLocalizacao.setText(anuncio.getLocalizacao().getCidade() + ", " + new EstadoUtils().getDescriptionByUf(anuncio.getLocalizacao().getEstado()));
+        if (anuncio.getCategoria() != null) {
+            holder.tvCategoria.setText(anuncio.getCategoria().getNome());
         } else {
             holder.tvCategoria.setVisibility(View.GONE);
         }
-        holder.tvDescricao.setText(mList.get(position).getDescricao());
+        holder.tvDescricao.setText(anuncio.getDescricao());
 
         try {
             YoYo.with(Techniques.FadeIn).duration(120).playOn(holder.itemView);

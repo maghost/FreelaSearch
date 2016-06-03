@@ -90,8 +90,8 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
                                     GraphResponse response) {
                                 try {
                                     DtoUsuario dto = new DtoUsuario();
-                                    dto.setEmail(object.getString("name"));
-                                    dto.setNome(object.getString("email"));
+                                    dto.setEmail(object.getString("email"));
+                                    dto.setNome(object.getString("name"));
                                     dto.setUrlFoto("https://graph.facebook.com/" + object.getString("id") + "/picture?type=large");
                                     loginOrSignupFacebook(dto);
                                 } catch (JSONException e) {

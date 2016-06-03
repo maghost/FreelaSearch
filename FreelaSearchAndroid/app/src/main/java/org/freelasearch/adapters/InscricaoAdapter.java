@@ -14,18 +14,19 @@ import com.squareup.picasso.Picasso;
 
 import org.freelasearch.R;
 import org.freelasearch.dtos.DtoAnuncio;
+import org.freelasearch.dtos.DtoInscricao;
 import org.freelasearch.interfaces.RecyclerViewOnClickListenerHack;
 import org.freelasearch.utils.EstadoUtils;
 
 import java.util.List;
 
 public class InscricaoAdapter extends RecyclerView.Adapter<InscricaoAdapter.MyViewHolder> {
-    private List<DtoAnuncio> mList;
+    private List<DtoInscricao> mList;
     private LayoutInflater mLayoutInflater;
     private RecyclerViewOnClickListenerHack mRecyclerViewOnClickListenerHack;
     private Context mContext;
 
-    public InscricaoAdapter(Context c, List<DtoAnuncio> l) {
+    public InscricaoAdapter(Context c, List<DtoInscricao> l) {
         mList = l;
         mLayoutInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mContext = c;
@@ -49,15 +50,22 @@ public class InscricaoAdapter extends RecyclerView.Adapter<InscricaoAdapter.MyVi
                     transform(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.TOP_RIGHT)).
                     into(holder.nhmAnunciante);
         }*/
-        if (holder.nhmAnunciante != null && mList.get(position).getAnunciante().getUsuario().getUrlFoto() != null && !mList.get(position).getAnunciante().getUsuario().getUrlFoto().trim().isEmpty()) {
-            Picasso.with(mContext).load(mList.get(position).getAnunciante().getUsuario().getUrlFoto())
-                    .placeholder(R.drawable.default_profile).error(R.drawable.default_profile).fit().into(holder.nhmAnunciante);
+
+        DtoAnuncio anuncio = mList.get(position).getAnuncio();
+
+        if (holder.nhmAnunciante != null) {
+            if (anuncio.getAnunciante().getUsuario().getUrlFoto() != null && !anuncio.getAnunciante().getUsuario().getUrlFoto().trim().isEmpty()) {
+                Picasso.with(mContext).load(anuncio.getAnunciante().getUsuario().getUrlFoto())
+                        .placeholder(R.drawable.default_profile).error(R.drawable.default_profile).fit().into(holder.nhmAnunciante);
+            } else {
+                holder.nhmAnunciante.setImageResource(R.drawable.default_profile);
+            }
         }
-        holder.tvTitulo.setText(mList.get(position).getTitulo());
-        holder.tvAnunciante.setText(mList.get(position).getAnunciante().getUsuario().getNome());
-        holder.tvLocalizacao.setText(mList.get(position).getLocalizacao().getCidade() + ", " + new EstadoUtils().getDescriptionByUf(mList.get(position).getLocalizacao().getEstado()));
-        holder.tvCategoria.setText(mList.get(position).getCategoria() != null ? mList.get(position).getCategoria().getNome() : null);
-        holder.tvDescricao.setText(mList.get(position).getDescricao());
+        holder.tvTitulo.setText(anuncio.getTitulo());
+        holder.tvAnunciante.setText(anuncio.getAnunciante().getUsuario().getNome());
+        holder.tvLocalizacao.setText(anuncio.getLocalizacao().getCidade() + ", " + new EstadoUtils().getDescriptionByUf(anuncio.getLocalizacao().getEstado()));
+        holder.tvCategoria.setText(anuncio.getCategoria() != null ? anuncio.getCategoria().getNome() : null);
+        holder.tvDescricao.setText(anuncio.getDescricao());
 
         try {
             YoYo.with(Techniques.FadeIn).duration(120).playOn(holder.itemView);
@@ -75,7 +83,7 @@ public class InscricaoAdapter extends RecyclerView.Adapter<InscricaoAdapter.MyVi
         mRecyclerViewOnClickListenerHack = r;
     }
 
-    public void addListItem(DtoAnuncio dto, int position) {
+    public void addListItem(DtoInscricao dto, int position) {
         mList.add(dto);
         notifyItemInserted(position);
     }

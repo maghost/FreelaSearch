@@ -26,7 +26,6 @@ public class InscricaoDetalharActivity extends AppCompatActivity implements View
 
     private DtoAnuncio anuncio;
     private Toolbar mToolbar;
-    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +82,7 @@ public class InscricaoDetalharActivity extends AppCompatActivity implements View
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, AnuncioActivity.class);
+                Intent intent = new Intent(InscricaoDetalharActivity.this, AnuncioActivity.class);
                 intent.putExtra("anuncio", anuncio);
                 startActivity(intent);
             }

@@ -80,7 +80,7 @@ public class Inscricao extends BaseBean {
 		this.dataInscricao = dataInscricao;
 	}
 
-	public Integer getInscricaoAceita() {
+	public Integer getStatusInscricao() {
 		return statusInscricao;
 	}
 
@@ -90,7 +90,8 @@ public class Inscricao extends BaseBean {
 
 	@Override
 	public String toString() {
-		return "Inscricao [id=" + id + ", anuncio=" + anuncio + ", inscrito=" + inscrito + ", dataInscricao=" + dataInscricao + ", inscricaoAceita=" + statusInscricao + "]";
+		return "Inscricao [id=" + id + ", anuncio=" + anuncio + ", inscrito=" + inscrito + ", dataInscricao=" + dataInscricao + ", inscricaoAceita="
+				+ statusInscricao + "]";
 	}
 
 }

@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class InscricaoService extends AbstractService<DtoAnuncio> {
 
-    public List<DtoAnuncio> findLimited(Map<String, Integer> params) throws IOException {
+    public List<DtoAnuncio> findByFiltro(Map<String, Integer> params) throws IOException {
         return retrieveListObject(params, "inscricao/buscar");
     }
 

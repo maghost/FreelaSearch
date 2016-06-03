@@ -2,6 +2,7 @@ package org.freelasearch.tasks.impl;
 
 import org.freelasearch.dtos.DtoAnuncio;
 import org.freelasearch.service.AnuncioService;
+import org.freelasearch.service.InscricaoService;
 import org.freelasearch.tasks.AbstractAsyncTask;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ public class AsyncTaskListaInscricao extends AbstractAsyncTask<Map<String, Integ
 
     @Override
     protected List<DtoAnuncio> executeService(Map<String, Integer> params) throws IOException {
-        AnuncioService service = new AnuncioService();
+        InscricaoService service = new InscricaoService();
         return service.findByFiltro(params);
     }
 

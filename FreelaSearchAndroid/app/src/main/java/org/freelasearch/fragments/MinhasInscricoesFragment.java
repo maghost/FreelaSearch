@@ -1,6 +1,5 @@
 package org.freelasearch.fragments;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,7 +18,7 @@ import android.widget.Toast;
 import org.freelasearch.R;
 import org.freelasearch.activities.InscricaoDetalharActivity;
 import org.freelasearch.adapters.InscricaoAdapter;
-import org.freelasearch.dtos.DtoAnuncio;
+import org.freelasearch.dtos.DtoInscricao;
 import org.freelasearch.interfaces.RecyclerViewOnClickListenerHack;
 import org.freelasearch.tasks.AsyncTaskListener;
 import org.freelasearch.tasks.impl.AsyncTaskListaInscricao;
@@ -42,7 +41,7 @@ public class MinhasInscricoesFragment extends Fragment implements RecyclerViewOn
     private ImageView ivSemInscricao;
     private AsyncTaskListaInscricao mAsyncTaskListaInscricao;
 
-    private List<DtoAnuncio> mList;
+    private List<DtoInscricao> mList;
 
     public MinhasInscricoesFragment() {
         // Required empty public constructor
@@ -101,7 +100,7 @@ public class MinhasInscricoesFragment extends Fragment implements RecyclerViewOn
     @Override
     public void onClickListener(View view, int position) {
         Intent intent = new Intent(getActivity(), InscricaoDetalharActivity.class);
-        intent.putExtra("anuncio", mList.get(position));
+        intent.putExtra("inscricao", mList.get(position));
         startActivity(intent);
     }
 
@@ -117,12 +116,12 @@ public class MinhasInscricoesFragment extends Fragment implements RecyclerViewOn
             public <T> void onComplete(T obj) {
                 if (mList == null) {
                     mList = new ArrayList<>();
-                    mList.addAll((List<DtoAnuncio>) obj);
+                    mList.addAll((List<DtoInscricao>) obj);
                     mAdapter = new InscricaoAdapter(getActivity(), mList);
                     mAdapter.setRecyclerViewOnClickListenerHack(mRecyclerViewOnClickListenerHack);
                     mRecyclerView.setAdapter(mAdapter);
                 } else {
-                    List<DtoAnuncio> listAux = (List<DtoAnuncio>) obj;
+                    List<DtoInscricao> listAux = (List<DtoInscricao>) obj;
                     InscricaoAdapter adapter = (InscricaoAdapter) mRecyclerView.getAdapter();
                     int totalInscricoesRetornadas = listAux.size();
                     for (int i = 0; i < totalInscricoesRetornadas; i++) {

@@ -45,7 +45,6 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
 
     private DtoAnuncio anuncio;
     private Toolbar mToolbar;
-    private Context context = this;
     private AsyncTaskListaAnuncio mAsyncTaskListaAnuncio;
 
     private AsyncTaskListaAnunciante mAsyncTaskListaAnunciante;
@@ -194,7 +193,7 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                         fab.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent intent = new Intent(context, AnuncioActivity.class);
+                                Intent intent = new Intent(AnuncioDetalharActivity.this, AnuncioActivity.class);
                                 intent.putExtra("anuncio", anuncio);
                                 startActivity(intent);
                             }
@@ -354,7 +353,7 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
     @Override
     public void onBackPressed() {
         if (getIntent() != null && getIntent().getExtras() != null && getIntent().getExtras().getBoolean("backMeusAnuncios")) {
-            Intent intent = new Intent(context, MainActivity.class);
+            Intent intent = new Intent(AnuncioDetalharActivity.this, MainActivity.class);
             intent.putExtra("idNavigationItem", R.id.nav_meus_anuncios);
             startActivity(intent);
             finish();
