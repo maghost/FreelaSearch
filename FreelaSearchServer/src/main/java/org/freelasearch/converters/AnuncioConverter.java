@@ -1,7 +1,6 @@
 package org.freelasearch.converters;
 
 import org.freelasearch.dtos.DtoAnuncio;
-//import org.freelasearch.entities.Anunciante;
 import org.freelasearch.entities.Anuncio;
 
 public abstract class AnuncioConverter {
