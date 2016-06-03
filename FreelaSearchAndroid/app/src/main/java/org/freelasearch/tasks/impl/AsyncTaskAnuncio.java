@@ -11,7 +11,7 @@ public class AsyncTaskAnuncio extends AbstractAsyncTask<DtoAnuncio, Void> {
     @Override
     protected Void executeService(DtoAnuncio dtoAnuncio) throws IOException {
         AnuncioService service = new AnuncioService();
-        service.save(dtoAnuncio);
+        System.out.println("AnuncioID: " + service.save(dtoAnuncio));
         return null;
     }
 

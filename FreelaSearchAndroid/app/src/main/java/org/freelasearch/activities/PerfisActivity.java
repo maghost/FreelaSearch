@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -82,13 +81,10 @@ public class PerfisActivity extends AppCompatActivity {
                             editor.remove("freelancer");
                             editor.commit();
 
-                            Intent intent = new Intent(PerfisActivity.this, MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
+                            acessarPerfil();
                         } else {
                             progress.setMessage("Você ainda não possui um perfil de Anunciante, criando perfil...");
-                            criarPerfil("anunciante", email);
+                            criarPerfil("anunciante");
                         }
                     } else {
                         Log.e("FreelaSearch", "Falha ao selecionar o perfil do Anunciante");
@@ -127,13 +123,10 @@ public class PerfisActivity extends AppCompatActivity {
                             editor.remove("anunciante");
                             editor.commit();
 
-                            Intent intent = new Intent(PerfisActivity.this, MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
+                            acessarPerfil();
                         } else {
                             progress.setMessage("Você ainda não possui um perfil de Freelancer, criando perfil...");
-                            criarPerfil("freelancer", email);
+                            criarPerfil("freelancer");
                         }
                     } else {
                         Log.e("FreelaSearch", "Falha ao selecionar o perfil do Freelancer");
@@ -155,7 +148,7 @@ public class PerfisActivity extends AppCompatActivity {
         }
     }
 
-    private void criarPerfil(String perfil, String email) {
+    private void criarPerfil(String perfil) {
         if (perfil.equals("anunciante")) {
             mAsyncTaskAnunciante = new AsyncTaskAnunciante();
             mAsyncTaskAnunciante.setAsyncTaskListener(new AsyncTaskListener() {
@@ -178,7 +171,7 @@ public class PerfisActivity extends AppCompatActivity {
             DtoUsuario dtoUsuario = new DtoUsuario();
             dtoUsuario.setId(sharedpreferences.getInt("id", 0));
             //Caso não tenha setado o id ainda, usará o email para identificar o usuário
-            dtoUsuario.setEmail(sharedpreferences.getString("email", null));
+            dtoUsuario.setEmail(email);
             dtoAnunciante.setUsuario(dtoUsuario);
             mAsyncTaskAnunciante.execute(dtoAnunciante);
         } else if (perfil.equals("freelancer")) {
@@ -203,12 +196,19 @@ public class PerfisActivity extends AppCompatActivity {
             DtoUsuario dtoUsuario = new DtoUsuario();
             dtoUsuario.setId(sharedpreferences.getInt("id", 0));
             //Caso não tenha setado o id ainda, usará o email para identificar o usuário
-            dtoUsuario.setEmail(sharedpreferences.getString("email", null));
+            dtoUsuario.setEmail(email);
             dtoFreelancer.setUsuario(dtoUsuario);
             mAsyncTaskFreelancer.execute(dtoFreelancer);
         } else {
             return;
         }
+    }
+
+    private void acessarPerfil() {
+        Intent intent = new Intent(PerfisActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     @Override

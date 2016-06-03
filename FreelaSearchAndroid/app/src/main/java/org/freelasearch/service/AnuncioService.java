@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class AnuncioService extends AbstractService<DtoAnuncio> {
 
-    public void save(DtoAnuncio dto) throws IOException {
-        sendObject(dto, "anuncio/salvar");
+    public Integer save(DtoAnuncio dto) throws IOException {
+        return (Integer) sendObject(dto, "anuncio/salvar");
     }
 
     public List<DtoAnuncio> findByFiltro(Map<String, Integer> params) throws IOException {

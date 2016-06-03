@@ -14,7 +14,7 @@ import java.util.Map;
 
 public abstract class AbstractService<T> {
 
-    protected void sendObject(T object, String uri) throws IOException {
+    protected Object sendObject(T object, String uri) throws IOException {
         HttpURLConnection urlConnection = getHttpURLConnection(uri);
         urlConnection.setRequestProperty("Content-type", "application/x-java-serialized-object");
 
@@ -28,6 +28,13 @@ public abstract class AbstractService<T> {
             } else {
                 throw new IOException(urlConnection.getResponseMessage());
             }
+        }
+
+        try {
+            ObjectInputStream ois = new ObjectInputStream(urlConnection.getInputStream());
+            return ois.readObject();
+        } catch (Exception ex) {
+            throw new IOException(ex.getMessage());
         }
     }
 
@@ -107,7 +114,7 @@ public abstract class AbstractService<T> {
     }
 
     private HttpURLConnection getHttpURLConnection(String uri) throws IOException {
-        //Properties mProperties = System.getProperties();mProperties.getProperty("systemProp.http.serverUrl")+ "/"
+        //URL url = new URL("http://10.0.2.2:8080/FreelaSearchServer/" + uri);
         //URL url = new URL("http://192.168.25.4:8080/FreelaSearchServer/" + uri);
         URL url = new URL("http://freelasearchserver.sa-east-1.elasticbeanstalk.com/" + uri);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

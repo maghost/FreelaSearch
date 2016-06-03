@@ -55,7 +55,7 @@ public class AnuncioServlet extends HttpServlet {
 
 				servico.salvar(dto);
 
-				oos.writeObject(new Boolean(true));
+				oos.writeObject(dto.getId());
 			}
 		} catch (ExceptionFreelaSearch e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
