@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.freelasearch.converters.UsuarioConverter;
 import org.freelasearch.dtos.DtoUsuario;
-import org.freelasearch.entities.Usuario;
 import org.freelasearch.filters.FiltroUsuario;
 import org.freelasearch.services.ServicoUsuario;
 import org.freelasearch.utils.ExceptionFreelaSearch;
@@ -40,6 +38,7 @@ public class UsuarioServlet extends HttpServlet {
 				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());
 				DtoUsuario dto = (DtoUsuario) ois.readObject();
 
+				// Salva o usuário e passa os dados atualizados para o dto
 				servico.salvar(dto);
 
 				// Retorna o objeto preenchido para a aplicação
@@ -48,22 +47,18 @@ public class UsuarioServlet extends HttpServlet {
 
 			// LOGIN
 			if (request.getRequestURI().toLowerCase().endsWith("/login")) {
-				String email = request.getParameter("email");
-				String senha = request.getParameter("senha");
-				oos.writeObject(servico.login(email, senha));
+				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());
+				DtoUsuario dto = (DtoUsuario) ois.readObject();
+
+				oos.writeObject(servico.login(dto));
 			}
 
-			// TODO: Atualizar depois esse método para se comportar igual ao salvar
 			// LOGIN/REGISTRO FACEBOOK
 			if (request.getRequestURI().toLowerCase().endsWith("/facebook")) {
-				DtoUsuario dto = new DtoUsuario();
+				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());
+				DtoUsuario dto = (DtoUsuario) ois.readObject();
 
-				dto.setEmail(request.getParameter("email"));
-				dto.setNome(request.getParameter("nome"));
-				dto.setUrlFoto(request.getParameter("urlFoto"));
-
-				Usuario usuario = UsuarioConverter.dtoToDomain(dto);
-				oos.writeObject(UsuarioConverter.domainToDto(servico.loginOrRegisterFacebook(usuario)));
+				oos.writeObject(servico.loginOrRegisterFacebook(dto));
 			}
 
 			// BUSCAR

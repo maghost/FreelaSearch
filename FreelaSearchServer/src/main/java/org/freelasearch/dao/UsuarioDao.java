@@ -21,7 +21,6 @@ public class UsuarioDao extends GenericDao<Usuario, Integer> {
 	public List<Usuario> findLogin(String email, String senha) {
 		// TODO Hash na senha
 		List<Usuario> usuarios = (List<Usuario>) this.executeQuery("SELECT u FROM Usuario u WHERE u.email = ?0 AND u.senha = ?1", email, senha);
-
 		return usuarios;
 	}
 

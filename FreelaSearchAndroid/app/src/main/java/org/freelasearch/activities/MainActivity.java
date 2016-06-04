@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Verifica se está logado
         sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        boolean loggedInApplication = sharedpreferences.getInt("id", 0) != 0;
+        boolean isLogged = sharedpreferences.getInt("id", 0) != 0;
 
-        if (!loggedInApplication) {
+        if (!isLogged) {
             logout(this);
             return;
         }
@@ -188,19 +188,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    /**
+     * Método que apaga os dados de login do usuário no SharedPrefences.
+     * Static para ser usado em outras Classes
+     *
+     * @param activity
+     */
     public static void logout(Activity activity) {
-        Intent intent = new Intent(activity, WelcomeActivity.class);
-        activity.startActivity(intent);
-        activity.finish();
-
         SharedPreferences mSharedpreferences = activity.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         if (mSharedpreferences != null) {
+            // Limpa o SharedPreferences referente a login
             SharedPreferences.Editor editor = mSharedpreferences.edit();
             editor.clear();
             editor.commit();
         }
 
+        // Desloga do Facebook
         LoginManager.getInstance().logOut();
+
+        Intent intent = new Intent(activity, WelcomeActivity.class);
+        activity.startActivity(intent);
+        activity.finish();
     }
 
     private void startActivity(Class activity) {

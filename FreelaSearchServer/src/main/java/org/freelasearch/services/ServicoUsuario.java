@@ -25,7 +25,7 @@ public class ServicoUsuario {
 		if (usuario.getId() == null) {
 			List<Usuario> listaPorEmail = usuarioDao.findByEmail(usuario.getEmail());
 
-			// Se for login pelo facebook a senha virá nula ou estará vazia
+			// Se for login pelo facebook a senha virá nula
 			if (usuario.getSenha() == null) {
 				if (listaPorEmail.size() > 1) {
 					throw new ExceptionFreelaSearch("Falha ao cadastrar via Facebook.");
@@ -52,16 +52,16 @@ public class ServicoUsuario {
 		dto = UsuarioConverter.domainToDto(usuario);
 	}
 
-	public DtoUsuario login(String email, String senha) {
-		List<Usuario> listUsuario = usuarioDao.findLogin(email, senha);
+	public DtoUsuario login(DtoUsuario dto) {
+		List<Usuario> listUsuario = usuarioDao.findLogin(dto.getEmail(), dto.getSenha());
 		if (listUsuario.size() != 1) {
-			List<Usuario> listUsuarioPorEmail = usuarioDao.findByEmail(email);
+			List<Usuario> listUsuarioPorEmail = usuarioDao.findByEmail(dto.getEmail());
 			if (listUsuarioPorEmail.size() == 1) {
 				if (listUsuarioPorEmail.get(0).getSenha() == null) {
-					throw new ExceptionFreelaSearch("O usuário informado não possui uma senha registrada. Logue-se pelo Facebook ou recupe a senha para ser enviada uma nova para o email registrado.");
+					throw new ExceptionFreelaSearch(
+							"O usuário informado não possui uma senha registrada. Logue-se pelo Facebook ou recupe a senha para ser enviada uma nova para o email registrado.");
 				}
 				throw new ExceptionFreelaSearch("A senha informada é inválida.");
-
 			}
 			throw new ExceptionFreelaSearch("Nenhuma conta foi encontrada com o e-mail informado.");
 		}
@@ -69,26 +69,31 @@ public class ServicoUsuario {
 		return UsuarioConverter.domainToDto(listUsuario.get(0));
 	}
 
-	public Usuario loginOrRegisterFacebook(Usuario usuario) {
+	public DtoUsuario loginOrRegisterFacebook(DtoUsuario dto) {
+		Usuario usuario = UsuarioConverter.dtoToDomain(dto);
+
 		List<Usuario> listaPorEmail = usuarioDao.findByEmail(usuario.getEmail());
 
 		if (listaPorEmail.size() == 0) {
 			usuarioDao.save(usuario);
-			return usuario;
+			dto = UsuarioConverter.domainToDto(usuario);
 		} else {
 			Usuario usuarioAtualizado = listaPorEmail.get(0);
 
-			if (usuarioAtualizado.getEmail().equals(usuario.getEmail()) && usuarioAtualizado.getNome().equals(usuario.getNome()) && usuarioAtualizado.getFoto().equals(usuario.getFoto())) {
-				return usuarioAtualizado;
+			if (usuarioAtualizado.getEmail().equals(usuario.getEmail()) && usuarioAtualizado.getNome().equals(usuario.getNome())
+					&& usuarioAtualizado.getFoto().equals(usuario.getFoto())) {
+				dto = UsuarioConverter.domainToDto(usuarioAtualizado);
+			} else {
+				usuarioAtualizado.setEmail(usuario.getEmail());
+				usuarioAtualizado.setNome(usuario.getNome());
+				usuarioAtualizado.setFoto(usuario.getFoto());
+
+				usuarioDao.update(usuarioAtualizado);
+				dto = UsuarioConverter.domainToDto(usuarioAtualizado);
 			}
-
-			usuarioAtualizado.setEmail(usuario.getEmail());
-			usuarioAtualizado.setNome(usuario.getNome());
-			usuarioAtualizado.setFoto(usuario.getFoto());
-
-			usuarioDao.update(usuarioAtualizado);
-			return usuarioAtualizado;
 		}
+
+		return dto;
 	}
 
 	public List<DtoUsuario> buscarLista(FiltroUsuario filtro) {

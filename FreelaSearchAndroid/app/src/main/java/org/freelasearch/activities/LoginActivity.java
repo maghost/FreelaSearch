@@ -12,15 +12,14 @@ import android.widget.Toast;
 
 import org.freelasearch.R;
 import org.freelasearch.dtos.DtoUsuario;
-import org.freelasearch.tasks.TarefaInterface;
-import org.freelasearch.tasks.impl.TarefaLoginUsuario;
+import org.freelasearch.tasks.AsyncTaskListener;
+import org.freelasearch.tasks.impl.AsyncTaskLoginUsuario;
 
-import java.io.IOException;
-import java.text.ParseException;
-
-public class LoginActivity extends AppCompatActivity implements TarefaInterface, View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String PREF_NAME = "SignupActivityPreferences";
+
+    private AsyncTaskLoginUsuario mAsyncTaskLoginUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,33 +37,37 @@ public class LoginActivity extends AppCompatActivity implements TarefaInterface,
             return;
         }
 
+        mAsyncTaskLoginUsuario = new AsyncTaskLoginUsuario();
+        mAsyncTaskLoginUsuario.setAsyncTaskListener(new AsyncTaskListener() {
+            @Override
+            public void onPreExecute() {
+            }
+
+            @Override
+            public <T> void onComplete(T obj) {
+                SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putInt("id", ((DtoUsuario) obj).getId());
+                editor.putString("nome", ((DtoUsuario) obj).getNome());
+                editor.putString("email", ((DtoUsuario) obj).getEmail());
+                editor.putString("profile_pic", ((DtoUsuario) obj).getUrlFoto());
+                editor.commit();
+
+                Intent activity = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(activity);
+                finish();
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+                Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         DtoUsuario dto = new DtoUsuario();
         dto.setEmail(((EditText) findViewById(R.id.email)).getText().toString());
         dto.setSenha(((EditText) findViewById(R.id.senha)).getText().toString());
-
-        TarefaLoginUsuario tarefa = new TarefaLoginUsuario(this, this);
-        tarefa.execute(dto);
-    }
-
-    @Override
-    public void retorno(Object obj) {
-        if (obj instanceof String) {
-            Toast.makeText(getApplicationContext(), (String) obj, Toast.LENGTH_LONG).show();
-        }
-
-        if (obj instanceof DtoUsuario) {
-            SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.putInt("id", ((DtoUsuario) obj).getId());
-            editor.putString("nome", ((DtoUsuario) obj).getNome());
-            editor.putString("email", ((DtoUsuario) obj).getEmail());
-            editor.putString("profile_pic", ((DtoUsuario) obj).getUrlFoto());
-            editor.commit();
-
-            Intent activity = new Intent(this, MainActivity.class);
-            startActivity(activity);
-            finish();
-        }
+        mAsyncTaskLoginUsuario.execute(dto);
     }
 
     public void abrirSignupActivity(View view) {
@@ -85,6 +88,14 @@ public class LoginActivity extends AppCompatActivity implements TarefaInterface,
             case R.id.btn_conectar:
                 login();
                 break;
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mAsyncTaskLoginUsuario != null) {
+            mAsyncTaskLoginUsuario.cancel(true);
         }
     }
 }

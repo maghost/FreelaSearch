@@ -24,14 +24,11 @@ import org.freelasearch.R;
 import org.freelasearch.dtos.DtoUsuario;
 import org.freelasearch.tasks.AsyncTaskListener;
 import org.freelasearch.tasks.impl.AsyncTaskFacebookUsuario;
-import org.freelasearch.tasks.impl.AsyncTaskUsuario;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,6 +36,8 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
     private CallbackManager callbackManager;
     private SharedPreferences sharedpreferences;
     private ProgressDialog mProgressDialog;
+
+    private AsyncTaskFacebookUsuario mAsyncTaskFacebookUsuario;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -53,23 +52,18 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_welcome);
 
-        //Verifica se está logado pela aplicação
+        //Verifica se está logado
         sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        boolean loggedInApplication = sharedpreferences.getInt("id", 0) != 0;
+        boolean isLogged = sharedpreferences.getInt("id", 0) != 0;
 
-        if (loggedInApplication) {
+        //Verifica se está logado pelo facebook
+        //callbackManager = CallbackManager.Factory.create();
+        //boolean loggedByFacebook = AccessToken.getCurrentAccessToken() != null;
+
+        if (isLogged) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
-            return;
-        }
-
-        //Verifica se está logado pelo facebook
-        callbackManager = CallbackManager.Factory.create();
-        //boolean loggedByFacebook = AccessToken.getCurrentAccessToken() != null;
-
-        if (!sharedpreferences.getString("email", "").equals("")) {
-            getUserConnectedByEmail(sharedpreferences.getString("email", ""));
             return;
         }
 
@@ -101,7 +95,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
                         }
                 );
                 Bundle parameters = new Bundle();
-                parameters.putString("fields", "name,email");
+                parameters.putString("fields", "name, email");
                 request.setParameters(parameters);
                 request.executeAsync();
             }
@@ -128,49 +122,9 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         tvResetarSenha.setOnClickListener(this);
     }
 
-    private void getUserConnectedByEmail(String email) {
-
-        AsyncTaskUsuario mAsyncTaskUsuario = new AsyncTaskUsuario();
-        mAsyncTaskUsuario.setAsyncTaskListener(new AsyncTaskListener() {
-            @Override
-            public void onPreExecute() {
-            }
-
-            @Override
-            public <T> void onComplete(T obj) {
-                if (obj != null) {
-                    DtoUsuario dtoUsuario = (DtoUsuario) obj;
-
-                    SharedPreferences.Editor editor = sharedpreferences.edit();
-                    editor.putInt("id", dtoUsuario.getId());
-                    editor.putString("nome", dtoUsuario.getNome());
-                    editor.putString("email", dtoUsuario.getEmail());
-                    editor.putString("profile_pic", dtoUsuario.getUrlFoto());
-                    editor.commit();
-
-                    Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                    return;
-                } else {
-                    Log.e("FreelaSearch", "Retorno nulo ao buscar usuário por email.");
-                }
-            }
-
-            @Override
-            public void onError(String errorMsg) {
-                Log.e("FreelaSearch", errorMsg);
-            }
-        });
-
-        Map<String, String> filtro = new HashMap<>();
-        filtro.put("email", email);
-        mAsyncTaskUsuario.execute(filtro);
-    }
-
     private void loginOrSignupFacebook(DtoUsuario dto) {
 
-        AsyncTaskFacebookUsuario mAsyncTaskFacebookUsuario = new AsyncTaskFacebookUsuario();
+        mAsyncTaskFacebookUsuario = new AsyncTaskFacebookUsuario();
         mAsyncTaskFacebookUsuario.setAsyncTaskListener(new AsyncTaskListener() {
             @Override
             public void onPreExecute() {
@@ -196,8 +150,9 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
                     finish();
                     return;
                 } else {
-                    Log.e("FreelaSearch", "Retorno nulo ao buscar usuário por email.");
+                    Log.e("FreelaSearch", "Retorno nulo ao tentar logar/registar via Facebook.");
                 }
+                mProgressDialog.dismiss();
             }
 
             @Override
@@ -225,6 +180,14 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
                 activity = new Intent(this, ResetPasswordActivity.class);
                 startActivity(activity);
                 break;
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mAsyncTaskFacebookUsuario != null) {
+            mAsyncTaskFacebookUsuario.cancel(true);
         }
     }
 }

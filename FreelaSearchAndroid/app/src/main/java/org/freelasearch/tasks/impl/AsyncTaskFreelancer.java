@@ -6,13 +6,13 @@ import org.freelasearch.tasks.AbstractAsyncTask;
 
 import java.io.IOException;
 
-public class AsyncTaskFreelancer extends AbstractAsyncTask<DtoFreelancer, Void> {
+public class AsyncTaskFreelancer extends AbstractAsyncTask<DtoFreelancer, DtoFreelancer> {
 
     @Override
-    protected Void executeService(DtoFreelancer dtoFreelancer) throws IOException {
+    protected DtoFreelancer executeService(DtoFreelancer dtoFreelancer) throws IOException {
         FreelancerService service = new FreelancerService();
         service.save(dtoFreelancer);
-        return null;
+        return dtoFreelancer;
     }
 
 }
