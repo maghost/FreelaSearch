@@ -57,7 +57,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         boolean isLogged = sharedpreferences.getInt("id", 0) != 0;
 
         //Verifica se está logado pelo facebook
-        //callbackManager = CallbackManager.Factory.create();
+        callbackManager = CallbackManager.Factory.create();
         //boolean loggedByFacebook = AccessToken.getCurrentAccessToken() != null;
 
         if (isLogged) {
