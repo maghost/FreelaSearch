@@ -9,7 +9,8 @@
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://freelasearch.cxvasrhmvvwl.sa-east-1.rds.amazonaws.com:3306/freelasearch" />
+			<!-- <property name="javax.persistence.jdbc.url" value="jdbc:mysql://freelasearch.cxvasrhmvvwl.sa-east-1.rds.amazonaws.com:3306/freelasearch" /> -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/freelasearch" />
 			<property name="javax.persistence.jdbc.user" value="matheus" />
 			<property name="javax.persistence.jdbc.password" value="matheusmaghost" />
 
