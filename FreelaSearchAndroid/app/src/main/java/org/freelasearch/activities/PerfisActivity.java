@@ -39,7 +39,6 @@ public class PerfisActivity extends AppCompatActivity {
     private AsyncTaskFreelancer mAsyncTaskFreelancer;
 
     private Integer idUsuario;
-
     private ProgressDialog progress;
 
     @Override
@@ -71,6 +70,7 @@ public class PerfisActivity extends AppCompatActivity {
                     progress = new ProgressDialog(PerfisActivity.this);
                     progress.setMessage("Buscando perfil...");
                     progress.setCanceledOnTouchOutside(false);
+                    progress.setCancelable(false);
                     progress.show();
                 }
 
@@ -99,7 +99,7 @@ public class PerfisActivity extends AppCompatActivity {
             });
 
             Map<String, String> filtro = new HashMap<>();
-            filtro.put("id", idUsuario.toString());
+            filtro.put("idUsuario", idUsuario.toString());
             mAsyncTaskListaAnunciante.execute(filtro);
         } else if (view.getId() == R.id.freelancer_perfil) {
             mAsyncTaskListaFreelancer = new AsyncTaskListaFreelancer();
@@ -137,7 +137,7 @@ public class PerfisActivity extends AppCompatActivity {
             });
 
             Map<String, String> filtro = new HashMap<>();
-            filtro.put("id", idUsuario.toString());
+            filtro.put("idUsuario", idUsuario.toString());
             mAsyncTaskListaFreelancer.execute(filtro);
         } else {
             return;

@@ -9,6 +9,7 @@ public abstract class LocalizacaoConverter {
 
 		dto.setCidade(cidade);
 		dto.setEstado(estado);
+		dto.setPais("BR");
 
 		return dto;
 	}

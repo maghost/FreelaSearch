@@ -39,10 +39,8 @@ public class UsuarioServlet extends HttpServlet {
 				DtoUsuario dto = (DtoUsuario) ois.readObject();
 
 				// Salva o usuário e passa os dados atualizados para o dto
-				servico.salvar(dto);
-
 				// Retorna o objeto preenchido para a aplicação
-				oos.writeObject(dto);
+				oos.writeObject(servico.salvar(dto));
 			}
 
 			// LOGIN

@@ -7,6 +7,7 @@ public class FiltroAnunciante extends FiltroFreelaSearch implements Serializable
 	private static final long serialVersionUID = 4291821855158177138L;
 
 	private Integer idAnunciante;
+	private Integer idUsuario;
 	private String email;
 
 	public Integer getIdAnunciante() {
@@ -15,6 +16,14 @@ public class FiltroAnunciante extends FiltroFreelaSearch implements Serializable
 
 	public void setIdAnunciante(Integer idAnunciante) {
 		this.idAnunciante = idAnunciante;
+	}
+
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getEmail() {

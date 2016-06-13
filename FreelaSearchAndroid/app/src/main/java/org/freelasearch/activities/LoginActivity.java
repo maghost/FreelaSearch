@@ -14,6 +14,7 @@ import org.freelasearch.R;
 import org.freelasearch.dtos.DtoUsuario;
 import org.freelasearch.tasks.AsyncTaskListener;
 import org.freelasearch.tasks.impl.AsyncTaskLoginUsuario;
+import org.freelasearch.utils.MD5;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -66,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         DtoUsuario dto = new DtoUsuario();
         dto.setEmail(((EditText) findViewById(R.id.email)).getText().toString());
-        dto.setSenha(((EditText) findViewById(R.id.senha)).getText().toString());
+        dto.setSenha(MD5.convertTo(((EditText) findViewById(R.id.senha)).getText().toString()));
         mAsyncTaskLoginUsuario.execute(dto);
     }
 

@@ -19,7 +19,7 @@ public class ServicoAnuncio {
 		anuncioDao = DaoFactory.anuncioInstance();
 	}
 
-	public void salvar(DtoAnuncio dto) {
+	public DtoAnuncio salvar(DtoAnuncio dto) {
 		Anuncio anuncio = AnuncioConverter.dtoToDomain(dto);
 
 		if (anuncio.getId() == null) {
@@ -29,7 +29,7 @@ public class ServicoAnuncio {
 			anuncioDao.update(anuncio);
 		}
 
-		dto = AnuncioConverter.domainToDto(anuncio);
+		return AnuncioConverter.domainToDto(anuncio);
 	}
 
 	public List<DtoAnuncio> buscarLista(FiltroAnuncio filtro) {

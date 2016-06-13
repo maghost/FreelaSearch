@@ -40,6 +40,7 @@ public class FreelancerServlet extends HttpServlet {
 				if (request.getParameter("id") != null) {
 					filtro.setIdFreelancer(Integer.valueOf(request.getParameter("id")));
 				} else {
+					filtro.setIdUsuario(Integer.valueOf(request.getParameter("idUsuario")));
 					filtro.setEmail(request.getParameter("email"));
 				}
 
@@ -50,9 +51,7 @@ public class FreelancerServlet extends HttpServlet {
 				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());
 				DtoFreelancer dto = (DtoFreelancer) ois.readObject();
 
-				servico.salvar(dto);
-
-				oos.writeObject(new Boolean(true));
+				oos.writeObject(servico.salvar(dto));
 			}
 		} catch (ExceptionFreelaSearch e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());

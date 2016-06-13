@@ -53,9 +53,7 @@ public class InscricaoServlet extends HttpServlet {
 				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());
 				DtoInscricao dto = (DtoInscricao) ois.readObject();
 
-				servico.salvar(dto);
-
-				oos.writeObject(new Boolean(true));
+				oos.writeObject(servico.salvar(dto));
 			}
 		} catch (ExceptionFreelaSearch e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());

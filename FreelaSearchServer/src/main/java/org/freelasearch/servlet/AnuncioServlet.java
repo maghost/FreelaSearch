@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.freelasearch.dtos.DtoAnuncio;
 import org.freelasearch.filters.FiltroAnuncio;
+import org.freelasearch.services.ServicoAnunciante;
 import org.freelasearch.services.ServicoAnuncio;
 import org.freelasearch.utils.ExceptionFreelaSearch;
 
@@ -31,6 +32,7 @@ public class AnuncioServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			ServicoAnuncio servico = new ServicoAnuncio();
+			ServicoAnunciante servicoAnunciante = new ServicoAnunciante();
 			ObjectOutputStream oos = new ObjectOutputStream(response.getOutputStream());
 
 			// BUSCAR
@@ -53,9 +55,11 @@ public class AnuncioServlet extends HttpServlet {
 				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());
 				DtoAnuncio dto = (DtoAnuncio) ois.readObject();
 
-				servico.salvar(dto);
+				// Como o Anúncio possui Anunciante, é preciso preencher esse Objeto por completo.
+				dto = servico.salvar(dto);
+				dto.setAnunciante(servicoAnunciante.buscarPorId(dto.getAnunciante().getId()));
 
-				oos.writeObject(dto.getId());
+				oos.writeObject(dto);
 			}
 		} catch (ExceptionFreelaSearch e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());

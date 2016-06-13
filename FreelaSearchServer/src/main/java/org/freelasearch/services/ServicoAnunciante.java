@@ -19,7 +19,7 @@ public class ServicoAnunciante {
 		anuncianteDao = DaoFactory.anuncianteInstance();
 	}
 
-	public void salvar(DtoAnunciante dto) {
+	public DtoAnunciante salvar(DtoAnunciante dto) {
 		Anunciante anunciante = AnuncianteConverter.dtoToDomain(dto);
 
 		if (anunciante.getId() == null) {
@@ -30,22 +30,26 @@ public class ServicoAnunciante {
 				anunciante.setUsuario(servicoUsuario.buscarDomain(filtroUsuario));
 			}
 			anuncianteDao.save(anunciante);
-			dto.setId(anunciante.getId());
 		} else {
 			anuncianteDao.update(anunciante);
 		}
 
+		return AnuncianteConverter.domainToDto(anunciante);
 	}
 
 	public List<DtoAnunciante> buscarLista(FiltroAnunciante filtro) {
-		List<Anunciante> anunciantes = anuncianteDao.findByFiltro(filtro);
+		List<Anunciante> listaAnunciante = anuncianteDao.findByFiltro(filtro);
 		List<DtoAnunciante> listaDtoAnunciante = new ArrayList<DtoAnunciante>();
 
-		for (Anunciante anunciante : anunciantes) {
+		for (Anunciante anunciante : listaAnunciante) {
 			listaDtoAnunciante.add(AnuncianteConverter.domainToDto(anunciante));
 		}
 
 		return listaDtoAnunciante;
+	}
+
+	public DtoAnunciante buscarPorId(Integer id) {
+		return AnuncianteConverter.domainToDto(anuncianteDao.findById(id));
 	}
 
 }

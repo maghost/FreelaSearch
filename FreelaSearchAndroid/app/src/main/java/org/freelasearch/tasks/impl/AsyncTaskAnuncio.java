@@ -6,13 +6,12 @@ import org.freelasearch.tasks.AbstractAsyncTask;
 
 import java.io.IOException;
 
-public class AsyncTaskAnuncio extends AbstractAsyncTask<DtoAnuncio, Void> {
+public class AsyncTaskAnuncio extends AbstractAsyncTask<DtoAnuncio, DtoAnuncio> {
 
     @Override
-    protected Void executeService(DtoAnuncio dtoAnuncio) throws IOException {
+    protected DtoAnuncio executeService(DtoAnuncio dtoAnuncio) throws IOException {
         AnuncioService service = new AnuncioService();
-        System.out.println("AnuncioID: " + service.save(dtoAnuncio));
-        return null;
+        return service.save(dtoAnuncio);
     }
 
 }

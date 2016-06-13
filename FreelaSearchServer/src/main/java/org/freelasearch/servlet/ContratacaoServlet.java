@@ -53,9 +53,7 @@ public class ContratacaoServlet extends HttpServlet {
 				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());
 				DtoContratacao dto = (DtoContratacao) ois.readObject();
 
-				servico.salvar(dto);
-
-				oos.writeObject(new Boolean(true));
+				oos.writeObject(servico.salvar(dto));
 			}
 		} catch (ExceptionFreelaSearch e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());

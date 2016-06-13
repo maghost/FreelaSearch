@@ -40,6 +40,7 @@ public class AnuncianteServlet extends HttpServlet {
 				if (request.getParameter("id") != null) {
 					filtro.setIdAnunciante(Integer.valueOf(request.getParameter("id")));
 				} else {
+					filtro.setIdUsuario(Integer.valueOf(request.getParameter("idUsuario")));
 					filtro.setEmail(request.getParameter("email"));
 				}
 
@@ -49,10 +50,8 @@ public class AnuncianteServlet extends HttpServlet {
 			else if (request.getRequestURI().toLowerCase().endsWith("/salvar")) {
 				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());
 				DtoAnunciante dto = (DtoAnunciante) ois.readObject();
-
-				servico.salvar(dto);
-
-				oos.writeObject(new Boolean(true));
+				
+				oos.writeObject(servico.salvar(dto));
 			}
 		} catch (ExceptionFreelaSearch e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());

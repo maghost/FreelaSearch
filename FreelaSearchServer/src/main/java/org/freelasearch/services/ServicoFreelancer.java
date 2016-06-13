@@ -19,7 +19,7 @@ public class ServicoFreelancer {
 		freelancerDao = DaoFactory.freelancerInstance();
 	}
 
-	public void salvar(DtoFreelancer dto) {
+	public DtoFreelancer salvar(DtoFreelancer dto) {
 		Freelancer freelancer = FreelancerConverter.dtoToDomain(dto);
 
 		if (freelancer.getId() == null) {
@@ -30,18 +30,18 @@ public class ServicoFreelancer {
 				freelancer.setUsuario(servicoUsuario.buscarDomain(filtroUsuario));
 			}
 			freelancerDao.save(freelancer);
-			dto.setId(freelancer.getId());
 		} else {
 			freelancerDao.update(freelancer);
 		}
 
+		return FreelancerConverter.domainToDto(freelancer);
 	}
 
 	public List<DtoFreelancer> buscarLista(FiltroFreelancer filtro) {
-		List<Freelancer> freelancers = freelancerDao.findByFiltro(filtro);
+		List<Freelancer> listaFreelancer = freelancerDao.findByFiltro(filtro);
 		List<DtoFreelancer> listaDtoFreelancer = new ArrayList<DtoFreelancer>();
 
-		for (Freelancer freelancer : freelancers) {
+		for (Freelancer freelancer : listaFreelancer) {
 			listaDtoFreelancer.add(FreelancerConverter.domainToDto(freelancer));
 		}
 

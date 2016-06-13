@@ -11,8 +11,7 @@ public class AsyncTaskFreelancer extends AbstractAsyncTask<DtoFreelancer, DtoFre
     @Override
     protected DtoFreelancer executeService(DtoFreelancer dtoFreelancer) throws IOException {
         FreelancerService service = new FreelancerService();
-        service.save(dtoFreelancer);
-        return dtoFreelancer;
+        return service.save(dtoFreelancer);
     }
 
 }

@@ -19,7 +19,7 @@ public class ServicoInscricao {
 		inscricaoDao = DaoFactory.inscricaoInstance();
 	}
 
-	public void salvar(DtoInscricao dto) {
+	public DtoInscricao salvar(DtoInscricao dto) {
 		Inscricao inscricao = InscricaoConverter.dtoToDomain(dto);
 
 		if (inscricao.getId() == null) {
@@ -29,6 +29,7 @@ public class ServicoInscricao {
 			inscricaoDao.update(inscricao);
 		}
 
+		return InscricaoConverter.domainToDto(inscricao);
 	}
 
 	public List<DtoInscricao> buscarLista(FiltroInscricao filtro) {

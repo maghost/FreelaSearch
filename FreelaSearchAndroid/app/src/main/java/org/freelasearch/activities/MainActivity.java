@@ -94,15 +94,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
         hideItem();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        TextView tvPerfilLogado = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tv_perfil_logado);
+        String perfil = sharedpreferences.getInt("freelancer", 0) == 0 ? "Anunciante" : "Freelancer";
+        tvPerfilLogado.setText("Você está logado com o perfil de " + perfil);
+
+        hideItem();
+
+        // Algumas Activities podem enviar dados para a MainActivity como mensagem e aviso para redirecionar,
+        // precisa ir até a MainActivity pois é ela quem é responsável pelos Fragments que a utilizam.
         Bundle b = getIntent().getExtras();
-        int idNavigationItem = b != null ? b.getInt("idNavigationItem") : 0;
-        if (idNavigationItem != 0) {
-            navigationView.setCheckedItem(idNavigationItem);
-            openFragmentByNavigationItemId(idNavigationItem);
-        }
-        if (b != null && b.getString("msgExtras") != null && !b.getString("msgExtras").isEmpty()) {
-            Toast.makeText(this, b.getString("msgExtras"), Toast.LENGTH_LONG).show();
+        if (b != null) {
+            int idNavigationItem = b.getInt("idNavigationItem");
+            if (idNavigationItem != 0) {
+                getIntent().removeExtra("idNavigationItem");
+                navigationView.setCheckedItem(idNavigationItem);
+                openFragmentByNavigationItemId(idNavigationItem);
+            }
+            if (b.getString("msgExtras") != null) {
+                getIntent().removeExtra("msgExtras");
+                Toast.makeText(this, b.getString("msgExtras"), Toast.LENGTH_LONG).show();
+            }
+            b.clear();
         }
     }
 
@@ -226,8 +244,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Menu navMenu = navigationView.getMenu();
             if (sharedpreferences.getInt("freelancer", 0) != 0) {
                 navMenu.findItem(R.id.nav_minhas_inscricoes).setVisible(true);
-            } else {
+                navMenu.findItem(R.id.nav_meus_anuncios).setVisible(false);
+            } else if (sharedpreferences.getInt("anunciante", 0) != 0) {
                 navMenu.findItem(R.id.nav_meus_anuncios).setVisible(true);
+                navMenu.findItem(R.id.nav_minhas_inscricoes).setVisible(false);
             }
         }
     }

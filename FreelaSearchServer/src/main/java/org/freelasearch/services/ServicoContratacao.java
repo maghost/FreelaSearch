@@ -19,7 +19,7 @@ public class ServicoContratacao {
 		contratacaoDao = DaoFactory.contratacaoInstance();
 	}
 
-	public void salvar(DtoContratacao dto) {
+	public DtoContratacao salvar(DtoContratacao dto) {
 		Contratacao contratacao = ContratacaoConverter.dtoToDomain(dto);
 
 		if (contratacao.getId() == null) {
@@ -29,6 +29,7 @@ public class ServicoContratacao {
 			contratacaoDao.update(contratacao);
 		}
 
+		return ContratacaoConverter.domainToDto(contratacao);
 	}
 
 	public List<DtoContratacao> buscarLista(FiltroContratacao filtro) {

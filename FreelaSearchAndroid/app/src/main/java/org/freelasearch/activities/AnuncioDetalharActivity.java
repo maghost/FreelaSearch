@@ -42,6 +42,7 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
 
     private static final String PREF_NAME = "SignupActivityPreferences";
     private SharedPreferences sharedpreferences;
+    private SharedPreferences.Editor editor;
 
     private DtoAnuncio anuncio;
     private Toolbar mToolbar;
@@ -52,6 +53,7 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
     private AsyncTaskAnunciante mAsyncTaskAnunciante;
     private AsyncTaskFreelancer mAsyncTaskFreelancer;
 
+    private Integer idUsuario;
     private ProgressDialog progress;
 
     @Override
@@ -60,6 +62,8 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_anuncio_detalhar);
 
         sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        idUsuario = sharedpreferences.getInt("id", 0);
+        editor = sharedpreferences.edit();
 
         if (getIntent() != null && getIntent().getExtras() != null) {
             if (getIntent().getExtras().getSerializable("anuncio") != null) {
@@ -202,8 +206,7 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
         }
     }
 
-    //TODO: Tentar arrumar o texto "logado como ..." (NavigationView) quando faz a troca de perfil por essa tela
-    private void selecionarPerfil(String perfil) {
+    public void selecionarPerfil(String perfil) {
         if (perfil.equals("anunciante")) {
             mAsyncTaskListaAnunciante = new AsyncTaskListaAnunciante();
             mAsyncTaskListaAnunciante.setAsyncTaskListener(new AsyncTaskListener() {
@@ -212,6 +215,7 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                     progress = new ProgressDialog(AnuncioDetalharActivity.this);
                     progress.setMessage("Buscando perfil...");
                     progress.setCanceledOnTouchOutside(false);
+                    progress.setCancelable(false);
                     progress.show();
                 }
 
@@ -221,13 +225,8 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                         List<DtoAnunciante> dtoAnunciante = (List<DtoAnunciante>) obj;
 
                         if (dtoAnunciante.size() == 1) {
-                            SharedPreferences.Editor editor = sharedpreferences.edit();
-                            editor.putInt("anunciante", dtoAnunciante.get(0).getId());
-                            editor.remove("freelancer");
-                            editor.commit();
-
-                            AnuncioDetalharActivity.this.recreate();
-                            progress.dismiss();
+                            editarPreferences("anunciante", dtoAnunciante.get(0).getId());
+                            acessarPerfil();
                         } else {
                             progress.setMessage("Você ainda não possui um perfil de Anunciante, criando perfil...");
                             criarPerfil("anunciante");
@@ -245,7 +244,7 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
             });
 
             Map<String, String> filtro = new HashMap<>();
-            filtro.put("email", sharedpreferences.getString("email", ""));
+            filtro.put("idUsuario", idUsuario.toString());
             mAsyncTaskListaAnunciante.execute(filtro);
         } else if (perfil.equals("freelancer")) {
             mAsyncTaskListaFreelancer = new AsyncTaskListaFreelancer();
@@ -264,13 +263,8 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                         List<DtoFreelancer> dtoFreelancer = (List<DtoFreelancer>) obj;
 
                         if (dtoFreelancer.size() == 1) {
-                            SharedPreferences.Editor editor = sharedpreferences.edit();
-                            editor.putInt("freelancer", dtoFreelancer.get(0).getId());
-                            editor.remove("anunciante");
-                            editor.commit();
-
-                            AnuncioDetalharActivity.this.recreate();
-                            progress.dismiss();
+                            editarPreferences("freelancer", dtoFreelancer.get(0).getId());
+                            acessarPerfil();
                         } else {
                             progress.setMessage("Você ainda não possui um perfil de Freelancer, criando perfil...");
                             criarPerfil("freelancer");
@@ -288,7 +282,7 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
             });
 
             Map<String, String> filtro = new HashMap<>();
-            filtro.put("email", sharedpreferences.getString("email", ""));
+            filtro.put("idUsuario", idUsuario.toString());
             mAsyncTaskListaFreelancer.execute(filtro);
         } else {
             return;
@@ -305,7 +299,8 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
 
                 @Override
                 public <T> void onComplete(T obj) {
-                    progress.dismiss();
+                    editarPreferences("anunciante", ((DtoAnunciante) obj).getId());
+                    acessarPerfil();
                 }
 
                 @Override
@@ -314,11 +309,11 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                 }
             });
 
-            DtoAnunciante dtoAnunciante = new DtoAnunciante();
+            DtoAnunciante dto = new DtoAnunciante();
             DtoUsuario dtoUsuario = new DtoUsuario();
             dtoUsuario.setId(sharedpreferences.getInt("id", 0));
-            dtoAnunciante.setUsuario(dtoUsuario);
-            mAsyncTaskAnunciante.execute(dtoAnunciante);
+            dto.setUsuario(dtoUsuario);
+            mAsyncTaskAnunciante.execute(dto);
         } else if (perfil.equals("freelancer")) {
             mAsyncTaskFreelancer = new AsyncTaskFreelancer();
             mAsyncTaskFreelancer.setAsyncTaskListener(new AsyncTaskListener() {
@@ -328,7 +323,8 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
 
                 @Override
                 public <T> void onComplete(T obj) {
-                    progress.dismiss();
+                    editarPreferences("freelancer", ((DtoFreelancer) obj).getId());
+                    acessarPerfil();
                 }
 
                 @Override
@@ -337,14 +333,29 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                 }
             });
 
-            DtoFreelancer dtoFreelancer = new DtoFreelancer();
+            DtoFreelancer dto = new DtoFreelancer();
             DtoUsuario dtoUsuario = new DtoUsuario();
             dtoUsuario.setId(sharedpreferences.getInt("id", 0));
-            dtoFreelancer.setUsuario(dtoUsuario);
-            mAsyncTaskFreelancer.execute(dtoFreelancer);
+            dto.setUsuario(dtoUsuario);
+            mAsyncTaskFreelancer.execute(dto);
         } else {
             return;
         }
+    }
+
+    private void acessarPerfil() {
+        AnuncioDetalharActivity.this.recreate();
+        progress.dismiss();
+    }
+
+    private void editarPreferences(String perfil, Integer idPerfil) {
+        editor.putInt(perfil, idPerfil);
+        if (perfil.equals("freelancer")) {
+            editor.remove("anunciante");
+        } else {
+            editor.remove("freelancer");
+        }
+        editor.commit();
     }
 
     @Override
@@ -364,6 +375,18 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
         super.onDestroy();
         if (mAsyncTaskListaAnuncio != null) {
             mAsyncTaskListaAnuncio.cancel(true);
+        }
+        if (mAsyncTaskListaAnunciante != null) {
+            mAsyncTaskListaAnunciante.cancel(true);
+        }
+        if (mAsyncTaskListaFreelancer != null) {
+            mAsyncTaskListaFreelancer.cancel(true);
+        }
+        if (mAsyncTaskAnunciante != null) {
+            mAsyncTaskAnunciante.cancel(true);
+        }
+        if (mAsyncTaskFreelancer != null) {
+            mAsyncTaskFreelancer.cancel(true);
         }
     }
 }

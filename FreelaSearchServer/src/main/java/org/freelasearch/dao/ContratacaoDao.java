@@ -18,7 +18,10 @@ public class ContratacaoDao extends GenericDao<Contratacao, Integer> {
 
 		// Se filtro possuir o id da contratacao, faz a busca direta, se não, utiliza lógicas para filtrar
 		if (filtro.getIdContratacao() != null) {
-			contratacaoes.add(findById(filtro.getIdContratacao()));
+			Contratacao contratacao = findById(filtro.getIdContratacao());
+			if (contratacao != null) {
+				contratacaoes.add(contratacao);
+			}
 		} else {
 			String query = "FROM Contratacao c WHERE 1=1 ";
 

@@ -19,7 +19,7 @@ public class ServicoUsuario {
 		usuarioDao = DaoFactory.usuarioInstance();
 	}
 
-	public void salvar(DtoUsuario dto) {
+	public DtoUsuario salvar(DtoUsuario dto) {
 		Usuario usuario = UsuarioConverter.dtoToDomain(dto);
 
 		if (usuario.getId() == null) {
@@ -49,7 +49,7 @@ public class ServicoUsuario {
 			usuarioDao.update(usuario);
 		}
 
-		dto = UsuarioConverter.domainToDto(usuario);
+		return UsuarioConverter.domainToDto(usuario);
 	}
 
 	public DtoUsuario login(DtoUsuario dto) {

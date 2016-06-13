@@ -46,11 +46,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public <T> void onComplete(T obj) {
-                // TODO: Arrumar esse método também, deve conter o id do usuário e sua foto
                 SharedPreferences sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putInt("id", ((DtoUsuario) obj).getId());
                 editor.putString("nome", ((DtoUsuario) obj).getNome());
                 editor.putString("email", ((DtoUsuario) obj).getEmail());
+                editor.putString("profile_pic", ((DtoUsuario) obj).getUrlFoto());
                 editor.commit();
 
                 Intent activity = new Intent(SignupActivity.this, PerfisActivity.class);

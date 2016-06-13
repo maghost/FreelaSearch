@@ -20,7 +20,7 @@ public abstract class AnuncioConverter {
 				dto.setCategoria(CategoriaConverter.domainToDto(domain.getCategoria()));
 			}
 
-			dto.setStatus(domain.getStatus() != null ? domain.getStatus() : 1);
+			dto.setStatus(domain.getStatus() != null ? domain.getStatus() : 0);
 		}
 
 		return dto;
@@ -34,7 +34,7 @@ public abstract class AnuncioConverter {
 			domain.setTitulo(dto.getTitulo());
 			domain.setDescricao(dto.getDescricao());
 			domain.setData(dto.getData());
-			domain.setStatus(dto.getStatus() != null ? dto.getStatus() : 1);
+			domain.setStatus(dto.getStatus() != null ? dto.getStatus() : 0);
 			domain.setCidade(dto.getLocalizacao().getCidade());
 			domain.setEstado(dto.getLocalizacao().getEstado());
 			if (dto.getCategoria() != null) {

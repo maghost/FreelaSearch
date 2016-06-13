@@ -18,7 +18,10 @@ public class AnuncioDao extends GenericDao<Anuncio, Integer> {
 
 		// Se filtro possuir o id do anúncio, faz a busca direta, se não, utiliza lógicas para filtrar
 		if (filtro.getIdAnuncio() != null) {
-			anuncios.add(findById(filtro.getIdAnuncio()));
+			Anuncio anuncio = findById(filtro.getIdAnuncio());
+			if (anuncio != null) {
+				anuncios.add(anuncio);
+			}
 		} else {
 			// TODO: Verificar uma forma de deixar isso mais evidente
 			// Tipo Busca:

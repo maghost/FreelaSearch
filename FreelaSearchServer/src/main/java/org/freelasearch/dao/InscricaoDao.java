@@ -18,7 +18,10 @@ public class InscricaoDao extends GenericDao<Inscricao, Integer> {
 
 		// Se filtro possuir o id da inscrição, faz a busca direta, se não, utiliza lógicas para filtrar
 		if (filtro.getIdInscricao() != null) {
-			inscricoes.add(findById(filtro.getIdInscricao()));
+			Inscricao inscricao = findById(filtro.getIdInscricao());
+			if (inscricao != null) {
+				inscricoes.add(inscricao);
+			}
 		} else {
 			// TODO: Verificar uma forma de deixar isso mais evidente
 			// Tipo Busca:

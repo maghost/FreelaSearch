@@ -28,9 +28,7 @@ import org.freelasearch.utils.CategoriaUtils;
 import org.freelasearch.utils.EstadoUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AnuncioActivity extends AppCompatActivity implements LabelledSpinner.OnItemChosenListener, View.OnClickListener {
 
@@ -38,7 +36,6 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
 
     private Toolbar mToolbar;
 
-    private AnuncioActivity activity = this;
     private ProgressDialog progress;
 
     private List<EstadoUtils> estadoUtils = new EstadoUtils().preencherEstados();
@@ -50,6 +47,7 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
     private AsyncTaskListaCategoria mAsyncTaskListaCategoria;
 
     private DtoAnuncio dtoAnuncioOriginal;
+    private DtoAnuncio dtoAnuncioModificado;
     private AsyncTaskAnuncio mAsyncTaskAnuncio;
 
     private SharedPreferences sharedpreferences;
@@ -101,9 +99,9 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
             TextInputEditText descricaoAnuncio = (TextInputEditText) findViewById(R.id.descricao_anuncio);
 
             // Preenchendo os dados conforme dto (Edição)
-            tituloAnuncio.setText(dtoAnuncioOriginal.getTitulo());
+            // Categoria não pode preencher aqui pois pode não ter terminado a thread de buscar a lista
 
-            //Categoria não pode preencher aqui pois pode não ter terminado a thread de buscar a lista
+            tituloAnuncio.setText(dtoAnuncioOriginal.getTitulo());
 
             cidadeAnuncio.setText(dtoAnuncioOriginal.getLocalizacao().getCidade());
 
@@ -160,7 +158,7 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
                 listDtoCategoria.addAll((List<DtoCategoria>) obj);
 
                 if (categoriaSpinner == null) {
-                    categoriaSpinner = (LabelledSpinner) activity.findViewById(R.id.categoria_anuncio);
+                    categoriaSpinner = (LabelledSpinner) AnuncioActivity.this.findViewById(R.id.categoria_anuncio);
                 }
                 categoriaSpinner.setItemsArray(CategoriaUtils.getNamesByList(listDtoCategoria));
 
@@ -186,42 +184,30 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
             return;
         }
 
-        if (sharedpreferences.getInt("anunciante", 0) == 0 || sharedpreferences.getInt("id", 0) == 0) {
-            Toast.makeText(getApplicationContext(), "O usuário conectado não possui permissão para cadastrar anúncios. Reconecte por favor.", Toast.LENGTH_LONG).show();
-            MainActivity.logout(AnuncioActivity.this);
-            return;
-        }
-
-        DtoAnuncio dtoAnuncio = preencheDto();
+        preencheDto();
 
         mAsyncTaskAnuncio = new AsyncTaskAnuncio();
         mAsyncTaskAnuncio.setAsyncTaskListener(new AsyncTaskListener() {
             @Override
             public void onPreExecute() {
-                progress = new ProgressDialog(activity);
+                progress = new ProgressDialog(AnuncioActivity.this);
                 progress.setMessage("Cadastrando anúncio, aguarde...");
                 progress.show();
             }
 
             @Override
             public <T> void onComplete(T obj) {
-                progress.dismiss();
-
-                Intent intent = new Intent(activity, MainActivity.class);
-                intent.putExtra("idNavigationItem", R.id.nav_meus_anuncios);
-                intent.putExtra("msgExtras", "Anúncio cadastrado com sucesso.");
-                startActivity(intent);
-                finish();
+                abrirMeusAnuncios((DtoAnuncio) obj, "cadastrado");
             }
 
             @Override
             public void onError(String errorMsg) {
-                Toast.makeText(activity, "Falha ao cadastrar o anúncio.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AnuncioActivity.this, "Falha ao cadastrar o anúncio.", Toast.LENGTH_SHORT).show();
                 progress.dismiss();
             }
         });
 
-        mAsyncTaskAnuncio.execute(dtoAnuncio);
+        mAsyncTaskAnuncio.execute(dtoAnuncioModificado);
     }
 
     private void editarAnuncio() {
@@ -230,44 +216,30 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
             return;
         }
 
-        if (sharedpreferences.getInt("anunciante", 0) == 0 || sharedpreferences.getInt("id", 0) == 0) {
-            Toast.makeText(getApplicationContext(), "O usuário conectado não possui permissão para editar esse anúncio. Reconecte por favor.", Toast.LENGTH_LONG).show();
-            MainActivity.logout(AnuncioActivity.this);
-            return;
-        }
-
-        DtoAnuncio dtoAnuncio = preencheDto();
+        preencheDto();
 
         mAsyncTaskAnuncio = new AsyncTaskAnuncio();
         mAsyncTaskAnuncio.setAsyncTaskListener(new AsyncTaskListener() {
             @Override
             public void onPreExecute() {
-                progress = new ProgressDialog(activity);
+                progress = new ProgressDialog(AnuncioActivity.this);
                 progress.setMessage("Editando anúncio, aguarde...");
                 progress.show();
             }
 
             @Override
             public <T> void onComplete(T obj) {
-                progress.dismiss();
-
-                Toast.makeText(AnuncioActivity.this, "Anúncio editado com sucesso.", Toast.LENGTH_SHORT);
-
-                Intent intent = new Intent(activity, AnuncioDetalharActivity.class);
-                intent.putExtra("id", dtoAnuncioOriginal.getId());
-                intent.putExtra("backMeusAnuncios", true);
-                startActivity(intent);
-                finish();
+                abrirMeusAnuncios((DtoAnuncio) obj, "editado");
             }
 
             @Override
             public void onError(String errorMsg) {
-                Toast.makeText(activity, "Falha ao editar o anúncio.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AnuncioActivity.this, "Falha ao editar o anúncio.", Toast.LENGTH_SHORT).show();
                 progress.dismiss();
             }
         });
 
-        mAsyncTaskAnuncio.execute(dtoAnuncio);
+        mAsyncTaskAnuncio.execute(dtoAnuncioModificado);
     }
 
     private boolean isValid() {
@@ -281,37 +253,44 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
         return true;
     }
 
-    private DtoAnuncio preencheDto() {
-        DtoAnuncio dto;
+    private void preencheDto() {
         if (dtoAnuncioOriginal != null) {
-            dto = dtoAnuncioOriginal;
+            dtoAnuncioModificado = dtoAnuncioOriginal;
         } else {
-            dto = new DtoAnuncio();
+            dtoAnuncioModificado = new DtoAnuncio();
 
             // Só precisa setar o usuário quando é uma inclusão, caso contrário já estará preenchido no dtoAnuncioOriginal
             DtoAnunciante dtoAnunciante = new DtoAnunciante();
             dtoAnunciante.setId(sharedpreferences.getInt("anunciante", 0));
+
             DtoUsuario dtoUsuario = new DtoUsuario();
             dtoUsuario.setId(sharedpreferences.getInt("id", 0));
-            dtoUsuario.setNome(sharedpreferences.getString("nome", ""));
-            dtoUsuario.setEmail(sharedpreferences.getString("email", ""));
-            dtoUsuario.setUrlFoto(sharedpreferences.getString("profile_pic", ""));
             dtoAnunciante.setUsuario(dtoUsuario);
-            dto.setAnunciante(dtoAnunciante);
+
+            dtoAnuncioModificado.setAnunciante(dtoAnunciante);
         }
 
-        dto.setTitulo(((TextInputEditText) findViewById(R.id.titulo_anuncio)).getText().toString().trim());
+        dtoAnuncioModificado.setTitulo(((TextInputEditText) findViewById(R.id.titulo_anuncio)).getText().toString().trim());
 
-        dto.setCategoria(categoriaSelecionada);
+        dtoAnuncioModificado.setCategoria(categoriaSelecionada);
 
         DtoLocalizacao dtoLocalizacao = new DtoLocalizacao();
         dtoLocalizacao.setCidade(((TextInputEditText) findViewById(R.id.cidade_anuncio)).getText().toString().trim());
         dtoLocalizacao.setEstado(ufSelecionada);
-        dto.setLocalizacao(dtoLocalizacao);
+        dtoAnuncioModificado.setLocalizacao(dtoLocalizacao);
 
-        dto.setDescricao(((TextInputEditText) findViewById(R.id.descricao_anuncio)).getText().toString().trim());
+        dtoAnuncioModificado.setDescricao(((TextInputEditText) findViewById(R.id.descricao_anuncio)).getText().toString().trim());
+    }
 
-        return dto;
+    private void abrirMeusAnuncios(DtoAnuncio anuncio, String acao) {
+        progress.dismiss();
+        dtoAnuncioModificado = anuncio;
+
+        Intent intent = new Intent(AnuncioActivity.this, MainActivity.class);
+        intent.putExtra("idNavigationItem", R.id.nav_meus_anuncios);
+        intent.putExtra("msgExtras", "Anúncio " + acao + " com sucesso.");
+        startActivity(intent);
+        finish();
     }
 
     @Override

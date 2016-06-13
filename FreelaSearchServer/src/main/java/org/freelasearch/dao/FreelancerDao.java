@@ -16,10 +16,16 @@ public class FreelancerDao extends GenericDao<Freelancer, Integer> {
 		List<Freelancer> freelancers = new ArrayList<>();
 
 		if (filtro.getIdFreelancer() != null) {
-			freelancers.add(findById(filtro.getIdFreelancer()));
+			Freelancer freelancer = findById(filtro.getIdFreelancer());
+			if (freelancer != null) {
+				freelancers.add(freelancer);
+			}
 		} else {
 			String query = "FROM Freelancer t WHERE 1=1";
 
+			if (filtro.getIdUsuario() != null) {
+				query += " and t.usuario.id = " + filtro.getIdUsuario();
+			}
 			if (filtro.getEmail() != null) {
 				query += " and t.usuario.email = '" + filtro.getEmail() + "'";
 			}

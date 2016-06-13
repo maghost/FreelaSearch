@@ -30,7 +30,10 @@ public class UsuarioDao extends GenericDao<Usuario, Integer> {
 
 		// Se filtro possuir o id do usuário, faz a busca direta, se não, utiliza lógicas para filtrar
 		if (filtro.getId() != null) {
-			usuarios.add(findById(filtro.getId()));
+			Usuario usuario = findById(filtro.getId());
+			if (usuario != null) {
+				usuarios.add(usuario);
+			}
 		} else {
 
 			String query = "FROM Usuario u WHERE 1=1 ";
