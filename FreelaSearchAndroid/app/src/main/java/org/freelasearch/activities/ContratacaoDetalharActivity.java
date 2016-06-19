@@ -1,9 +1,6 @@
 package org.freelasearch.activities;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,9 +17,9 @@ import com.squareup.picasso.Picasso;
 
 import org.freelasearch.R;
 import org.freelasearch.dtos.DtoAnuncio;
-import org.freelasearch.dtos.DtoInscricao;
+import org.freelasearch.dtos.DtoContratacao;
 import org.freelasearch.tasks.AsyncTaskListener;
-import org.freelasearch.tasks.impl.AsyncTaskListaInscricao;
+import org.freelasearch.tasks.impl.AsyncTaskListaContratacao;
 import org.freelasearch.utils.EstadoUtils;
 
 import java.util.Collections;
@@ -30,23 +27,18 @@ import java.util.List;
 
 public class ContratacaoDetalharActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String PREF_NAME = "SignupActivityPreferences";
-    private SharedPreferences sharedpreferences;
-
-    private DtoInscricao inscricao;
+    private DtoContratacao contratacao;
     private Toolbar mToolbar;
-    private AsyncTaskListaInscricao mAsyncTaskListaInscricao;
+    private AsyncTaskListaContratacao mAsyncTaskListaContratacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contratacao_detalhar);
 
-        sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-
         if (getIntent() != null && getIntent().getExtras() != null) {
-            if (getIntent().getExtras().getSerializable("inscricao") != null) {
-                inscricao = (DtoInscricao) getIntent().getExtras().getSerializable("inscricao");
+            if (getIntent().getExtras().getSerializable("contratacao") != null) {
+                contratacao = (DtoContratacao) getIntent().getExtras().getSerializable("contratacao");
             } else if (getIntent().getExtras().getInt("id") != 0) {
                 buscarAnuncioPorId();
             } else {
@@ -75,46 +67,54 @@ public class ContratacaoDetalharActivity extends AppCompatActivity implements Vi
     }
 
     private void buscarAnuncioPorId() {
-        mAsyncTaskListaInscricao = new AsyncTaskListaInscricao();
-        mAsyncTaskListaInscricao.setAsyncTaskListener(new AsyncTaskListener() {
+        mAsyncTaskListaContratacao = new AsyncTaskListaContratacao();
+        mAsyncTaskListaContratacao.setAsyncTaskListener(new AsyncTaskListener() {
             @Override
             public void onPreExecute() {
             }
 
             @Override
             public <T> void onComplete(T obj) {
-                List<DtoInscricao> listAux = (List<DtoInscricao>) obj;
-                inscricao = listAux.get(0);
+                List<DtoContratacao> listAux = (List<DtoContratacao>) obj;
+                contratacao = listAux.get(0);
                 preencherTela();
             }
 
             @Override
             public void onError(String errorMsg) {
-                Toast.makeText(getApplicationContext(), "Erro ao buscar a inscrição", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Erro ao buscar a contratação", Toast.LENGTH_SHORT).show();
                 return;
             }
         });
 
-        mAsyncTaskListaInscricao.execute(Collections.singletonMap("id", getIntent().getExtras().getInt("id")));
+        mAsyncTaskListaContratacao.execute(Collections.singletonMap("id", getIntent().getExtras().getInt("id")));
     }
 
     private void preencherTela() {
         ImageView nhmAnunciante = (ImageView) findViewById(R.id.nhm_anunciante);
+        ImageView nhmFreelancer = (ImageView) findViewById(R.id.nhm_freelancer);
         TextView tvTitulo = (TextView) findViewById(R.id.tv_titulo);
         TextView tvAnunciante = (TextView) findViewById(R.id.tv_anunciante);
+        TextView tvFreelancer = (TextView) findViewById(R.id.tv_freelancer);
         TextView tvLocalizacao = (TextView) findViewById(R.id.tv_localizacao);
         TextView tvDescricao = (TextView) findViewById(R.id.tv_descricao);
 
-        if (inscricao != null) {
-            DtoAnuncio anuncio = inscricao.getAnuncio();
+        if (contratacao != null) {
+            DtoAnuncio anuncio = contratacao.getAnuncio();
+
+            tvTitulo.setText(anuncio.getTitulo());
+
+            tvAnunciante.setText("Anunciante: " + anuncio.getAnunciante().getUsuario().getNome());
             if (anuncio.getAnunciante().getUsuario().getUrlFoto() != null && !anuncio.getAnunciante().getUsuario().getUrlFoto().trim().isEmpty()) {
                 Picasso.with(this).load(anuncio.getAnunciante().getUsuario().getUrlFoto())
                         .placeholder(R.drawable.default_profile).error(R.drawable.default_profile).fit().into(nhmAnunciante);
             }
 
-            tvTitulo.setText(anuncio.getTitulo());
-
-            tvAnunciante.setText(anuncio.getAnunciante().getUsuario().getNome());
+            tvFreelancer.setText("Freelancer: " + contratacao.getFreelancer().getUsuario().getNome());
+            if (contratacao.getFreelancer().getUsuario().getUrlFoto() != null && !contratacao.getFreelancer().getUsuario().getUrlFoto().trim().isEmpty()) {
+                Picasso.with(this).load(contratacao.getFreelancer().getUsuario().getUrlFoto())
+                        .placeholder(R.drawable.default_profile).error(R.drawable.default_profile).fit().into(nhmFreelancer);
+            }
 
             tvLocalizacao.setText(anuncio.getLocalizacao().getCidade() + ", " + new EstadoUtils().getDescriptionByUf(anuncio.getLocalizacao().getEstado()));
 
@@ -149,6 +149,7 @@ public class ContratacaoDetalharActivity extends AppCompatActivity implements Vi
         }
     }
 
+    // TODO: Arrumar a aparencia e lógica da avaliação
     public void showDialog() {
         AlertDialog.Builder popDialog = new AlertDialog.Builder(this);
         RatingBar rating = new RatingBar(this);

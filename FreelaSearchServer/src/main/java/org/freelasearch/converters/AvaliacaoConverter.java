@@ -13,6 +13,8 @@ public abstract class AvaliacaoConverter {
 			dto.setNota(domain.getNota());
 			dto.setData(domain.getData());
 			dto.setComentario(domain.getComentario());
+		} else {
+			return null;
 		}
 
 		return dto;
@@ -26,6 +28,8 @@ public abstract class AvaliacaoConverter {
 			domain.setNota(dto.getNota());
 			domain.setData(dto.getData());
 			domain.setComentario(dto.getComentario());
+		} else {
+			return null;
 		}
 
 		return domain;

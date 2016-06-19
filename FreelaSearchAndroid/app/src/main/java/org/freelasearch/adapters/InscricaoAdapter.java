@@ -48,22 +48,26 @@ public class InscricaoAdapter extends RecyclerView.Adapter<InscricaoAdapter.MyVi
         DtoInscricao inscricao = mList.get(position);
         DtoAnuncio anuncio = inscricao.getAnuncio();
 
-        if (holder.ivFreelancer != null) {
-            if (inscricao.getFreelancer().getUsuario().getUrlFoto() != null && !inscricao.getFreelancer().getUsuario().getUrlFoto().trim().isEmpty()) {
-                Picasso.with(mContext).load(inscricao.getFreelancer().getUsuario().getUrlFoto()).placeholder(R.drawable.default_profile_bigger).error(R.drawable.default_profile_bigger).fit().
-                        transform(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.TOP_RIGHT)).
-                        into(holder.ivFreelancer);
-            } else {
-                holder.ivFreelancer.setImageResource(R.drawable.default_profile_bigger);
-            }
-        }
         if (holder.ivAnunciante != null) {
             if (anuncio.getAnunciante().getUsuario().getUrlFoto() != null && !anuncio.getAnunciante().getUsuario().getUrlFoto().trim().isEmpty()) {
                 Picasso.with(mContext).load(anuncio.getAnunciante().getUsuario().getUrlFoto()).placeholder(R.drawable.default_profile_bigger).error(R.drawable.default_profile_bigger).fit().
                         transform(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.TOP_LEFT)).
                         into(holder.ivAnunciante);
             } else {
-                holder.ivAnunciante.setImageResource(R.drawable.default_profile_bigger);
+                Picasso.with(mContext).load(R.drawable.default_profile_bigger).fit().
+                        transform(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.TOP_LEFT)).
+                        into(holder.ivAnunciante);
+            }
+        }
+        if (holder.ivFreelancer != null) {
+            if (inscricao.getFreelancer().getUsuario().getUrlFoto() != null && !inscricao.getFreelancer().getUsuario().getUrlFoto().trim().isEmpty()) {
+                Picasso.with(mContext).load(inscricao.getFreelancer().getUsuario().getUrlFoto()).placeholder(R.drawable.default_profile_bigger).error(R.drawable.default_profile_bigger).fit().
+                        transform(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.TOP_RIGHT)).
+                        into(holder.ivFreelancer);
+            } else {
+                Picasso.with(mContext).load(R.drawable.default_profile_bigger).fit().
+                        transform(new RoundedCornersTransformation(8, 0, RoundedCornersTransformation.CornerType.TOP_RIGHT)).
+                        into(holder.ivFreelancer);
             }
         }
         holder.tvTitulo.setText(anuncio.getTitulo());

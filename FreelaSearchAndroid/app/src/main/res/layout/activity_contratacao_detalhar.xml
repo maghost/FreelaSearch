@@ -57,11 +57,12 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/app_bar_layout"
                         android:layout_marginBottom="@dimen/small_margin"
+                        android:maxLines="3"
                         android:paddingLeft="@dimen/medium_margin"
                         android:paddingRight="@dimen/medium_margin"
                         android:text="Título"
                         android:textColor="@android:color/white"
-                        android:textSize="34sp" />
+                        android:textSize="30sp" />
 
                     <RelativeLayout
                         android:id="@+id/rl_anunciante"
@@ -72,8 +73,8 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                             android:id="@+id/nhm_anunciante"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
                             android:layout_centerInParent="true"
@@ -94,21 +95,55 @@
                             android:text="Anunciante"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:textColor="@android:color/white"
-                            android:textSize="24sp" />
+                            android:textSize="20sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_freelancer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rl_anunciante"
+                        android:padding="@dimen/medium_margin">
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/nhm_freelancer"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+                            android:singleLine="true"
+                            android:src="@drawable/default_profile"
+                            app:border_color="#FFFFFFFF" />
+
+                        <TextView
+                            android:id="@+id/tv_freelancer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/small_margin"
+                            android:layout_toRightOf="@+id/nhm_freelancer"
+                            android:paddingLeft="3dp"
+                            android:text="Freelancer"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@android:color/white"
+                            android:textSize="20sp" />
                     </RelativeLayout>
 
                     <TextView
                         android:id="@+id/tv_localizacao"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/rl_anunciante"
+                        android:layout_below="@+id/rl_freelancer"
                         android:drawableLeft="@drawable/ic_place_36dp"
                         android:drawablePadding="11dp"
                         android:drawableStart="@drawable/ic_place_36dp"
                         android:padding="@dimen/medium_margin"
                         android:text="Cidade, Estado"
                         android:textColor="@android:color/white"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
                 </RelativeLayout>
             </RelativeLayout>
 

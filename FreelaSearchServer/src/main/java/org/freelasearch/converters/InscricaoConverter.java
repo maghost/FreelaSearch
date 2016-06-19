@@ -27,7 +27,7 @@ public abstract class InscricaoConverter {
 			domain.setAnuncio(AnuncioConverter.dtoToDomain(dto.getAnuncio()));
 			domain.setInscrito(FreelancerConverter.dtoToDomain(dto.getFreelancer()));
 			domain.setDataInscricao(dto.getData());
-			domain.setStatusInscricao(dto.getStatus());
+			domain.setStatusInscricao(dto.getStatus() == null ? 0 : dto.getStatus());
 		}
 
 		return domain;

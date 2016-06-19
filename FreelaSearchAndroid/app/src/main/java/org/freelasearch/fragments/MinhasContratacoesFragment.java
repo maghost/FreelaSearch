@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,12 +16,11 @@ import android.widget.Toast;
 
 import org.freelasearch.R;
 import org.freelasearch.activities.ContratacaoDetalharActivity;
-import org.freelasearch.activities.InscricaoDetalharActivity;
-import org.freelasearch.adapters.InscricaoAdapter;
-import org.freelasearch.dtos.DtoInscricao;
+import org.freelasearch.adapters.ContratacaoAdapter;
+import org.freelasearch.dtos.DtoContratacao;
 import org.freelasearch.interfaces.RecyclerViewOnClickListenerHack;
 import org.freelasearch.tasks.AsyncTaskListener;
-import org.freelasearch.tasks.impl.AsyncTaskListaInscricao;
+import org.freelasearch.tasks.impl.AsyncTaskListaContratacao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,14 +32,14 @@ public class MinhasContratacoesFragment extends Fragment implements RecyclerView
     private static final String PREF_NAME = "SignupActivityPreferences";
 
     private RecyclerView mRecyclerView;
-    private InscricaoAdapter mAdapter;
+    private ContratacaoAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private RecyclerViewOnClickListenerHack mRecyclerViewOnClickListenerHack = this;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private ImageView ivSemInscricao;
-    private AsyncTaskListaInscricao mAsyncTaskListaInscricao;
+    private ImageView ivSemContratacao;
+    private AsyncTaskListaContratacao mAsyncTaskListaContratacao;
 
-    private List<DtoInscricao> mList;
+    private List<DtoContratacao> mList;
 
     public MinhasContratacoesFragment() {
         // Required empty public constructor
@@ -50,11 +48,11 @@ public class MinhasContratacoesFragment extends Fragment implements RecyclerView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_minhas_inscricoes, container, false);
+        View view = inflater.inflate(R.layout.fragment_minhas_contratacoes, container, false);
 
-        ivSemInscricao = (ImageView) view.findViewById(R.id.iv_sem_inscricao);
+        ivSemContratacao = (ImageView) view.findViewById(R.id.iv_sem_contratacao);
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_minhas_inscricoes);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_minhas_contratacoes);
         mSwipeRefreshLayout.setBackgroundResource(android.R.color.transparent);
         mSwipeRefreshLayout.setRefreshing(true);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -68,7 +66,7 @@ public class MinhasContratacoesFragment extends Fragment implements RecyclerView
             }
         });
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_minhas_inscricoes);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_minhas_contratacoes);
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -100,13 +98,13 @@ public class MinhasContratacoesFragment extends Fragment implements RecyclerView
     @Override
     public void onClickListener(View view, int position) {
         Intent intent = new Intent(getActivity(), ContratacaoDetalharActivity.class);
-        intent.putExtra("inscricao", mList.get(position));
+        intent.putExtra("contratacao", mList.get(position));
         startActivity(intent);
     }
 
     public void updateMinhasContratacoesList(int qtdRetorno, int qtdExibida, final int idPrimeiroLista) {
-        mAsyncTaskListaInscricao = new AsyncTaskListaInscricao();
-        mAsyncTaskListaInscricao.setAsyncTaskListener(new AsyncTaskListener() {
+        mAsyncTaskListaContratacao = new AsyncTaskListaContratacao();
+        mAsyncTaskListaContratacao.setAsyncTaskListener(new AsyncTaskListener() {
             @Override
             public void onPreExecute() {
                 mSwipeRefreshLayout.setRefreshing(true);
@@ -116,15 +114,15 @@ public class MinhasContratacoesFragment extends Fragment implements RecyclerView
             public <T> void onComplete(T obj) {
                 if (mList == null) {
                     mList = new ArrayList<>();
-                    mList.addAll((List<DtoInscricao>) obj);
-                    mAdapter = new InscricaoAdapter(getActivity(), mList);
+                    mList.addAll((List<DtoContratacao>) obj);
+                    mAdapter = new ContratacaoAdapter(getActivity(), mList);
                     mAdapter.setRecyclerViewOnClickListenerHack(mRecyclerViewOnClickListenerHack);
                     mRecyclerView.setAdapter(mAdapter);
                 } else {
-                    List<DtoInscricao> listAux = (List<DtoInscricao>) obj;
-                    InscricaoAdapter adapter = (InscricaoAdapter) mRecyclerView.getAdapter();
-                    int totalInscricoesRetornadas = listAux.size();
-                    for (int i = 0; i < totalInscricoesRetornadas; i++) {
+                    List<DtoContratacao> listAux = (List<DtoContratacao>) obj;
+                    ContratacaoAdapter adapter = (ContratacaoAdapter) mRecyclerView.getAdapter();
+                    int totalContratacoesRetornadas = listAux.size();
+                    for (int i = 0; i < totalContratacoesRetornadas; i++) {
                         adapter.addListItem(listAux.get(i), mList.size());
                         if (idPrimeiroLista != 0) {
                             mRecyclerView.getLayoutManager().smoothScrollToPosition(mRecyclerView, null, 0);
@@ -132,10 +130,10 @@ public class MinhasContratacoesFragment extends Fragment implements RecyclerView
                     }
                 }
                 if (mList.isEmpty()) {
-                    ivSemInscricao.setVisibility(View.VISIBLE);
+                    ivSemContratacao.setVisibility(View.VISIBLE);
                     Toast.makeText(getActivity(), "Nenhum item novo encontrado", Toast.LENGTH_SHORT).show();
                 } else {
-                    ivSemInscricao.setVisibility(View.GONE);
+                    ivSemContratacao.setVisibility(View.GONE);
                 }
                 mSwipeRefreshLayout.setRefreshing(false);
             }
@@ -153,16 +151,19 @@ public class MinhasContratacoesFragment extends Fragment implements RecyclerView
         filtro.put("qtdRetorno", qtdRetorno);
         filtro.put("qtdExibida", qtdExibida);
         filtro.put("idPrimeiroLista", idPrimeiroLista);
-        filtro.put("idUsuario", sharedpreferences.getInt("id", 0));
-        filtro.put("tipoBusca", 2);
-        mAsyncTaskListaInscricao.execute(filtro);
+        if (sharedpreferences.getInt("anunciante", 0) != 0) {
+            filtro.put("idAnunciante", sharedpreferences.getInt("anunciante", 0));
+        } else if (sharedpreferences.getInt("freelancer", 0) != 0) {
+            filtro.put("idFreelancer", sharedpreferences.getInt("freelancer", 0));
+        }
+        mAsyncTaskListaContratacao.execute(filtro);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mAsyncTaskListaInscricao != null) {
-            mAsyncTaskListaInscricao.cancel(true);
+        if (mAsyncTaskListaContratacao != null) {
+            mAsyncTaskListaContratacao.cancel(true);
         }
     }
 

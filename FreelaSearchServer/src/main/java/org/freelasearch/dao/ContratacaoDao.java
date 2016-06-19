@@ -35,10 +35,10 @@ public class ContratacaoDao extends GenericDao<Contratacao, Integer> {
 			}
 
 			if (filtro.getIdPrimeiroLista() != 0) {
-				query += " and i.id > " + filtro.getIdPrimeiroLista();
+				query += " and c.id > " + filtro.getIdPrimeiroLista();
 			}
 
-			query += " ORDER BY i.id DESC";
+			query += " ORDER BY c.id DESC";
 			Query q = this.getEntityManager().createQuery(query);
 
 			if (filtro.getQtdRetorno() != 0) {

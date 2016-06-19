@@ -265,6 +265,8 @@ public class AnuncioActivity extends AppCompatActivity implements LabelledSpinne
 
             DtoUsuario dtoUsuario = new DtoUsuario();
             dtoUsuario.setId(sharedpreferences.getInt("id", 0));
+            dtoUsuario.setNome(sharedpreferences.getString("nome", ""));
+            dtoUsuario.setUrlFoto(sharedpreferences.getString("profile_pic", ""));
             dtoAnunciante.setUsuario(dtoUsuario);
 
             dtoAnuncioModificado.setAnunciante(dtoAnunciante);

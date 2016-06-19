@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.freelasearch.dtos.DtoInscricao;
 import org.freelasearch.filters.FiltroInscricao;
+import org.freelasearch.services.ServicoAnunciante;
 import org.freelasearch.services.ServicoInscricao;
 import org.freelasearch.utils.ExceptionFreelaSearch;
 
@@ -31,6 +32,7 @@ public class InscricaoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			ServicoInscricao servico = new ServicoInscricao();
+			ServicoAnunciante servicoAnunciante = new ServicoAnunciante();
 			ObjectOutputStream oos = new ObjectOutputStream(response.getOutputStream());
 
 			// BUSCAR
@@ -45,6 +47,7 @@ public class InscricaoServlet extends HttpServlet {
 					filtro.setIdPrimeiroLista(request.getParameter("idPrimeiroLista") == null ? 0 : Integer.valueOf(request.getParameter("idPrimeiroLista")));
 					filtro.setTipoBusca(request.getParameter("tipoBusca") == null ? null : Integer.valueOf(request.getParameter("tipoBusca")));
 					filtro.setIdUsuario(request.getParameter("idUsuario") == null ? null : Integer.valueOf(request.getParameter("idUsuario")));
+					filtro.setIdAnuncio(request.getParameter("idAnuncio") == null ? null : Integer.valueOf(request.getParameter("idAnuncio")));
 				}
 				oos.writeObject(servico.buscarLista(filtro));
 			}
@@ -52,6 +55,10 @@ public class InscricaoServlet extends HttpServlet {
 			else if (request.getRequestURI().toLowerCase().endsWith("/salvar")) {
 				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());
 				DtoInscricao dto = (DtoInscricao) ois.readObject();
+				
+				// Como o Anúncio possui Anunciante, é preciso preencher esse Objeto por completo.
+				dto = servico.salvar(dto);
+				dto.getAnuncio().setAnunciante(servicoAnunciante.buscarPorId(dto.getAnuncio().getAnunciante().getId()));
 
 				oos.writeObject(servico.salvar(dto));
 			}

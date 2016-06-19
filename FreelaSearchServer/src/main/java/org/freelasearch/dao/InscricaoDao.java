@@ -23,31 +23,24 @@ public class InscricaoDao extends GenericDao<Inscricao, Integer> {
 				inscricoes.add(inscricao);
 			}
 		} else {
-			// TODO: Verificar uma forma de deixar isso mais evidente
-			// Tipo Busca:
-			// 1 = Minhas Inscrições
-			// TODO: Depois se der tempo fazer as contratações separadas das inscrições, tanto no Server quanto no Android
-			// 2 = Minhas Contratações (inscrições ativas)
-
 			String query = "FROM Inscricao i WHERE 1=1 ";
-			if (filtro.getTipoBusca() != null) {
-				if (filtro.getTipoBusca() == 1 && filtro.getIdUsuario() != null) {
-					query += " and i.inscrito.usuario.id = " + filtro.getIdUsuario();
-					query += " and i.statusInscricao <> " + 1;
-				} else if (filtro.getTipoBusca() == 2 && filtro.getIdUsuario() != null) {
-					query += " and i.inscrito.usuario.id = " + filtro.getIdUsuario();
-					query += " and i.statusInscricao = " + 1; // Inscrição aceita
-				}
+			if (filtro.getTipoBusca() != null && filtro.getTipoBusca() == 1) {
+				query += " and i.inscrito.usuario.id = " + filtro.getIdUsuario();
+				query += " and i.statusInscricao <> " + 1;
 			}
 
-			if (filtro.getIdPrimeiroLista() != 0) {
+			if (filtro.getIdPrimeiroLista() != null && filtro.getIdPrimeiroLista() != 0) {
 				query += " and i.id > " + filtro.getIdPrimeiroLista();
+			}
+
+			if (filtro.getIdAnuncio() != null) {
+				query += " and i.anuncio.id = " + filtro.getIdAnuncio();
 			}
 
 			query += " ORDER BY i.id DESC";
 			Query q = this.getEntityManager().createQuery(query);
 
-			if (filtro.getQtdRetorno() != 0) {
+			if (filtro.getQtdRetorno() != null && filtro.getQtdRetorno() != 0) {
 				q.setFirstResult(filtro.getQtdExibida());
 				q.setMaxResults(filtro.getQtdRetorno());
 			}

@@ -2,6 +2,7 @@ package org.freelasearch.activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,13 +25,16 @@ import org.freelasearch.R;
 import org.freelasearch.dtos.DtoAnunciante;
 import org.freelasearch.dtos.DtoAnuncio;
 import org.freelasearch.dtos.DtoFreelancer;
+import org.freelasearch.dtos.DtoInscricao;
 import org.freelasearch.dtos.DtoUsuario;
 import org.freelasearch.tasks.AsyncTaskListener;
 import org.freelasearch.tasks.impl.AsyncTaskAnunciante;
 import org.freelasearch.tasks.impl.AsyncTaskFreelancer;
+import org.freelasearch.tasks.impl.AsyncTaskInscricao;
 import org.freelasearch.tasks.impl.AsyncTaskListaAnunciante;
 import org.freelasearch.tasks.impl.AsyncTaskListaAnuncio;
 import org.freelasearch.tasks.impl.AsyncTaskListaFreelancer;
+import org.freelasearch.tasks.impl.AsyncTaskListaInscricao;
 import org.freelasearch.utils.EstadoUtils;
 
 import java.util.Collections;
@@ -46,12 +50,21 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
 
     private DtoAnuncio anuncio;
     private Toolbar mToolbar;
+
+    private LinearLayout llInscritos;
+    private AppCompatButton btnInscritos;
+    private TextView tvNenhumInscrito;
+
     private AsyncTaskListaAnuncio mAsyncTaskListaAnuncio;
 
-    private AsyncTaskListaAnunciante mAsyncTaskListaAnunciante;
-    private AsyncTaskListaFreelancer mAsyncTaskListaFreelancer;
     private AsyncTaskAnunciante mAsyncTaskAnunciante;
+    private AsyncTaskListaAnunciante mAsyncTaskListaAnunciante;
+
     private AsyncTaskFreelancer mAsyncTaskFreelancer;
+    private AsyncTaskListaFreelancer mAsyncTaskListaFreelancer;
+
+    private AsyncTaskInscricao mAsyncTaskInscricao;
+    private AsyncTaskListaInscricao mAsyncTaskListaInscricao;
 
     private Integer idUsuario;
     private ProgressDialog progress;
@@ -102,7 +115,11 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                 AlertDialog.Builder alertDialogInscricao = new AlertDialog.Builder(this);
                 alertDialogInscricao.setTitle("Deseja inscrever-se?");
                 alertDialogInscricao.setMessage("Ao inscrever-se para a vaga será enviada uma notificação para o anunciante informando-o do seu interesse pelo anúncio.");
-                alertDialogInscricao.setPositiveButton("Ok", null);
+                alertDialogInscricao.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        inscrever();
+                    }
+                });
                 alertDialogInscricao.setNegativeButton("Cancelar", null);
                 alertDialogInscricao.show();
                 break;
@@ -111,6 +128,9 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                 break;
             case R.id.btn_logar_anunciante:
                 selecionarPerfil("anunciante");
+                break;
+            case R.id.btn_inscritos:
+                abrirInscritos();
                 break;
         }
     }
@@ -145,10 +165,14 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
         TextView tvAnunciante = (TextView) findViewById(R.id.tv_anunciante);
         TextView tvLocalizacao = (TextView) findViewById(R.id.tv_localizacao);
         TextView tvDescricao = (TextView) findViewById(R.id.tv_descricao);
-        AppCompatButton btnInscrever = (AppCompatButton) findViewById(R.id.btn_inscrever_se);
+        TextView tvAnuncioBloqueado = (TextView) findViewById(R.id.tv_anuncio_bloqueado);
+        tvNenhumInscrito = (TextView) findViewById(R.id.tv_nenhum_inscrito);
         LinearLayout llLogarFreelancer = (LinearLayout) findViewById(R.id.ll_logar_freelancer);
+        llInscritos = (LinearLayout) findViewById(R.id.ll_inscritos);
+        AppCompatButton btnInscrever = (AppCompatButton) findViewById(R.id.btn_inscrever_se);
         AppCompatButton btnLogarFreelancer = (AppCompatButton) findViewById(R.id.btn_logar_freelancer);
         AppCompatButton btnLogarAnunciante = (AppCompatButton) findViewById(R.id.btn_logar_anunciante);
+        btnInscritos = (AppCompatButton) findViewById(R.id.btn_inscritos);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         if (anuncio != null) {
@@ -165,13 +189,15 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
 
             tvDescricao.setText(anuncio.getDescricao());
 
-            // Se anúncio não for inativo (status != 1) deve mostrar algum botão de ação
-            if (anuncio.getStatus() != 1) {
+            // Se o anúncio não for inativo ou finalizado (1 = inativo, 2 = finalizado) deve mostrar algum botão de ação
+            if (anuncio.getStatus() != 1 && anuncio.getStatus() != 2) {
                 btnInscrever.setOnClickListener(this);
 
                 btnLogarFreelancer.setOnClickListener(this);
 
                 btnLogarAnunciante.setOnClickListener(this);
+
+                btnInscritos.setOnClickListener(this);
 
                 // Lógicas para exibir ou ocultar botões/funcionaldades
                 if (sharedpreferences.getInt("id", 0) != anuncio.getAnunciante().getUsuario().getId()) {
@@ -191,6 +217,7 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                             }
                         });
                     } else {
+                        buscarInscricoes();
                         fab.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -202,8 +229,46 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                     }
                     fab.setVisibility(View.VISIBLE);
                 }
+            } else {
+                tvAnuncioBloqueado.setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    /**
+     * Busca as inscrições e libera o botão referente aos inscritos ou a mensagem informando que não possui inscrições
+     */
+    private void buscarInscricoes() {
+        mAsyncTaskListaInscricao = new AsyncTaskListaInscricao();
+        mAsyncTaskListaInscricao.setAsyncTaskListener(new AsyncTaskListener() {
+            @Override
+            public void onPreExecute() {
+            }
+
+            @Override
+            public <T> void onComplete(T obj) {
+                if (obj != null) {
+                    List<DtoInscricao> dtoInscricaoList = (List<DtoInscricao>) obj;
+
+                    if (dtoInscricaoList.size() > 0) {
+                        llInscritos.setVisibility(View.VISIBLE);
+                        btnInscritos.setText("Visualizar Inscrições (" + dtoInscricaoList.size() + ")");
+                    } else {
+                        tvNenhumInscrito.setVisibility(View.VISIBLE);
+                        tvNenhumInscrito.setText("Esse anúncio ainda não possui inscrições.");
+                    }
+                } else {
+                    Log.e("FreelaSearch", "Falha ao buscar inscrições para o anúncio #" + anuncio.getId());
+                }
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+                Log.e("FreelaSearch", errorMsg);
+            }
+        });
+
+        mAsyncTaskListaInscricao.execute(Collections.singletonMap("idAnuncio", anuncio.getId()));
     }
 
     public void selecionarPerfil(String perfil) {
@@ -233,12 +298,14 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                         }
                     } else {
                         Log.e("FreelaSearch", "Falha ao selecionar o perfil do Anunciante");
+                        progress.dismiss();
                         return;
                     }
                 }
 
                 @Override
                 public void onError(String errorMsg) {
+                    progress.dismiss();
                     Log.e("FreelaSearch", errorMsg);
                 }
             });
@@ -281,9 +348,7 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                 }
             });
 
-            Map<String, String> filtro = new HashMap<>();
-            filtro.put("idUsuario", idUsuario.toString());
-            mAsyncTaskListaFreelancer.execute(filtro);
+            mAsyncTaskListaFreelancer.execute(Collections.singletonMap("idUsuario", idUsuario.toString()));
         } else {
             return;
         }
@@ -358,6 +423,56 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
         editor.commit();
     }
 
+    private void inscrever() {
+        mAsyncTaskInscricao = new AsyncTaskInscricao();
+        mAsyncTaskInscricao.setAsyncTaskListener(new AsyncTaskListener() {
+            @Override
+            public void onPreExecute() {
+                progress = new ProgressDialog(AnuncioDetalharActivity.this);
+                progress.setMessage("Inscrevendo-se no Anúncio...");
+                progress.setCanceledOnTouchOutside(false);
+                progress.show();
+            }
+
+            @Override
+            public <T> void onComplete(T obj) {
+                progress.dismiss();
+                abrirMinhasInscricoes();
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+                progress.dismiss();
+                Log.e("FreelaSearch", errorMsg);
+            }
+        });
+
+        DtoInscricao dto = new DtoInscricao();
+
+        dto.setAnuncio(anuncio);
+
+        DtoFreelancer dtoFreelancer = new DtoFreelancer();
+        dtoFreelancer.setId(sharedpreferences.getInt("freelancer", 0));
+        dto.setFreelancer(dtoFreelancer);
+
+        dto.setStatus(0);
+
+        mAsyncTaskInscricao.execute(dto);
+    }
+
+    private void abrirMinhasInscricoes() {
+        Intent intent = new Intent(AnuncioDetalharActivity.this, MainActivity.class);
+        intent.putExtra("idNavigationItem", R.id.nav_minhas_inscricoes);
+        startActivity(intent);
+        finish();
+    }
+
+    private void abrirInscritos() {
+        Intent intent = new Intent(AnuncioDetalharActivity.this, InscricoesAnuncioActivity.class);
+        intent.putExtra("anuncio", anuncio);
+        startActivity(intent);
+    }
+
     @Override
     public void onBackPressed() {
         if (getIntent() != null && getIntent().getExtras() != null && getIntent().getExtras().getBoolean("backMeusAnuncios")) {
@@ -387,6 +502,9 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
         }
         if (mAsyncTaskFreelancer != null) {
             mAsyncTaskFreelancer.cancel(true);
+        }
+        if (mAsyncTaskInscricao != null) {
+            mAsyncTaskInscricao.cancel(true);
         }
     }
 }

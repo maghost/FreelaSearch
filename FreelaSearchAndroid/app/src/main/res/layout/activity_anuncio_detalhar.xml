@@ -121,6 +121,45 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin">
 
+                <!-- Visualizar Freelancer Inscritos -->
+                <LinearLayout
+                    android:id="@+id/ll_inscritos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/btn_inscritos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        android:background="@color/accent"
+                        android:padding="@dimen/padding_button"
+                        android:text="Visualizar Freelancers Inscritos"
+                        android:textColor="@color/icons" />
+                </LinearLayout>
+
+                <!-- Anúncio Inativo ou Finalizado -->
+                <TextView
+                    android:id="@+id/tv_anuncio_bloqueado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Não é possível editar ou inscrever-se nesse anúncio. Motivo: Anúncio Finalizado ou Inativo."
+                    android:textAlignment="center"
+                    android:textColor="@color/secondary_text"
+                    android:visibility="gone" />
+
+                <!-- Nenhum Freelancer Inscrito -->
+                <TextView
+                    android:id="@+id/tv_nenhum_inscrito"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Este anúncio ainda não possui inscritos"
+                    android:textAlignment="center"
+                    android:textColor="@color/secondary_text"
+                    android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/tv_descricao"
                     android:layout_width="match_parent"
