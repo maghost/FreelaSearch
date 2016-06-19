@@ -39,7 +39,7 @@ public class AnuncioDao extends GenericDao<Anuncio, Integer> {
 				} else if (filtro.getTipoBusca() == 2) {
 					query += " and a.status = 1 and a.anunciante.usuario.id = " + filtro.getIdUsuario();
 				} else if (filtro.getTipoBusca() == 3) {
-					query += " and a.status = 1";
+					query += " and a.status = 2";
 				}
 			}
 

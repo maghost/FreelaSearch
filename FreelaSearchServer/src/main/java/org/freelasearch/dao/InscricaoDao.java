@@ -33,6 +33,10 @@ public class InscricaoDao extends GenericDao<Inscricao, Integer> {
 				query += " and i.id > " + filtro.getIdPrimeiroLista();
 			}
 
+			if (filtro.getIdFreelancer() != null) {
+				query += " and i.inscrito.id = " + filtro.getIdFreelancer();
+			}
+
 			if (filtro.getIdAnuncio() != null) {
 				query += " and i.anuncio.id = " + filtro.getIdAnuncio();
 			}
@@ -49,5 +53,4 @@ public class InscricaoDao extends GenericDao<Inscricao, Integer> {
 		}
 		return inscricoes;
 	}
-
 }

@@ -219,6 +219,18 @@
                     android:textColor="@color/icons"
                     android:visibility="gone" />
 
+                <!-- Cancelar Inscrição -->
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_cancelar_inscricao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:background="@color/btn_alert"
+                    android:padding="@dimen/padding_button"
+                    android:text="@string/cancelar_inscricao"
+                    android:textColor="@color/icons"
+                    android:visibility="gone" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

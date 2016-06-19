@@ -1,10 +1,12 @@
 package org.freelasearch.activities;
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -99,6 +101,7 @@ public class InscricaoDetalharActivity extends AppCompatActivity implements View
         TextView tvAnunciante = (TextView) findViewById(R.id.tv_anunciante);
         TextView tvLocalizacao = (TextView) findViewById(R.id.tv_localizacao);
         TextView tvDescricao = (TextView) findViewById(R.id.tv_descricao);
+        AppCompatButton btnCancelarInscricao = (AppCompatButton) findViewById(R.id.btn_cancelar_inscricao);
 
         if (inscricao != null) {
             DtoAnuncio anuncio = inscricao.getAnuncio();
@@ -115,10 +118,29 @@ public class InscricaoDetalharActivity extends AppCompatActivity implements View
 
             tvDescricao.setText(anuncio.getDescricao());
 
+            btnCancelarInscricao.setOnClickListener(this);
         }
+    }
+
+    private void cancelarInscricao() {
+        // TODO: Incrementar esse método
     }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_cancelar_inscricao:
+                AlertDialog.Builder alertDialogCancelar = new AlertDialog.Builder(this);
+                alertDialogCancelar.setTitle("Deseja cancelar sua inscrição?");
+                alertDialogCancelar.setMessage("Ao cancelar sua inscrição você não será mais elegível para essa vaga até que se inscreva novamente.");
+                alertDialogCancelar.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        cancelarInscricao();
+                    }
+                });
+                alertDialogCancelar.setNegativeButton("Cancelar", null);
+                alertDialogCancelar.show();
+                break;
+        }
     }
 }

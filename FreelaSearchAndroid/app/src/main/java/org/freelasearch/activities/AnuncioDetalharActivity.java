@@ -55,6 +55,9 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
     private AppCompatButton btnInscritos;
     private TextView tvNenhumInscrito;
 
+    private AppCompatButton btnInscrever;
+    private AppCompatButton btnCancelarInscricao;
+
     private AsyncTaskListaAnuncio mAsyncTaskListaAnuncio;
 
     private AsyncTaskAnunciante mAsyncTaskAnunciante;
@@ -123,6 +126,18 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                 alertDialogInscricao.setNegativeButton("Cancelar", null);
                 alertDialogInscricao.show();
                 break;
+            case R.id.btn_cancelar_inscricao:
+                AlertDialog.Builder alertDialogCancelar = new AlertDialog.Builder(this);
+                alertDialogCancelar.setTitle("Deseja cancelar sua inscrição?");
+                alertDialogCancelar.setMessage("Ao cancelar sua inscrição você não será mais elegível para essa vaga até que se inscreva novamente.");
+                alertDialogCancelar.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        cancelarInscricao();
+                    }
+                });
+                alertDialogCancelar.setNegativeButton("Cancelar", null);
+                alertDialogCancelar.show();
+                break;
             case R.id.btn_logar_freelancer:
                 selecionarPerfil("freelancer");
                 break;
@@ -169,7 +184,8 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
         tvNenhumInscrito = (TextView) findViewById(R.id.tv_nenhum_inscrito);
         LinearLayout llLogarFreelancer = (LinearLayout) findViewById(R.id.ll_logar_freelancer);
         llInscritos = (LinearLayout) findViewById(R.id.ll_inscritos);
-        AppCompatButton btnInscrever = (AppCompatButton) findViewById(R.id.btn_inscrever_se);
+        btnInscrever = (AppCompatButton) findViewById(R.id.btn_inscrever_se);
+        btnCancelarInscricao = (AppCompatButton) findViewById(R.id.btn_cancelar_inscricao);
         AppCompatButton btnLogarFreelancer = (AppCompatButton) findViewById(R.id.btn_logar_freelancer);
         AppCompatButton btnLogarAnunciante = (AppCompatButton) findViewById(R.id.btn_logar_anunciante);
         btnInscritos = (AppCompatButton) findViewById(R.id.btn_inscritos);
@@ -193,6 +209,8 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
             if (anuncio.getStatus() != 1 && anuncio.getStatus() != 2) {
                 btnInscrever.setOnClickListener(this);
 
+                btnCancelarInscricao.setOnClickListener(this);
+
                 btnLogarFreelancer.setOnClickListener(this);
 
                 btnLogarAnunciante.setOnClickListener(this);
@@ -202,7 +220,7 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                 // Lógicas para exibir ou ocultar botões/funcionaldades
                 if (sharedpreferences.getInt("id", 0) != anuncio.getAnunciante().getUsuario().getId()) {
                     if (sharedpreferences.getInt("freelancer", 0) != 0) {
-                        btnInscrever.setVisibility(View.VISIBLE);
+                        buscarInscricoesFreelancer();
                     } else {
                         llLogarFreelancer.setVisibility(View.VISIBLE);
                     }
@@ -257,6 +275,16 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
                         tvNenhumInscrito.setVisibility(View.VISIBLE);
                         tvNenhumInscrito.setText("Esse anúncio ainda não possui inscrições.");
                     }
+
+                    if (sharedpreferences.getInt("freelancer", 0) != 0) {
+                        Integer idFreelancer = sharedpreferences.getInt("freelancer", 0);
+                        for (DtoInscricao inscricao : dtoInscricaoList) {
+                            if (inscricao.getFreelancer().getId() == idFreelancer) {
+
+                                break;
+                            }
+                        }
+                    }
                 } else {
                     Log.e("FreelaSearch", "Falha ao buscar inscrições para o anúncio #" + anuncio.getId());
                 }
@@ -269,6 +297,45 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
         });
 
         mAsyncTaskListaInscricao.execute(Collections.singletonMap("idAnuncio", anuncio.getId()));
+    }
+
+    /**
+     * Busca as inscrições feitas pelo Freelancer logado, e verifica se o mesmo já está inscrito
+     */
+    private void buscarInscricoesFreelancer() {
+        mAsyncTaskListaInscricao = new AsyncTaskListaInscricao();
+        mAsyncTaskListaInscricao.setAsyncTaskListener(new AsyncTaskListener() {
+            @Override
+            public void onPreExecute() {
+            }
+
+            @Override
+            public <T> void onComplete(T obj) {
+                if (obj != null) {
+                    List<DtoInscricao> dtoInscricaoList = (List<DtoInscricao>) obj;
+
+                    if (dtoInscricaoList.size() > 0) {
+                        btnCancelarInscricao.setVisibility(View.VISIBLE);
+                        btnInscrever.setVisibility(View.GONE);
+                    } else {
+                        btnCancelarInscricao.setVisibility(View.GONE);
+                        btnInscrever.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    Log.e("FreelaSearch", "Falha ao buscar inscrições para o anúncio #" + anuncio.getId() + " e Freelancer #" + sharedpreferences.getInt("freelancer", 0));
+                }
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+                Log.e("FreelaSearch", errorMsg);
+            }
+        });
+
+        Map<String, Integer> filtro = new HashMap<>();
+        filtro.put("idAnuncio", anuncio.getId());
+        filtro.put("idFreelancer", sharedpreferences.getInt("freelancer", 0));
+        mAsyncTaskListaInscricao.execute(filtro);
     }
 
     public void selecionarPerfil(String perfil) {
@@ -471,6 +538,10 @@ public class AnuncioDetalharActivity extends AppCompatActivity implements View.O
         Intent intent = new Intent(AnuncioDetalharActivity.this, InscricoesAnuncioActivity.class);
         intent.putExtra("anuncio", anuncio);
         startActivity(intent);
+    }
+
+    private void cancelarInscricao() {
+        // TODO: Incrementar esse método
     }
 
     @Override

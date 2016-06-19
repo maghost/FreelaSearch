@@ -28,6 +28,7 @@ import org.freelasearch.fragments.MainFragment;
 import org.freelasearch.fragments.MeusAnunciosFragment;
 import org.freelasearch.fragments.MinhasContratacoesFragment;
 import org.freelasearch.fragments.MinhasInscricoesFragment;
+import org.freelasearch.fragments.MinhasMensagensFragment;
 import org.freelasearch.fragments.TabAnunciosFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -185,6 +186,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_contratacoes) {
             setToolbarTitle(R.string.contratacoes);
             fragment = new MinhasContratacoesFragment();
+        } else if (id == R.id.nav_mensagens) {
+            setToolbarTitle(R.string.mensagens);
+            fragment = new MinhasMensagensFragment();
         } else if (id == R.id.nav_settings) {
             startActivity(SettingsActivity.class);
             return false;

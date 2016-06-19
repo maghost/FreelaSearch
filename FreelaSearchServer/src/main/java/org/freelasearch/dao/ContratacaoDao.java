@@ -14,13 +14,13 @@ public class ContratacaoDao extends GenericDao<Contratacao, Integer> {
 	@SuppressWarnings("unchecked")
 	public List<Contratacao> findByFiltro(FiltroContratacao filtro) {
 
-		List<Contratacao> contratacaoes = new ArrayList<>();
+		List<Contratacao> contratacoes = new ArrayList<>();
 
 		// Se filtro possuir o id da contratacao, faz a busca direta, se não, utiliza lógicas para filtrar
 		if (filtro.getIdContratacao() != null) {
 			Contratacao contratacao = findById(filtro.getIdContratacao());
 			if (contratacao != null) {
-				contratacaoes.add(contratacao);
+				contratacoes.add(contratacao);
 			}
 		} else {
 			String query = "FROM Contratacao c WHERE 1=1 ";
@@ -46,9 +46,9 @@ public class ContratacaoDao extends GenericDao<Contratacao, Integer> {
 				q.setMaxResults(filtro.getQtdRetorno());
 			}
 
-			contratacaoes = (List<Contratacao>) q.getResultList();
+			contratacoes = (List<Contratacao>) q.getResultList();
 		}
-		return contratacaoes;
+		return contratacoes;
 	}
 
 }

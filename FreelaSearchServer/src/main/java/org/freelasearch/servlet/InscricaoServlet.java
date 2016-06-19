@@ -47,6 +47,7 @@ public class InscricaoServlet extends HttpServlet {
 					filtro.setIdPrimeiroLista(request.getParameter("idPrimeiroLista") == null ? 0 : Integer.valueOf(request.getParameter("idPrimeiroLista")));
 					filtro.setTipoBusca(request.getParameter("tipoBusca") == null ? null : Integer.valueOf(request.getParameter("tipoBusca")));
 					filtro.setIdUsuario(request.getParameter("idUsuario") == null ? null : Integer.valueOf(request.getParameter("idUsuario")));
+					filtro.setIdFreelancer(request.getParameter("idFreelancer") == null ? null : Integer.valueOf(request.getParameter("idFreelancer")));
 					filtro.setIdAnuncio(request.getParameter("idAnuncio") == null ? null : Integer.valueOf(request.getParameter("idAnuncio")));
 				}
 				oos.writeObject(servico.buscarLista(filtro));
@@ -55,7 +56,7 @@ public class InscricaoServlet extends HttpServlet {
 			else if (request.getRequestURI().toLowerCase().endsWith("/salvar")) {
 				ObjectInputStream ois = new ObjectInputStream(request.getInputStream());
 				DtoInscricao dto = (DtoInscricao) ois.readObject();
-				
+
 				// Como o Anúncio possui Anunciante, é preciso preencher esse Objeto por completo.
 				dto = servico.salvar(dto);
 				dto.getAnuncio().setAnunciante(servicoAnunciante.buscarPorId(dto.getAnuncio().getAnunciante().getId()));
