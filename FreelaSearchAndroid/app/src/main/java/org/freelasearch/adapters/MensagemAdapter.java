@@ -111,6 +111,8 @@ public class MensagemAdapter extends RecyclerView.Adapter<MensagemAdapter.MyView
             tvSistema = (TextView) itemView.findViewById(R.id.tv_sistema);
             tvMensagem = (TextView) itemView.findViewById(R.id.tv_mensagem);
             tvData = (TextView) itemView.findViewById(R.id.tv_data);
+
+            itemView.setOnClickListener(this);
         }
 
         @Override

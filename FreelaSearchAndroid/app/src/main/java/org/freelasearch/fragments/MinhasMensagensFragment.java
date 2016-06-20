@@ -1,10 +1,10 @@
 package org.freelasearch.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.freelasearch.R;
+import org.freelasearch.activities.ContratacaoDetalharActivity;
+import org.freelasearch.activities.MainActivity;
+import org.freelasearch.activities.MensagemDetalharActivity;
 import org.freelasearch.adapters.MensagemAdapter;
 import org.freelasearch.dtos.DtoMensagem;
 import org.freelasearch.interfaces.RecyclerViewOnClickListenerHack;
@@ -21,19 +24,21 @@ import org.freelasearch.tasks.AsyncTaskListener;
 import org.freelasearch.tasks.impl.AsyncTaskListaMensagem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 public class MinhasMensagensFragment extends Fragment implements RecyclerViewOnClickListenerHack {
 
     private static final String PREF_NAME = "SignupActivityPreferences";
+    private SharedPreferences sharedpreferences;
 
     private RecyclerView mRecyclerView;
     private MensagemAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private RecyclerViewOnClickListenerHack mRecyclerViewOnClickListenerHack = this;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
     private ImageView ivSemMensagem;
     private AsyncTaskListaMensagem mAsyncTaskListaMensagem;
 
@@ -50,44 +55,14 @@ public class MinhasMensagensFragment extends Fragment implements RecyclerViewOnC
 
         ivSemMensagem = (ImageView) view.findViewById(R.id.iv_sem_mensagem);
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_minhas_mensagens);
-        mSwipeRefreshLayout.setBackgroundResource(android.R.color.transparent);
-        mSwipeRefreshLayout.setRefreshing(true);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (mList.size() > 0) {
-                    updateMinhasMensagensList(0, mList.size(), mList.get(0).getId());
-                } else {
-                    updateMinhasMensagensList(10, 0, 0);
-                }
-            }
-        });
-
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_minhas_mensagens);
         mRecyclerView.setHasFixedSize(false);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                LinearLayoutManager llm = (LinearLayoutManager) mRecyclerView.getLayoutManager();
-                if (mList.size() == llm.findLastCompletelyVisibleItemPosition() + 1) {
-                    updateMinhasMensagensList(10, mList.size(), 0);
-                }
-            }
-        });
 
         mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        updateMinhasMensagensList(10, 0, 0);
+        updateMinhasMensagensList(0, 0, 0);
 
         // Inflate the layout for this fragment
         return view;
@@ -95,9 +70,9 @@ public class MinhasMensagensFragment extends Fragment implements RecyclerViewOnC
 
     @Override
     public void onClickListener(View view, int position) {
-        /*Intent intent = new Intent(getActivity(), MensagemDetalharActivity.class);
+        Intent intent = new Intent(getActivity(), MensagemDetalharActivity.class);
         intent.putExtra("mensagem", mList.get(position));
-        startActivity(intent);*/
+        startActivity(intent);
     }
 
     public void updateMinhasMensagensList(int qtdRetorno, int qtdExibida, final int idPrimeiroLista) {
@@ -105,56 +80,76 @@ public class MinhasMensagensFragment extends Fragment implements RecyclerViewOnC
         mAsyncTaskListaMensagem.setAsyncTaskListener(new AsyncTaskListener() {
             @Override
             public void onPreExecute() {
-                mSwipeRefreshLayout.setRefreshing(true);
             }
 
             @Override
             public <T> void onComplete(T obj) {
-                if (mList == null) {
-                    mList = new ArrayList<>();
-                    mList.addAll((List<DtoMensagem>) obj);
-                    mAdapter = new MensagemAdapter(getActivity(), mList);
-                    mAdapter.setRecyclerViewOnClickListenerHack(mRecyclerViewOnClickListenerHack);
-                    mRecyclerView.setAdapter(mAdapter);
-                } else {
-                    List<DtoMensagem> listAux = (List<DtoMensagem>) obj;
-                    MensagemAdapter adapter = (MensagemAdapter) mRecyclerView.getAdapter();
-                    int totalMensagensRetornadas = listAux.size();
-                    for (int i = 0; i < totalMensagensRetornadas; i++) {
-                        adapter.addListItem(listAux.get(i), mList.size());
-                        if (idPrimeiroLista != 0) {
-                            mRecyclerView.getLayoutManager().smoothScrollToPosition(mRecyclerView, null, 0);
-                        }
-                    }
-                }
+                mList = new ArrayList<>();
+                mList.addAll(separarMensagens((List<DtoMensagem>) obj));
+                mAdapter = new MensagemAdapter(getActivity(), mList);
+                mAdapter.setRecyclerViewOnClickListenerHack(mRecyclerViewOnClickListenerHack);
+                mRecyclerView.setAdapter(mAdapter);
+
                 if (mList.isEmpty()) {
                     ivSemMensagem.setVisibility(View.VISIBLE);
-                    Toast.makeText(getActivity(), "Nenhuma mensagem nova encontrada", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Nenhum item novo encontrado", Toast.LENGTH_SHORT).show();
                 } else {
                     ivSemMensagem.setVisibility(View.GONE);
                 }
-                mSwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onError(String errorMsg) {
                 Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
-                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
 
-        SharedPreferences sharedpreferences = getActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        sharedpreferences = getActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
 
         Map<String, String> filtro = new HashMap<>();
         filtro.put("qtdRetorno", String.valueOf(qtdRetorno));
         filtro.put("qtdExibida", String.valueOf(qtdExibida));
         filtro.put("idPrimeiroLista", String.valueOf(idPrimeiroLista));
-        if (sharedpreferences.getInt("anunciante", 0) != 0) {
-            filtro.put("idAnunciante", String.valueOf(sharedpreferences.getInt("anunciante", 0)));
-        } else if (sharedpreferences.getInt("freelancer", 0) != 0) {
-            filtro.put("idFreelancer", String.valueOf(sharedpreferences.getInt("freelancer", 0)));
-        }
+        filtro.put("idUsuario", String.valueOf(sharedpreferences.getInt("id", 0)));
         mAsyncTaskListaMensagem.execute(filtro);
+    }
+
+    private List<DtoMensagem> separarMensagens(List<DtoMensagem> dtoMensagemList) {
+        List<DtoMensagem> dtoMensagemListSeparada = new ArrayList<>();
+        Map<Integer, DtoMensagem> dtoMensagemMap = new HashMap<>();
+
+        Integer idUsuario = sharedpreferences.getInt("id", 0);
+        Integer idContraparte = null;
+        for (DtoMensagem dtoMensagem : dtoMensagemList) {
+            if (dtoMensagem.getUsuarioDestinatario() == null) {
+                idContraparte = null;
+            } else if (dtoMensagem.getUsuarioDestinatario().getId().equals(idUsuario)) {
+                idContraparte = dtoMensagem.getUsuarioRemetente().getId();
+            } else if (dtoMensagem.getUsuarioRemetente().getId().equals(idUsuario)) {
+                idContraparte = dtoMensagem.getUsuarioDestinatario().getId();
+                // Deixa setado o usuário da contraparte
+                dtoMensagem.setUsuarioRemetente(dtoMensagem.getUsuarioDestinatario());
+            } else {
+                continue;
+            }
+
+            if (!dtoMensagemMap.containsKey(idContraparte)) {
+                dtoMensagemMap.put(idContraparte, dtoMensagem);
+            }
+        }
+
+        Iterator entries = dtoMensagemMap.entrySet().iterator();
+        while (entries.hasNext()) {
+            Map.Entry thisEntry = (Map.Entry) entries.next();
+            //Integer key = (Integer) thisEntry.getKey();
+            DtoMensagem value = (DtoMensagem) thisEntry.getValue();
+
+            dtoMensagemListSeparada.add(value);
+        }
+
+        // Inverte porque ao passar do map para lista acaba invertendo a ordem das mensagens
+        Collections.reverse(dtoMensagemListSeparada);
+        return dtoMensagemListSeparada;
     }
 
     @Override

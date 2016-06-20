@@ -71,6 +71,7 @@
         <activity
             android:name=".activities.InscricoesAnuncioActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activities.MensagemDetalharActivity"></activity>
     </application>
 
 </manifest>

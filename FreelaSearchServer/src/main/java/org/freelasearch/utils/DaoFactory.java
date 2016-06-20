@@ -12,6 +12,7 @@ import org.freelasearch.dao.FreelancerDao;
 import org.freelasearch.dao.InscricaoDao;
 import org.freelasearch.dao.MensagemDao;
 import org.freelasearch.dao.UsuarioDao;
+import org.freelasearch.dao.ViewFreelaSearchDao;
 
 public final class DaoFactory {
 
@@ -158,6 +159,20 @@ public final class DaoFactory {
 		}
 
 		return usuarioDaoInstance;
+	}
+
+	// /////////////////////////////////////////////////////////////////
+	// VIEW FREELASEARCH
+	// /////////////////////////////////////////////////////////////////
+
+	private static ViewFreelaSearchDao viewFreelaSearchInstance;
+
+	public static ViewFreelaSearchDao viewFreelaSearchInstance() {
+		if (viewFreelaSearchInstance == null) {
+			viewFreelaSearchInstance = new ViewFreelaSearchDao();
+		}
+
+		return viewFreelaSearchInstance;
 	}
 
 }

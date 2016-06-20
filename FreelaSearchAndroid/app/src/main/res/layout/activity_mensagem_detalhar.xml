@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backrepeat"
+    android:fitsSystemWindows="true"
+    tools:context="org.freelasearch.activities.MensagemDetalharActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.AppBarOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/appbar_space"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_mensagem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/icons"
+            android:maxLines="5"
+            android:paddingBottom="@dimen/medium_margin"
+            android:paddingLeft="@dimen/medium_margin"
+            android:paddingRight="70dp"
+            android:paddingTop="@dimen/medium_margin" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_mensagens"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/et_mensagem"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:scrollbars="vertical" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginRight="9dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_send_24dp" />
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

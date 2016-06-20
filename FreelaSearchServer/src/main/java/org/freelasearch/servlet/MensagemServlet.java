@@ -45,8 +45,8 @@ public class MensagemServlet extends HttpServlet {
 					filtro.setIdPrimeiroLista(request.getParameter("idPrimeiroLista") == null ? 0 : Integer.valueOf(request.getParameter("idPrimeiroLista")));
 					filtro.setConteudo(request.getParameter("conteudo") == null ? null : request.getParameter("conteudo"));
 					filtro.setData(request.getParameter("data") == null ? null : request.getParameter("data"));
-					filtro.setIdRemetente(request.getParameter("idRemetente") == null ? 0 : Integer.valueOf(request.getParameter("idRemetente")));
-					filtro.setIdDestinatario(request.getParameter("idDestinatario") == null ? 0 : Integer.valueOf(request.getParameter("idDestinatario")));
+					filtro.setIdContraparte(request.getParameter("idContraparte") == null ? null : Integer.valueOf(request.getParameter("idContraparte")));
+					filtro.setIdUsuario(request.getParameter("idUsuario") == null ? null : Integer.valueOf(request.getParameter("idUsuario")));
 				}
 				oos.writeObject(servico.buscarLista(filtro));
 			}

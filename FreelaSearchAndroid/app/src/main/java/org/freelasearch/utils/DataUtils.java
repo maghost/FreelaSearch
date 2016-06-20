@@ -39,4 +39,28 @@ public final class DataUtils {
         }
         return data.toString();
     }
+
+    public static String formatChat(Date data) {
+        try {
+            DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm");
+            DateFormat dfDia = new SimpleDateFormat("HH:mm");
+
+            Date dataHoje = new Date();
+
+            Calendar calData = Calendar.getInstance();
+            Calendar calDataHoje = Calendar.getInstance();
+
+            calData.setTime(data);
+            calDataHoje.setTime(dataHoje);
+
+            if (calData.get(Calendar.YEAR) == calDataHoje.get(Calendar.YEAR) && calData.get(Calendar.MONTH) == calDataHoje.get(Calendar.MONTH) && calDataHoje.get(Calendar.DAY_OF_MONTH) == calData.get(Calendar.DAY_OF_MONTH)) {
+                return dfDia.format(data);
+            } else {
+                return df.format(data);
+            }
+        } catch (Exception e) {
+            Log.e("DataUtils.formatChat", e.getMessage(), e);
+        }
+        return data.toString();
+    }
 }

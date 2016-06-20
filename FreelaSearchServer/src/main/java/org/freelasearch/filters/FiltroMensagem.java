@@ -12,8 +12,8 @@ public class FiltroMensagem extends FiltroFreelaSearch implements Serializable {
 	private Integer idPrimeiroLista;
 	private String conteudo;
 	private String data;
-	private Integer idRemetente;
-	private Integer idDestinatario;
+	private Integer idUsuario;
+	private Integer idContraparte;
 
 	public Integer getIdMensagem() {
 		return idMensagem;
@@ -63,20 +63,20 @@ public class FiltroMensagem extends FiltroFreelaSearch implements Serializable {
 		this.data = data;
 	}
 
-	public Integer getIdRemetente() {
-		return idRemetente;
+	public Integer getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setIdRemetente(Integer idRemetente) {
-		this.idRemetente = idRemetente;
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
-	public Integer getIdDestinatario() {
-		return idDestinatario;
+	public Integer getIdContraparte() {
+		return idContraparte;
 	}
 
-	public void setIdDestinatario(Integer idDestinatario) {
-		this.idDestinatario = idDestinatario;
+	public void setIdContraparte(Integer idContraparte) {
+		this.idContraparte = idContraparte;
 	}
 
 }

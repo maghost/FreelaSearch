@@ -29,6 +29,17 @@ public class MensagemDao extends GenericDao<Mensagem, Integer> {
 				query += " and m.id > " + filtro.getIdPrimeiroLista();
 			}
 
+			if (filtro.getIdUsuario() != null) {
+				query += " and (m.usuarioRemetente = " + filtro.getIdUsuario() + " OR m.usuarioDestinatario = " + filtro.getIdUsuario() + ")";
+			}
+
+			if (filtro.getIdContraparte() != null && filtro.getIdContraparte() != 0) {
+				query += " and (m.usuarioRemetente = " + filtro.getIdContraparte() + " OR m.usuarioDestinatario = " + filtro.getIdContraparte() + ")";
+			} else if (filtro.getIdContraparte() != null) {
+				// SISTEMA
+				query += " and m.usuarioRemetente = null";
+			}
+
 			query += " ORDER BY m.id DESC";
 			Query q = this.getEntityManager().createQuery(query);
 

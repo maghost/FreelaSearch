@@ -80,7 +80,6 @@
         android:layout_width="match_parent"
         android:layout_height="0.3dp"
         android:layout_below="@+id/rl_anuncio"
-        android:layout_marginBottom="@dimen/small_margin"
         android:layout_marginTop="@dimen/small_margin"
         android:background="@color/primary_light" />
 

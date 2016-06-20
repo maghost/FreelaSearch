@@ -1,0 +1,121 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_item_mensagem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    android:layout_marginLeft="@dimen/small_margin"
+    android:layout_marginRight="@dimen/small_margin"
+    android:layout_marginTop="6dp"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardElevation="0dp"
+    app:cardMaxElevation="0dp"
+    app:cardPreventCornerOverlap="false">
+
+    <RelativeLayout
+        android:id="@+id/rl_contraparte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_foto_contraparte"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_profile" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_toEndOf="@+id/iv_foto_contraparte"
+            android:layout_toRightOf="@+id/iv_foto_contraparte"
+            android:background="@color/accent"
+            android:minWidth="200dp"
+            android:padding="@dimen/small_margin">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_contraparte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_mensagem_contraparte"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mensagem"
+                    android:textColor="@color/icons"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_data_contraparte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative_layout_contraparte"
+                android:singleLine="true"
+                android:text="01/01/2001 23:59"
+                android:textColor="@color/icons"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_foto"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_profile" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_toLeftOf="@+id/iv_foto"
+            android:layout_toStartOf="@+id/iv_foto"
+            android:background="@color/icons"
+            android:minWidth="200dp"
+            android:padding="@dimen/small_margin">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_mensagem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mensagem"
+                    android:textColor="@color/primary"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative_layout"
+                android:singleLine="true"
+                android:text="01/01/2001 23:59"
+                android:textColor="@color/secondary_text"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
