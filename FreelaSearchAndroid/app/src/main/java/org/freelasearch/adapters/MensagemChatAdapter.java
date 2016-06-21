@@ -131,9 +131,14 @@ public class MensagemChatAdapter extends RecyclerView.Adapter<MensagemChatAdapte
         this.idUsuario = idUsuario;
     }
 
-    public void addListItem(DtoMensagem dto, int position) {
-        mList.add(dto);
-        notifyItemInserted(position);
+    public void addListItem(DtoMensagem dto, int position, boolean adicionaInicio) {
+        if (adicionaInicio) {
+            mList.add(0, dto);
+            notifyItemInserted(0);
+        } else {
+            mList.add(dto);
+            notifyItemInserted(position);
+        }
     }
 
     public void removeListItem(int position) {

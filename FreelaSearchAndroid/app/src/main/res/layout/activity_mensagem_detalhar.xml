@@ -52,7 +52,7 @@
             android:scrollbars="vertical" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/ib_enviar_mensagem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

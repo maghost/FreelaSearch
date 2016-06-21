@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import org.freelasearch.R;
@@ -17,19 +20,24 @@ import org.freelasearch.dtos.DtoUsuario;
 import org.freelasearch.interfaces.RecyclerViewOnClickListenerHack;
 import org.freelasearch.tasks.AsyncTaskListener;
 import org.freelasearch.tasks.impl.AsyncTaskListaMensagem;
+import org.freelasearch.tasks.impl.AsyncTaskMensagem;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MensagemDetalharActivity extends AppCompatActivity implements RecyclerViewOnClickListenerHack {
+public class MensagemDetalharActivity extends AppCompatActivity implements RecyclerViewOnClickListenerHack, View.OnClickListener {
 
     private static final String PREF_NAME = "SignupActivityPreferences";
     private SharedPreferences sharedpreferences;
 
     private DtoMensagem mensagem;
     private DtoUsuario usuarioContraparte;
+    private Integer idUsuario;
+
+    private EditText etMensagem;
 
     private Toolbar mToolbar;
 
@@ -39,6 +47,7 @@ public class MensagemDetalharActivity extends AppCompatActivity implements Recyc
     private RecyclerViewOnClickListenerHack mRecyclerViewOnClickListenerHack = this;
 
     private AsyncTaskListaMensagem mAsyncTaskListaMensagem;
+    private AsyncTaskMensagem mAsyncTaskMensagem;
 
     private List<DtoMensagem> mList;
 
@@ -62,9 +71,10 @@ public class MensagemDetalharActivity extends AppCompatActivity implements Recyc
         }
 
         sharedpreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        idUsuario = sharedpreferences.getInt("id", 0);
 
         if (mensagem.getUsuarioRemetente() != null && mensagem.getUsuarioRemetente().getId() != null) {
-            usuarioContraparte = mensagem.getUsuarioRemetente().getId().equals(sharedpreferences.getInt("id", 0)) ? mensagem.getUsuarioDestinatario() : mensagem.getUsuarioRemetente();
+            usuarioContraparte = mensagem.getUsuarioRemetente().getId().equals(idUsuario) ? mensagem.getUsuarioDestinatario() : mensagem.getUsuarioRemetente();
         } else {
             DtoUsuario usuarioSistema = new DtoUsuario();
             usuarioSistema.setNome("SISTEMA");
@@ -84,6 +94,10 @@ public class MensagemDetalharActivity extends AppCompatActivity implements Recyc
             }
         });
 
+        etMensagem = (EditText) findViewById(R.id.et_mensagem);
+        ImageButton ibEnviarMensagem = (ImageButton) findViewById(R.id.ib_enviar_mensagem);
+        ibEnviarMensagem.setOnClickListener(this);
+
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_mensagens);
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -98,7 +112,7 @@ public class MensagemDetalharActivity extends AppCompatActivity implements Recyc
 
                 LinearLayoutManager llm = (LinearLayoutManager) mRecyclerView.getLayoutManager();
                 if (mList.size() == llm.findLastCompletelyVisibleItemPosition() + 1) {
-                    updateMensagensList(5, mList.size(), 0);
+                    updateMensagensList(10, mList.size(), 0, false);
                 }
             }
         });
@@ -109,14 +123,14 @@ public class MensagemDetalharActivity extends AppCompatActivity implements Recyc
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        updateMensagensList(5, 0, 0);
+        updateMensagensList(10, 0, 0, false);
     }
 
     @Override
     public void onClickListener(View view, int position) {
     }
 
-    public void updateMensagensList(int qtdRetorno, int qtdExibida, final int idPrimeiroLista) {
+    public void updateMensagensList(int qtdRetorno, int qtdExibida, final int idPrimeiroLista, final boolean adicionaInicio) {
         mAsyncTaskListaMensagem = new AsyncTaskListaMensagem();
         mAsyncTaskListaMensagem.setAsyncTaskListener(new AsyncTaskListener() {
             @Override
@@ -129,7 +143,7 @@ public class MensagemDetalharActivity extends AppCompatActivity implements Recyc
                     mList = new ArrayList<>();
                     mList.addAll((List<DtoMensagem>) obj);
                     mAdapter = new MensagemChatAdapter(MensagemDetalharActivity.this, mList);
-                    mAdapter.setIdUsuario(sharedpreferences.getInt("id", 0));
+                    mAdapter.setIdUsuario(idUsuario);
                     mAdapter.setRecyclerViewOnClickListenerHack(mRecyclerViewOnClickListenerHack);
                     mRecyclerView.setAdapter(mAdapter);
                     mRecyclerView.scrollToPosition(mList.size() - 1);
@@ -138,7 +152,7 @@ public class MensagemDetalharActivity extends AppCompatActivity implements Recyc
                     MensagemChatAdapter adapter = (MensagemChatAdapter) mRecyclerView.getAdapter();
                     int totalMensagensRetornadas = listAux.size();
                     for (int i = 0; i < totalMensagensRetornadas; i++) {
-                        adapter.addListItem(listAux.get(i), mList.size());
+                        adapter.addListItem(listAux.get(i), mList.size(), adicionaInicio);
                         if (idPrimeiroLista != 0) {
                             mRecyclerView.getLayoutManager().smoothScrollToPosition(mRecyclerView, null, 0);
                         }
@@ -156,7 +170,7 @@ public class MensagemDetalharActivity extends AppCompatActivity implements Recyc
         filtro.put("qtdRetorno", String.valueOf(qtdRetorno));
         filtro.put("qtdExibida", String.valueOf(qtdExibida));
         filtro.put("idPrimeiroLista", String.valueOf(idPrimeiroLista));
-        filtro.put("idUsuario", String.valueOf(sharedpreferences.getInt("id", 0)));
+        filtro.put("idUsuario", String.valueOf(idUsuario));
         if (usuarioContraparte.getId() != null) {
             filtro.put("idContraparte", String.valueOf(usuarioContraparte.getId()));
         } else {
@@ -166,10 +180,75 @@ public class MensagemDetalharActivity extends AppCompatActivity implements Recyc
     }
 
     @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ib_enviar_mensagem:
+                enviarMensagem();
+                break;
+        }
+    }
+
+    private void enviarMensagem() {
+        if (etMensagem == null || etMensagem.getText().toString().isEmpty()) {
+            Toast.makeText(MensagemDetalharActivity.this, "Preencha a mensagem antes de enviá-la", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        mAsyncTaskMensagem = new AsyncTaskMensagem();
+        mAsyncTaskMensagem.setAsyncTaskListener(new AsyncTaskListener() {
+            @Override
+            public void onPreExecute() {
+
+            }
+
+            @Override
+            public <T> void onComplete(T obj) {
+                // Trazer todas as mensagens a partir da última exibida
+                updateMensagensList(0, mList.size(), getIdUltimoLista(), true);
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+                Toast.makeText(MensagemDetalharActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                Log.e("FreelaSearch", errorMsg);
+            }
+        });
+
+        DtoMensagem dto = new DtoMensagem();
+
+        DtoUsuario dtoUsuario = new DtoUsuario();
+        dtoUsuario.setId(idUsuario);
+        dtoUsuario.setNome(sharedpreferences.getString("nome", ""));
+        dtoUsuario.setUrlFoto(sharedpreferences.getString("profile_pic", ""));
+        dto.setUsuarioRemetente(dtoUsuario);
+
+        dto.setUsuarioDestinatario(usuarioContraparte);
+
+        dto.setDataEnvio(new Date());
+
+        dto.setConteudo(etMensagem.getText().toString());
+
+        etMensagem.setText("");
+
+        mAsyncTaskMensagem.execute(dto);
+    }
+
+    private Integer getIdUltimoLista() {
+        if (mList != null && mList.get(0) != null) {
+            return mList.get(0).getId();
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         if (mAsyncTaskListaMensagem != null) {
             mAsyncTaskListaMensagem.cancel(true);
+        }
+        if (mAsyncTaskMensagem != null) {
+            mAsyncTaskMensagem.cancel(true);
         }
     }
 
